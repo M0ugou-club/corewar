@@ -7,28 +7,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "prog_list.h"
+#include "my.h"
 
-//void exit_error(char *line, char *copy, prog_list_t *prog_list,
-//    prog_list_t *new_node)
-//{
-//    if (line != NULL) {
-//        free(line);
-//    }
-//    if (copy != NULL) {
-//        free(copy);
-//    }
-//    if (prog_list != NULL) {
-//        free_list(prog_list);
-//    }
-//    if (new_node != NULL) {
-//        free(new_node);
-//    }
-//    exit(84);
-//}
-
-prog_list_t *fill_list(prog_list_t *prog_list,
-    prog_list_t *new_node)
+static prog_list_t *fill_list(prog_list_t *prog_list, prog_list_t *new_node)
 {
     prog_list_t *tmp = NULL;
 
@@ -44,11 +27,13 @@ prog_list_t *fill_list(prog_list_t *prog_list,
     return (prog_list);
 }
 
-prog_list_t *add_node(char *copy, prog_list_t *prog_list)
+static prog_list_t *add_node(char *copy, prog_list_t *prog_list,
+    bool *first_line)
 {
     prog_list_t *new_node = NULL;
 
     if (my_strlen(copy) != 0) {
+        *first_line = true;
         new_node = malloc(sizeof(prog_list_t));
         if (new_node == NULL) {
             return (NULL);
@@ -63,9 +48,23 @@ prog_list_t *add_node(char *copy, prog_list_t *prog_list)
     return (prog_list);
 }
 
-prog_list_t *get_prog_list(int fd)
+static int remove_comment(char *str)
+{
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (str[i] == '#') {
+            str[i] = '\0';
+        }
+        i++;
+    }
+    return (0);
+}
+
+prog_list_t *get_prog_list(FILE *fd)
 {
     prog_list_t *prog_list = NULL;
+    bool first_line = false;
     char *copy = NULL;
     char *line = NULL;
     size_t size = 0;
@@ -73,11 +72,13 @@ prog_list_t *get_prog_list(int fd)
 
     while ((len = getline(&line, &size, fd)) != EOF) {
         line[len - 1] = '\0';
-        copy = str_clear(line);
-        if (copy == NULL) {
+        remove_comment(line);
+        copy = my_strclear(line);
+        if (copy == NULL)
             return (NULL);
-        }
-        prog_list = add_node(line, prog_list);
+        prog_list = add_node(copy, prog_list, &first_line);
+        if (first_line == true && prog_list == NULL)
+            return (NULL);
         free(copy);
     }
     free(line);
