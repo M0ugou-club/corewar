@@ -9,7 +9,7 @@ SRC =
 
 OBJ = $(SRC:.c=.o)
 
-NAME = asm
+NAME = corewar
 
 CFLAGS = 
 
