@@ -19,7 +19,7 @@ char *my_strdup(char const *str)
     }
     len = my_strlen(str);
     new_str = malloc(sizeof(char) * (len + 1));
-    new_str = my_memset(new_str, '\0', len + 1);
+    my_memset(new_str, '\0', len + 1);
     while (i < len) {
         new_str[i] = str[i];
         i++;
