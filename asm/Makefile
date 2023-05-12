@@ -7,7 +7,7 @@
 
 SRC = ./src/get_prog_list.c \
 	  ./src/open_file.c \
-	  ./src/test.c
+	  ./src/get_format_value.c
 
 OBJ = $(SRC:.c=.o)
 
