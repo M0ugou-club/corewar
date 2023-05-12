@@ -8,7 +8,8 @@
 SRC = ./src/my_memset.c \
 	  ./src/my_strdup.c \
 	  ./src/my_strlen.c \
-	  ./src/my_strclear.c
+	  ./src/my_strclear.c \
+	  ./src/Makefile.c
 
 OBJ = $(SRC:.c=.o)
 
