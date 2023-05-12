@@ -5,13 +5,14 @@
 ## Makefile
 ##
 
-SRC = my_memset.c \
-	  my_strdup.c \
-	  my_strlen.c
+SRC = ./src/my_memset.c \
+	  ./src/my_strdup.c \
+	  ./src/my_strlen.c \
+	  ./src/my_strclear.c
 
 OBJ = $(SRC:.c=.o)
 
-NAME = my.a
+NAME = libmy.a
 
 CFLAGS = -W -Wall -Wextra -I./include
 

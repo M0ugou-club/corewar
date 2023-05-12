@@ -5,18 +5,20 @@
 ## Makefile
 ##
 
-SRC =
+SRC = ./src/get_prog_list.c \
+	  ./src/open_file.c \
+	  ./src/test.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = asm
 
-CFLAGS =
+CFLAGS = -W -Wall -Wextra -I./include
 
-LDFLAGS =
+LDFLAGS = -L ../lib -lmy
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
 
 all : $(NAME)
 
