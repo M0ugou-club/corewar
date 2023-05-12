@@ -10,7 +10,7 @@
 
     typedef struct prog_list_s prog_list_t;
 
-    typedef struct prog_list_s {
+    struct prog_list_s {
         char *line;
         prog_list_t *next;
     };
