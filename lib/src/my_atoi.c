@@ -5,6 +5,8 @@
 ** my_atoi
 */
 
+#include <stddef.h>
+
 static int check_sign(const char *str, int *index, int *sign)
 {
     if (str[0] == '-') {
@@ -23,8 +25,9 @@ int my_atoi(const char *str)
     int index = 0;
     int sign = 0;
 
-    if (str == NULL)
+    if (str == NULL) {
         return -1;
+    }
     check_sign(str, &index, &sign);
     while (str[index] != '\0') {
         if (str[index] <= '0' || str[index] >= '9') {

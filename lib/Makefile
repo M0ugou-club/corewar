@@ -9,7 +9,9 @@ SRC = ./src/my_memset.c \
 	  ./src/my_strdup.c \
 	  ./src/my_strlen.c \
 	  ./src/my_strclear.c \
-	  ./src/Makefile.c
+	  ./src/my_atoi.c \
+	  ./src/my_strcmp.c \
+	  ./src/my_power.c
 
 OBJ = $(SRC:.c=.o)
 
