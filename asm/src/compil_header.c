@@ -45,6 +45,14 @@ int get_name(file_t *file)
 
 int get_comment(file_t *file)
 {
+    if (file && file->line) {
+        if (my_strncmp(file->line, ".comment \"", 10) != 0) {
+            return SYNTAX_ERROR_STATUS;
+        }
+        if (count_quote(file->line) != 0) {
+            return SYNTAX_ERROR_STATUS;
+        }
+    }
     return 0;
 }
 
