@@ -6,9 +6,40 @@
 */
 
 #include <stdlib.h>
+#include "error.h"
+#include "my.h"
+
+static int count_quote(const char *line)
+{
+    int compt = 0;
+
+    for (int i = 0; line[i] != '\0'; i++) {
+        if (line[i] == '"') {
+            compt++;
+        }
+    }
+    if (compt != 2) {
+        return SYNTAX_ERROR_STATUS;
+    }
+}
 
 int get_name(file_t *file)
 {
+    if (file->line) {
+        if (my_strncmp(file->line, ".name ", 6) != 0
+            && my_strncmp(file->line, ".comment ", 9) == 0) {
+            return COMMENT_ERROR_STATUS;
+        }
+        if (my_strncmp(file->line, ".name ", 6) != 0) {
+            return NAME_FIRST_LINE_ERROR_STATUS;
+        }
+        if (my_strncmp(file->line, ".name \"", 7) != 0) {
+            return SYNTAX_ERROR_STATUS;
+        }
+        if (count_quote(file->line) != 0) {
+            return SYNTAX_ERROR_STATUS;
+        }
+    }
     return 0;
 }
 
@@ -35,7 +66,7 @@ int compil_header(file_t *file)
             return 84;
         }
         temp = temp->next;
-        status = get_command(temp);
+        status = get_comment(temp);
         status = error_handling(status);
     }
     return status;
