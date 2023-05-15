@@ -7,16 +7,37 @@
 
 #ifndef ASM_H_
     #define ASM_H_
+    #define MAX_LENGTH 6
 
     #include <stdio.h>
-    #include "prog_list.h"
+    #include "op.h"
 
-    typedef struct format_s {
+    typedef struct format_s format_t;
+
+    struct format_s {
         char *type;
         int bit1;
         int bit2;
-    } format_t;
+    };
+
+    /* Command */
+
+    typedef struct prog_list_s prog_list_t;
+    typedef struct command_int_s command_int_t;
+
+    struct prog_list_s {
+        char *line;
+        char **line_array;
+        command_int_t *command_int;
+        prog_list_t *next;
+    };
+
+    struct command_int_s {
+        int *value_size;
+        int *value;
+    };
 
     prog_list_t *get_prog_list(FILE *fd);
+    int get_format_value(char **args);
 
 #endif /* !ASM_H_ */
