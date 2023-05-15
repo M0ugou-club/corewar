@@ -14,6 +14,21 @@ static const type_t type[] = {{"r", REG_SIZE},
 {"", IND_SIZE},
 {NULL, -1}};
 
+static int get_error_value(char const *arg, int index_nb)
+{
+    int error = 0;
+
+    error = my_str_is_num(&arg[index_nb]);
+    if (error != 0) {
+        error = is_label(arg);
+    }
+    if (error != 0) {
+        return (-1);
+    } else {
+        return (0);
+    }
+}
+
 int get_nbr_value(int *value , int *value_size, char *arg, int index)
 {
     int error = 0;
@@ -25,7 +40,7 @@ int get_nbr_value(int *value , int *value_size, char *arg, int index)
             index_nb--;
         }
         if (my_strncmp(arg, type[i].c, my_strlen(type[i].c)) == 0) {
-            error = my_str_is_num(&arg[index_nb]);
+            error = get_error_value(arg, index_nb);
             value[index] = my_atoi(&arg[index_nb]);
             value_size[index] = type[i].lenght;
         }
