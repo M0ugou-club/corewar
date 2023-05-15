@@ -8,6 +8,8 @@
 #ifndef ASM_H_
     #define ASM_H_
     #define MAX_LENGTH 6
+    #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | (( x << 8) & 0xff0000) |\
+        ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
 
     #include <stdio.h>
     #include "op.h"
@@ -31,6 +33,7 @@
     } type_t;
 
     struct prog_list_s {
+        char *label;
         char *line;
         char **line_array;
         command_int_t *command_int;
@@ -48,5 +51,11 @@
         int fnct_nbr);
     int get_format_value(char **args);
     int get_nbr_value(int *value , int *value_size, char *arg, int index);
+    int process_asm(char const *file_name);
+    FILE *open_file(char const *file_name);
+    int compile_line(prog_list_t *line);
+    int is_label(char const *arg);
+    int change_label_value(prog_list_t *prog_list);
+    int write_file(prog_list_t *prog_list);
 
 #endif /* !ASM_H_ */
