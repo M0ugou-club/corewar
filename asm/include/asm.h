@@ -44,5 +44,6 @@
 
     prog_list_t *get_prog_list(FILE *fd);
     int get_format_value(char **args);
+    int get_nbr_value(int *value , int *value_size, char *arg, int index);
 
 #endif /* !ASM_H_ */
