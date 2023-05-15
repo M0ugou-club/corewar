@@ -25,6 +25,11 @@
     typedef struct prog_list_s prog_list_t;
     typedef struct command_int_s command_int_t;
 
+    typedef struct type_s {
+        char* c;
+        int lenght;
+    } type_t;
+
     struct prog_list_s {
         char *line;
         char **line_array;
