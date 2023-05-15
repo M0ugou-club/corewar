@@ -43,6 +43,9 @@
     };
 
     prog_list_t *get_prog_list(FILE *fd);
+    command_int_t *load_int_tab(void);
+    int fill_multiple_args_line(command_int_t *command_int, char **line_array,
+        int fnct_nbr);
     int get_format_value(char **args);
     int get_nbr_value(int *value , int *value_size, char *arg, int index);
 
