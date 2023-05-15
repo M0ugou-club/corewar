@@ -21,6 +21,7 @@ int my_str_is_num(char const *str)
         if (str[i] < '0' || str[i] > '9') {
             return (-1);
         }
+        i++;
     }
     return (0);
 }
