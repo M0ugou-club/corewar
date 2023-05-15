@@ -16,5 +16,7 @@
     int my_strcmp(char const *str1, char const *str2);
     int my_strncmp(char const *str1, char const *str2, int n);
     int my_power(int nb, int power);
+    int my_str_is_num(char const *str);
+    int my_int_memset(int *tab, int byte, int len);
 
 #endif /* !MY_H_ */
