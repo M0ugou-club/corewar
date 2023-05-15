@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "asm.h"
+#include "my.h"
 
 command_int_t *load_int_tab(void)
 {

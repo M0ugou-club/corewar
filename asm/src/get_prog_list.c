@@ -42,6 +42,7 @@ static prog_list_t *add_node(char *copy, prog_list_t *prog_list,
         new_node->line = my_strdup(copy);
         new_node->command_int = NULL;
         new_node->line_array = NULL;
+        new_node->label = NULL;
         if (new_node->line == NULL) {
             return (NULL);
         }
