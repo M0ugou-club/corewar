@@ -9,7 +9,7 @@
 #include "error.h"
 #include "my.h"
 
-static int count_text(file_t *file, char *text)
+static int count_text(file_t *file, const char *text)
 {
     file_t *temp = file;
     int compt = 0;
@@ -40,7 +40,7 @@ static int count_quote(const char *line)
     }
 }
 
-int get_name(file_t *file, header_s *header)
+static int get_name(file_t *file, header_s *header)
 {
     if (file->line) {
         if (my_strncmp(file->line, ".name ", 6) != 0
@@ -64,7 +64,7 @@ int get_name(file_t *file, header_s *header)
     return 0;
 }
 
-int get_comment(file_t *file, header_s *header)
+static int get_comment(file_t *file, header_s *header)
 {
     if (file && file->line) {
         if (my_strncmp(file->line, ".comment ", 9) != 0) {
