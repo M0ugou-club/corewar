@@ -11,7 +11,8 @@ SRC = ./src/my_memset.c \
 	  ./src/my_strclear.c \
 	  ./src/my_atoi.c \
 	  ./src/my_strcmp.c \
-	  ./src/my_power.c
+	  ./src/my_power.c \
+	  ./src/str_is_num.c
 
 OBJ = $(SRC:.c=.o)
 
