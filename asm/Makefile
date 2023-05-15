@@ -11,6 +11,11 @@ SRC = ./src/get_prog_list.c \
 	  ./src/get_number_value.c \
 	  ./src/fill_line.c \
 	  ./src/load_tab.c \
+	  ./src/change_label_value.c \
+	  ./src/is_label.c \
+	  ./src/write_file.c \
+	  ./src/asm.c \
+	  ./src/main.c \
 	  ./src/compil_line.c \
 	  ./src/compil/calculation.c \
 	  ./src/compil/compil_aff.c \
