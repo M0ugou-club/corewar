@@ -5,10 +5,9 @@
 ** compil_line
 */
 
+#include <unistd.h>
 #include "asm.h"
 #include "my.h"
-#include "compil_line.h"
-#include "op.h"
 
 int error_aff(char **line_array)
 {
@@ -19,7 +18,8 @@ command_int_t *compil_aff(char **line_array, int nb_ft)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_aff(line_array) != 0) {

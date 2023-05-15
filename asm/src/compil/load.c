@@ -5,10 +5,11 @@
 ** load
 */
 
+#include <unistd.h>
 #include <stddef.h>
 #include "asm.h"
 
-int error_load(char **line_array)
+static int error_load(char **line_array)
 {
     return (0);
 }
@@ -17,7 +18,8 @@ command_int_t *compile_load(char **line_array, int fnct_nbr)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_load(line_array) != 0) {
@@ -30,7 +32,7 @@ command_int_t *compile_load(char **line_array, int fnct_nbr)
     return (command_int);
 }
 
-int error_load_index(char **line_array)
+static int error_load_index(char **line_array)
 {
     return (0);
 }
@@ -39,7 +41,8 @@ command_int_t *compile_load_index(char **line_array, int fnct_nbr)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_load_index(line_array) != 0) {

@@ -5,6 +5,7 @@
 ** calculation
 */
 
+#include <unistd.h>
 #include "asm.h"
 
 int error_calculation(char **line_array)

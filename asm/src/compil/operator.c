@@ -5,6 +5,7 @@
 ** operator
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "asm.h"
 #include "my.h"
@@ -33,7 +34,8 @@ command_int_t *compile_operator(char **line_array, int fnct_nbr)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_operator(line_array) != 0) {

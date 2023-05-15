@@ -5,6 +5,7 @@
 ** store
 */
 
+#include <unistd.h>
 #include <stddef.h>
 #include "asm.h"
 
@@ -17,7 +18,8 @@ command_int_t *compile_store(char **line_array, int fnct_nbr)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_store(line_array) != 0) {
@@ -39,7 +41,8 @@ command_int_t *compile_store_index(char **line_array, int fnct_nbr)
 {
     command_int_t *command_int = NULL;
 
-    if (load_int_tab() == -1) {
+    command_int = load_int_tab();
+    if (command_int == NULL) {
         return (NULL);
     }
     if (error_store_index(line_array) != 0) {
