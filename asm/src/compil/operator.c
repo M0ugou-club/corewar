@@ -48,30 +48,12 @@ int error_operator(char **line_array)
     return (0);
 }
 
-int load_int_tab(prog_list_t *line)
-{
-    line->command_int = malloc(sizeof(command_int_t));
-    if (line->command_int == NULL) {
-        return -1;
-    }
-    line->command_int->value = malloc(sizeof(int) * MAX_LENGTH);
-    line->command_int->value_size = malloc(sizeof(int) * MAX_LENGTH);
-    if (line->command_int->value == NULL
-        || line->command_int->value_size == NULL) {
-        free(line->command_int);
-        return (-1);
-    }
-    my_int_memset(line->command_int->value, -1, MAX_LENGTH);
-    my_int_memset(line->command_int->value_size, -1, MAX_LENGTH);
-    return (0);
-}
-
 command_int_t *compile_operator(prog_list_t *line, char **line_array, int fnct_nbr)
 {
     if (load_int_tab(line) == -1) {
         return (NULL);
     }
-    if (error_operator != 0) {
+    if (error_operator(line_array) != 0) {
         write(2, "error\n", 6);
         return (NULL);
     }
