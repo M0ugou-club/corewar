@@ -13,7 +13,7 @@ static char *remove_tab(char *str)
     int i = 0;
 
     while (str[i] != '\0') {
-        if (str[i] == '\t') {
+        if (str[i] == '\t' || str[i] == ',') {
             str[i] = ' ';
         }
         i++;
