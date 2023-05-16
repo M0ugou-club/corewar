@@ -31,5 +31,8 @@
     #define NO_COMMENT_ERROR              "No comment specified."
     #define NO_COMMENT_ERROR_STATUS       -8
 
+    #define INVALID_ARGUMENT              "The argument given to the instruction is invalid."
+    #define INVALID_ARGUMENT_STATUS       -9
+
     int error_handling(int status);
 #endif /*ERROR_H_*/

@@ -8,7 +8,7 @@
 #include "my.h"
 #include "error.h"
 
-static int other_error(int status)
+static int other_error(const int status)
 {
     if (status == COMMENT_ERROR_STATUS) {
         my_putstr(COMMENT_ERROR);
@@ -26,10 +26,13 @@ static int other_error(int status)
         my_putstr(NO_COMMENT_ERROR);
         return 84;
     }
+    if (status == INVALID_ARGUMENT_STATUS) {
+        my_putstr(INVALID_ARGUMENT);
+    }
     return 0;
 }
 
-int error_handling(int status)
+int error_handling(const int status)
 {
     if (status == SYNTAX_ERROR_STATUS) {
         my_putstr(SYNTAX_ERROR);
