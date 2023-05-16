@@ -103,7 +103,7 @@ int compil_header(file_t *file, header_s *header, int size)
             return 84;
         }
         header->magic = COREWAR_EXEC_MAGIC;
-        header->prog_size;
+        header->prog_size = size;
     }
     return status;
 }
