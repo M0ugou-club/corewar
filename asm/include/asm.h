@@ -8,8 +8,8 @@
 #ifndef ASM_H_
     #define ASM_H_
     #define MAX_LENGTH 6
-    #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | (( x << 8) & 0xff0000) |\
-        ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
+    #define BYTE_VALUE 256
+    #define MALLOC_RETURN(ptr, ret) if (ptr == NULL) return (ret);
 
     #include <stdio.h>
     #include "op.h"
@@ -42,7 +42,7 @@
 
     struct command_int_s {
         int *value_size;
-        int *value;
+        char **value;
     };
 
     prog_list_t *get_prog_list(FILE *fd);
@@ -50,12 +50,17 @@
     int fill_multiple_args_line(command_int_t *command_int, char **line_array,
         int fnct_nbr);
     int get_format_value(char **args);
-    int get_nbr_value(int *value , int *value_size, char *arg, int index);
+    int get_nbr_value(char **value , int *value_size, char *arg, int index);
     int process_asm(char const *file_name);
     FILE *open_file(char const *file_name);
     int compile_line(prog_list_t *line);
     int is_label(char const *arg);
     int change_label_value(prog_list_t *prog_list);
     int write_file(prog_list_t *prog_list);
+    int get_line_array(prog_list_t *prog_list);
+    int compare_char(char compare);
+    int get_all_label(prog_list_t *list);
+    int change_size_index(command_int_t *command_int);
+    char *fill_char_tab(int num, int size);
 
 #endif /* !ASM_H_ */

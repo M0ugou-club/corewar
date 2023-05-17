@@ -12,8 +12,11 @@ SRC = ./src/get_prog_list.c \
 	  ./src/fill_line.c \
 	  ./src/load_tab.c \
 	  ./src/change_label_value.c \
+	  ./src/get_line_array.c \
 	  ./src/is_label.c \
+	  ./src/change_size_index.c \
 	  ./src/write_file.c \
+	  ./src/get_all_label.c \
 	  ./src/asm.c \
 	  ./src/main.c \
 	  ./src/compil_line.c \
@@ -28,9 +31,9 @@ OBJ = $(SRC:.c=.o)
 
 NAME = asm
 
-CFLAGS = -W -Wall -Wextra -I./include
+CFLAGS = -W -Wall -Wextra -I./include -g3
 
-LDFLAGS = -L ../lib -lmy
+LDFLAGS = -L ../lib -lmy -g3
 
 $(NAME) : $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
