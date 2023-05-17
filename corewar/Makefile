@@ -11,7 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = asm
 
-CFLAGS = 
+CFLAGS = -W -Wall -Wextra -Iincludes -Iinclude
 
 LDFLAGS =
 
