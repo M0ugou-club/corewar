@@ -1,0 +1,24 @@
+/*
+** EPITECH PROJECT, 2023
+** corewar
+** File description:
+** get_line_array
+*/
+
+#include <stdlib.h>
+#include "asm.h"
+#include "my.h"
+
+int get_line_array(prog_list_t *prog_list)
+{
+    prog_list_t *tmp = prog_list;
+
+    while (tmp != NULL) {
+        tmp->line_array = str_to_array(tmp->line, ' ');
+        if (tmp->line_array == NULL) {
+            return (-1);
+        }
+        tmp = tmp->next;
+    }
+    return (0);
+}
