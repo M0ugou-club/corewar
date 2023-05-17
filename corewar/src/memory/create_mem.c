@@ -13,7 +13,6 @@ char modif_mem(char *mem, int index, const char value)
     if (index < 0) {
         index = MEM_SIZE - index;
     }
-    index = index % MEM_SIZE;
     mem[index] = value;
 }
 
