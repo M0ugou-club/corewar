@@ -52,5 +52,6 @@ command_int_t *compile_load_index(char **line_array, int fnct_nbr)
     if (fill_multiple_args_line(command_int, line_array, fnct_nbr) != 0) {
         return (NULL);
     }
+    change_size_index(command_int);
     return (command_int);
 }

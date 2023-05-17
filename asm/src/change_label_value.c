@@ -5,7 +5,7 @@
 ** change_label_value
 */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 
@@ -53,6 +53,27 @@ static int get_curr_index(prog_list_t *prog_list, prog_list_t *line)
     return (index);
 }
 
+int change_int_value(prog_list_t *line, int i, int value)
+{
+    int index = i;
+    int curr_value = 1;
+
+    while (line->command_int->value_size[index] != -1 && curr_value != 0) {
+        curr_value = 0;
+        for (int j = line->command_int->value_size[index]; j >= 0; j--) {
+            curr_value += line->command_int->value[index][j];
+        }
+        if (curr_value != 0) {
+            index++;
+        }
+    }
+    free(line->command_int->value[index]);
+    line->command_int->value[index] = fill_char_tab(value,
+        line->command_int->value_size[index]);
+    MALLOC_RETURN(line->command_int->value[index], -1);
+    return (0);
+}
+
 static int get_label_value(prog_list_t *prog_list, prog_list_t *line, int i)
 {
     int index = 0;
@@ -70,7 +91,9 @@ static int get_label_value(prog_list_t *prog_list, prog_list_t *line, int i)
         if (index == -1) {
             return (-1);
         }
-        line->command_int->value[i] = index - curr_index;
+        if (change_int_value(line, i, index - curr_index) == -1) {
+            return (-1);
+        }
     }
     i++;
     return (0);

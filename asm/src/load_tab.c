@@ -17,14 +17,14 @@ command_int_t *load_int_tab(void)
     if (command_int == NULL) {
         return NULL;
     }
-    command_int->value = malloc(sizeof(int) * MAX_LENGTH);
+    command_int->value = malloc(sizeof(char *) * MAX_LENGTH);
     command_int->value_size = malloc(sizeof(int) * MAX_LENGTH);
     if (command_int->value == NULL
         || command_int->value_size == NULL) {
         free(command_int);
         return (NULL);
     }
-    my_int_memset(command_int->value, -1, MAX_LENGTH);
+    my_tab_memset(command_int->value, NULL, MAX_LENGTH);
     my_int_memset(command_int->value_size, -1, MAX_LENGTH);
     return (command_int);
 }

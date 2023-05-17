@@ -18,7 +18,7 @@ int error_operator(char **line_array)
     while (line_array[i] != NULL) {
         i++;
     }
-    if (i != index_error) {
+    if (i != index_error + 1) {
         return (-1);
     }
     if (line_array[index_error] == NULL) {
