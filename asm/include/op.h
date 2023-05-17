@@ -8,7 +8,7 @@
 #ifndef _OP_H_
     #define _OP_H_
 
-    #define MEM_SIZE (6*1024)
+    #define MEM_SIZE (6 * 1024)
     #define IDX_MOD 512 /* modulo of the index < */
     #define MAX_ARGS_NUMBER 4 /* this may not be changed 2^*IND_SIZE */
 
@@ -18,7 +18,7 @@
     #define SEPARATOR_CHAR ','
 
     #define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
-    
+
     #define NAME_CMD_STRING ".name"
     #define COMMENT_CMD_STRING ".comment"
 
@@ -33,13 +33,13 @@
         into r1 (4 bytes )) */
     #define T_LAB 8 /* LABEL */
 
-    struct  op_s {
-       char *mnemonique;
-       char nbr_args;
-       args_type_t type[MAX_ARGS_NUMBER];
-       char code;
-       int nbr_cycles;
-       char *comment;
+    struct op_s {
+        char *mnemonique;
+        char nbr_args;
+        args_type_t type[MAX_ARGS_NUMBER];
+        char code;
+        int nbr_cycles;
+        char *comment;
     };
 
     typedef struct op_s op_t;
@@ -58,10 +58,10 @@
 
     #define COREWAR_EXEC_MAGIC 0xea83f3 /* why not */
     struct header_s {
-       int  magic;
-       char prog_name[PROG_NAME_LENGTH + 1];
-       int  prog_size;
-       char comment[COMMENT_LENGTH + 1];
+        int  magic;
+        char prog_name[PROG_NAME_LENGTH + 1];
+        int  prog_size;
+        char comment[COMMENT_LENGTH + 1];
     };
 
     typedef struct header_s header_t;
