@@ -5,6 +5,7 @@
 ** get_all_label
 */
 
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 

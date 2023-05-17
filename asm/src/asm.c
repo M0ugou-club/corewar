@@ -13,6 +13,9 @@ int make_compil(prog_list_t *prog_list)
     if (compile_line(prog_list) != 0) {
         return (-1);
     }
+    if (get_all_label(prog_list) != 0) {
+        return (-1);
+    }
     if (change_label_value(prog_list) != 0) {
         return (-1);
     }
@@ -36,6 +39,11 @@ int process_asm(char const *file_name)
     if (prog_list == NULL) {
         return (-1);
     }
-    make_compil(prog_list);
+    if (get_line_array(prog_list) == -1) {
+        return (-1);
+    }
+    if (make_compil(prog_list) == -1) {
+        return (-1);
+    }
     return (0);
 }
