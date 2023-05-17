@@ -5,18 +5,41 @@
 ** write_file
 */
 
+#include <unistd.h>
 #include "asm.h"
+
+int write_int(char *num, int num_size)
+{
+    char nb = 0;
+
+    for (int i = 0; i < num_size; i++) {
+        nb = num[i];
+        write(1, &nb, 1);
+    }
+    return (0);
+}
+
+int write_int_tab(command_int_t *command_int, prog_list_t *test)
+{
+    char *num = NULL;
+
+    if (command_int->value == NULL || command_int->value_size == NULL) {
+        return (0);
+    }
+    for (int i = 0; command_int->value_size[i] != -1; i++) {
+        num = command_int->value[i];
+        write_int(num, command_int->value_size[i]);
+    }
+    return (0);
+}
 
 int write_file(prog_list_t *prog_list)
 {
-    int num = 0;
     prog_list_t *tmp = prog_list;
 
     while (tmp != NULL) {
-        for (int i = 0; prog_list->command_int->value_size[i] != -1; i++) {
-            num = prog_list->command_int->value[i];
-            num = SWAP_ENDIAN(num);
-            write(1, &num, prog_list->command_int->value_size[i]);
+        if (tmp->command_int != NULL) {
+            write_int_tab(tmp->command_int, tmp);
         }
         tmp = tmp->next;
     }
