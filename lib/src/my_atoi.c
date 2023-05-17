@@ -30,7 +30,7 @@ int my_atoi(const char *str)
     }
     check_sign(str, &index, &sign);
     while (str[index] != '\0') {
-        if (str[index] <= '0' || str[index] >= '9') {
+        if (str[index] < '0' || str[index] > '9') {
             return 0;
         } else {
             res = res * 10 + str[index] - '0';
