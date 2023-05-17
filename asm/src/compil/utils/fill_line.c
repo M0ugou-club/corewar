@@ -8,7 +8,8 @@
 #include <stdlib.h>
 #include "asm.h"
 
-int set_first_two_args(command_int_t *command_int, int fnct_nbr, char **line_array)
+int set_first_two_args(command_int_t *command_int, int fnct_nbr,
+    char **line_array)
 {
     int index_int = 0;
     int index_char = 1;

@@ -9,20 +9,8 @@
 #include "asm.h"
 #include "my.h"
 
-int increase_index(command_int_t *command_int)
-{
-    int index = 0;
-
-    if (command_int == NULL) {
-        return (index);
-    }
-    for (int i = 0; command_int->value_size[i] != -1 && i < MAX_LENGTH; i++) {
-        index += command_int->value_size[i];
-    }
-    return (index);
-}
-
-static int find_label_index(prog_list_t *prog_list, prog_list_t *line, char *arg)
+static int find_label_index(prog_list_t *prog_list, prog_list_t *line,
+    char *arg)
 {
     prog_list_t *tmp = prog_list;
     int len = 0;
@@ -41,19 +29,7 @@ static int find_label_index(prog_list_t *prog_list, prog_list_t *line, char *arg
     return (-1);
 }
 
-static int get_curr_index(prog_list_t *prog_list, prog_list_t *line)
-{
-    prog_list_t *tmp = prog_list;
-    int index = 0;
-
-    while (tmp != NULL && tmp != line) {
-        index += increase_index(tmp->command_int);
-        tmp = tmp->next;
-    }
-    return (index);
-}
-
-int change_int_value(prog_list_t *line, int i, int value)
+static int change_int_value(prog_list_t *line, int i, int value)
 {
     int index = i;
     int curr_value = 1;
@@ -88,12 +64,10 @@ static int get_label_value(prog_list_t *prog_list, prog_list_t *line, int i)
     if (is_label(line->line_array[i]) == 0) {
         curr_index = get_curr_index(prog_list, line);
         index = find_label_index(prog_list, line, line->line_array[i]);
-        if (index == -1) {
+        if (index == -1)
             return (-1);
-        }
-        if (change_int_value(line, i, index - curr_index) == -1) {
+        if (change_int_value(line, i, index - curr_index) == -1)
             return (-1);
-        }
     }
     i++;
     return (0);
