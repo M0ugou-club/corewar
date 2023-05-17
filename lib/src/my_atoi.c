@@ -26,12 +26,12 @@ int my_atoi(const char *str)
     int sign = 0;
 
     if (str == NULL) {
-        return -1;
+        return 0;
     }
     check_sign(str, &index, &sign);
     while (str[index] != '\0') {
-        if (str[index] <= '0' || str[index] >= '9') {
-            return -1;
+        if (str[index] < '0' || str[index] > '9') {
+            return 0;
         } else {
             res = res * 10 + str[index] - '0';
             index++;

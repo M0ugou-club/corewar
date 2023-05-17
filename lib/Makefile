@@ -11,13 +11,15 @@ SRC = ./src/my_memset.c \
 	  ./src/my_strclear.c \
 	  ./src/my_atoi.c \
 	  ./src/my_strcmp.c \
-	  ./src/my_power.c
+	  ./src/my_power.c \
+	  ./src/str_is_num.c \
+	  ./src/str_to_word_array.c \
 
 OBJ = $(SRC:.c=.o)
 
 NAME = libmy.a
 
-CFLAGS = -W -Wall -Wextra -I./include
+CFLAGS = -W -Wall -Wextra -I./include -g3
 
 $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)

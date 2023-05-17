@@ -16,7 +16,7 @@ FILE *open_file(char const *file_name)
     FILE *fd = 0;
 
     fd = fopen(file_name, "r");
-    if (fd  == NULL) {
+    if (fd == NULL) {
         write(2, error, my_strlen(error));
     }
     return (fd);
