@@ -33,9 +33,10 @@ int get_command(prog_list_t *line, line_compil_t comp_line)
         return (0);
     }
     for (int i = 0; line->line_array[i] != NULL; i++) {
-        if ((my_strcmp(line->line_array[i], comp_line.command) == 0) && (comp_line.compil != NULL)) {
+        if ((my_strcmp(line->line_array[i], comp_line.command) == 0)
+            && (comp_line.compil != NULL)) {
             line->command_int = comp_line.compil(&line->line_array[i],
-            comp_line.fnct_nbr);
+                comp_line.fnct_nbr);
         }
     }
     if (line->command_int == NULL) {

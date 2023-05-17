@@ -62,5 +62,7 @@
     int get_all_label(prog_list_t *list);
     int change_size_index(command_int_t *command_int);
     char *fill_char_tab(int num, int size);
+    int increase_index(command_int_t *command_int);
+    int get_line_array(prog_list_t *prog_list);
 
 #endif /* !ASM_H_ */
