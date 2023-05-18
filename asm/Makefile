@@ -6,10 +6,11 @@
 ##
 
 UTILS =  ./src/utils/get_line_array.c \
-		 ./src/utils/load_tab.c \
 		 ./src/utils/open_file.c \
 		 ./src/utils/manip_index.c \
 		 ./src/utils/create_new_file.c \
+		 ./src/utils/get_str.c \
+		 ./src/compil/utils/load_tab.c \
 		 ./src/compil/utils/change_size_index.c \
 		 ./src/compil/utils/fill_line.c \
 		 ./src/compil/utils/get_format_value.c \

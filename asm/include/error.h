@@ -22,7 +22,8 @@
     #define COMMENT_ERROR "The comment must be just after the name."
     #define COMMENT_ERROR_STATUS -5
 
-    #define NAME_FIRST_LINE_ERROR "The name of your programe must be the fist line."
+    #define NAME_FIRST_LINE_ERROR "The name of your programe must be the first \
+line."
     #define NAME_FIRST_LINE_ERROR_STATUS -6
 
     #define NO_NAME_ERROR "No name specified."
@@ -35,4 +36,5 @@
     #define INVALID_ARGUMENT_STATUS -9
 
     int error_handling(int status);
+
 #endif /*ERROR_H_*/

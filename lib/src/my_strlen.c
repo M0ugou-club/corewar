@@ -23,7 +23,7 @@ int my_strlen(char const *str)
 int my_tablen(char **tab)
 {
     int len = 0;
-    
+
     if (tab == NULL) {
         return (len);
     }
