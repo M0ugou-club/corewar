@@ -7,5 +7,5 @@
 #ifndef VM_H_
     #define VM_H_
 
-int loop_process(process_t *process);
+int loop_process(process_t *process, char *memory);
 #endif /*VM_H_*/
