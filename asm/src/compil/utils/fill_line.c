@@ -16,12 +16,12 @@ static int set_first_two_args(command_int_t *command_int, int fnct_nbr,
     int index_char = 1;
     int num = 0;
 
-    command_int->value[index_int] = fill_char_tab(fnct_nbr, 1);
+    command_int->value[index_int] = fill_char_tab(fnct_nbr, 1, -1);
     MALLOC_RETURN(command_int->value[index_int], -1);
     command_int->value_size[index_int] = 1;
     index_int++;
     num = get_format_value(&line_array[index_char]);
-    command_int->value[index_int] = fill_char_tab(num, 1);
+    command_int->value[index_int] = fill_char_tab(num, 1, -1);
     MALLOC_RETURN(command_int->value[index_int], -1);
     command_int->value_size[index_int] = 1;
     index_int++;

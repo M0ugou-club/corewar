@@ -13,6 +13,7 @@
     #define RETURN_ERROR(value, error, exit) if (value == error) return (exit);
     #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) \
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
+    #define REG_INDEX 0
 
     #include <stdio.h>
 
@@ -57,7 +58,7 @@
     int write_file(prog_list_t *prog_list, int fd);
 
     /* Utils*/
-    char *fill_char_tab(int num, int size);
+    char *fill_char_tab(int num, int size, int i);
     int get_curr_index(prog_list_t *prog_list, prog_list_t *line);
     int get_str(char const *line, char str[]);
     int get_line_array(prog_list_t *prog_list);

@@ -5,11 +5,13 @@
 ** get_number_value
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "op.h"
 #include "asm.h"
 #include "my.h"
 
+static const char error_str[23] = "Wrong register value.\n";
 static const type_t type[] = {{"r", 1},
 {"%", DIR_SIZE},
 {"", IND_SIZE},
@@ -26,10 +28,14 @@ static int get_error_value(char const *arg, int index_nb)
     return (error);
 }
 
-char *fill_char_tab(int num, int size)
+char *fill_char_tab(int num, int size, int i)
 {
     char *num_tab = NULL;
 
+    if (i == REG_INDEX && (num > 16 || num < 1)) {
+        write(2, error_str, my_strlen(error_str));
+        return (NULL);
+    }
     num_tab = malloc(sizeof(char) * (size + 1));
     MALLOC_RETURN(num_tab, NULL);
     my_memset(num_tab, '\0', size + 1);
@@ -61,7 +67,7 @@ int get_nbr_value(char **value , int *value_size, char const *arg, int index)
             error = get_error_value(arg, index_nb);
             value_size[index] = type[i].info;
             num = my_atoi(&arg[index_nb]);
-            value[index] = fill_char_tab(num, value_size[index]);
+            value[index] = fill_char_tab(num, value_size[index], i);
             MALLOC_RETURN(value[index], -1);
             return (error);
         }

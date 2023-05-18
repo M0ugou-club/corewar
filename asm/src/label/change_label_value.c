@@ -48,7 +48,7 @@ static int change_int_value(prog_list_t *line, int i, int value)
     }
     free(line->command_int->value[index]);
     line->command_int->value[index] = fill_char_tab(value,
-        line->command_int->value_size[index]);
+        line->command_int->value_size[index], -1);
     MALLOC_RETURN(line->command_int->value[index], -1);
     return (0);
 }
