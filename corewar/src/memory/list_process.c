@@ -15,6 +15,8 @@ void destroy_process_list(process_t *list)
     while (list != NULL) {
         tmp = list;
         list = list->next;
+        free(tmp->id);
+        free(tmp->registers);
         free(tmp);
     }
 }
