@@ -43,7 +43,7 @@ int my_vm(char *memory, process_t *process)
     }
     champ_alive = how_many_champ_alive(process);
     while (champ_alive > 1 && cycle_to_die > 0) {
-        loop_process(process);
+        loop_process(process, memory);
         cycle++;
         if (cycle == cycle_to_die) {
             cycle_to_die = incrementation_cycle(&champ_alive, cycle_to_die)
