@@ -13,7 +13,8 @@ int increase_index(command_int_t *command_int)
 {
     int index = 0;
 
-    if (command_int == NULL) {
+    if (command_int == NULL || command_int->value_size == NULL
+        || command_int->value == NULL) {
         return (index);
     }
     for (int i = 0; command_int->value_size[i] != -1 && i < MAX_LENGTH; i++) {
