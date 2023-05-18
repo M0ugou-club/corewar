@@ -5,6 +5,7 @@
 ** error_handling
 */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "asm.h"
 #include "op.h"
@@ -28,7 +29,7 @@ static int fill_type(char type_array[], int index, char const *line_array)
     return (0);
 }
 
-static int compare_type(char type_array[], int fct_nb, int tab_len)
+static int compare_type(char type_array[], int fct_nb)
 {
     int error = 0;
     int i = 0;
@@ -75,7 +76,7 @@ int error_compil(char **line_array, int fct_nb)
             fill_type(type_array, i - 1, line_array[i]);
         }
     }
-    if (compare_type(type_array, fct_nb, tab_len) == -1) {
+    if (compare_type(type_array, fct_nb) == -1) {
         free(type_array);
         return (-1);
     }
