@@ -10,24 +10,24 @@
 #include "compil_line.h"
 
 static const line_compil_t compil_tab[] = {{"live", &compil_one_format, 1},
-{"ld", &compile_load, 2},
-{"st", &compile_store, 3},
-{"add", &compile_calculation, 4},
-{"sub", &compile_calculation, 5},
-{"and", &compile_operator, 6},
-{"or", &compile_operator, 7},
-{"xor", &compile_operator, 8},
+{"ld", &compil_basic, 2},
+{"st", &compil_basic, 3},
+{"add", &compil_basic, 4},
+{"sub", &compil_basic, 5},
+{"and", &compil_basic, 6},
+{"or", &compil_basic, 7},
+{"xor", &compil_basic, 8},
 {"zjmp", &compil_one_format_index, 9},
-{"ldi", &compile_load_index, 10},
-{"sti", &compile_store_index, 11},
+{"ldi", &compil_index, 10},
+{"sti", &compil_index, 11},
 {"fork", &compil_one_format_index, 12},
-{"lld", &compile_load, 13},
-{"lldi", &compile_load_index, 14},
+{"lld", &compil_basic, 13},
+{"lldi", &compil_index, 14},
 {"lfork", &compil_one_format_index, 15},
-{"aff", &compil_aff, 16},
+{"aff", &compil_basic, 16},
 {NULL, NULL, -1}};
 
-int get_command(prog_list_t *line, line_compil_t comp_line)
+static int get_command(prog_list_t *line, line_compil_t comp_line)
 {
     if (line->line_array == NULL) {
         return (0);
@@ -37,13 +37,10 @@ int get_command(prog_list_t *line, line_compil_t comp_line)
             && (comp_line.compil != NULL)) {
             line->command_int = comp_line.compil(&line->line_array[i],
                 comp_line.fnct_nbr);
+            RETURN_ERROR(line->command_int, NULL, -1);
         }
     }
-    if (line->command_int == NULL) {
-        return (-1);
-    } else {
-        return (0);
-    }
+    return (0);
 }
 
 int compile_line(prog_list_t *line)
@@ -54,12 +51,12 @@ int compile_line(prog_list_t *line)
 
     while (tmp != NULL) {
         while (compil_tab[i].command != NULL) {
-            return_value = get_command(tmp, compil_tab[i]);
+            return_value += get_command(tmp, compil_tab[i]);
             i++;
         }
         if (return_value != 0
-            && my_strncmp(tmp->line, ".name", my_strlen(".name") == 0)
-            && my_strncmp(tmp->line, ".comment", my_strlen(".comment") == 0)) {
+            && my_strncmp(tmp->line, ".name", my_strlen(".name") != 0)
+            && my_strncmp(tmp->line, ".comment", my_strlen(".comment") != 0)) {
             return (-1);
         }
         i = 0;
