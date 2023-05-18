@@ -32,7 +32,7 @@ char *fill_char_tab(int num, int size, int i)
 {
     char *num_tab = NULL;
 
-    if (i == REG_INDEX && (num > 16 || num < 1)) {
+    if (i == REG_INDEX && (num > REG_NUMBER || num < 1)) {
         write(2, error_str, my_strlen(error_str));
         return (NULL);
     }
