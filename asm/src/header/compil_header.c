@@ -7,15 +7,17 @@
 
 #include <stdlib.h>
 #include "error.h"
+#include "asm.h"
+#include "op.h"
 #include "my.h"
 
-static int count_text(file_t *file, const char *text)
+static int count_text(prog_list_t *file, const char *text)
 {
-    file_t *temp = file;
+    prog_list_t *temp = file;
     int compt = 0;
 
     while (temp) {
-        if (my_strncmp(temp->line, text, my_strlen(text) == 0)) {
+        if (my_strncmp(temp->line, text, my_strlen(text)) == 0) {
             compt++;
         }
         temp = temp->next;
@@ -38,9 +40,27 @@ static int count_quote(const char *line)
     if (compt != 2) {
         return SYNTAX_ERROR_STATUS;
     }
+    return (0);
 }
 
-static int get_name(file_t *file, header_s *header)
+static int get_str(char const *line, char str[])
+{
+    int quote_status = -1;
+    int index = 0;
+
+    for (int i = 0; line[i] != '\0'; i++) {
+        if (quote_status == 1 && line[i] != '\"') {
+            str[index] = line[i];
+            index++;
+        }
+        if (line[i] == '\"') {
+            quote_status *= -1;
+        }
+    }
+    return (0);
+}
+
+static int get_name(prog_list_t *file, header_t *header)
 {
     if (file->line) {
         if (my_strncmp(file->line, ".name ", 6) != 0
@@ -59,12 +79,12 @@ static int get_name(file_t *file, header_s *header)
         if (count_text(file, ".name ") != 0) {
             return NAME_REP_ERROR_STATUS;
         }
-        header->prog_name = file->line;
+        get_str(file->line, header->prog_name);
     }
     return 0;
 }
 
-static int get_comment(file_t *file, header_s *header)
+static int get_comment(prog_list_t *file, header_t *header)
 {
     if (file && file->line) {
         if (my_strncmp(file->line, ".comment ", 9) != 0) {
@@ -79,14 +99,14 @@ static int get_comment(file_t *file, header_s *header)
         if (count_text(file, ".comment ") != 0) {
             return COMMENT_REP_ERROR_STATUS;
         }
-        header->prog_comment = file->line;
+        get_str(file->line, header->comment);
     }
     return 0;
 }
 
-int compil_header(file_t *file, header_s *header, int size)
+int compil_header(prog_list_t *file, header_t *header, int size)
 {
-    file_t *temp = NULL;
+    prog_list_t *temp = NULL;
     int status = 0;
 
     if (file && header) {
