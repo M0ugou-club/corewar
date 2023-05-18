@@ -10,7 +10,7 @@
     #define MAX_LENGTH 6
     #define BYTE_VALUE 256
     #define MALLOC_RETURN(ptr, ret) if (ptr == NULL) return (ret);
-    #define RETURN_ERROR(value, error, exit) if (value == error) return(exit);
+    #define RETURN_ERROR(value, error, exit) if (value == error) return (exit);
     #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) \
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
 
