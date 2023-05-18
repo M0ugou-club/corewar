@@ -30,7 +30,7 @@ int my_strcat(char *dest, char const *src)
     if (src == NULL || dest == NULL) {
         return (-1);
     }
-    while (src[index] != '\0') {
+    while (dest[index] != '\0') {
         index++;
     }
     for (int i = 0; src[i] != '\0'; i++) {

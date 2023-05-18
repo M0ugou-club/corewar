@@ -22,7 +22,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = libmy.a
 
-CFLAGS = -W -Wall -Wextra -I./include -g3
+CFLAGS = -W -Wall -Wextra -I./include
 
 $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)
