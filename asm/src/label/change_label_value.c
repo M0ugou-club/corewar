@@ -5,16 +5,18 @@
 ** change_label_value
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "asm.h"
+#include "op.h"
 #include "my.h"
 
-static int find_label_index(prog_list_t *prog_list, prog_list_t *line,
-    char *arg)
+static int find_label_index(prog_list_t *prog_list, char const *arg)
 {
     prog_list_t *tmp = prog_list;
     int len = 0;
     int index = 0;
+    const char error_str[18] = "Wrong label name\n";
 
     len = my_strlen("%:");
     while (tmp != NULL) {
@@ -26,6 +28,7 @@ static int find_label_index(prog_list_t *prog_list, prog_list_t *line,
         }
         tmp = tmp->next;
     }
+    write(2, error_str, my_strlen(error_str));
     return (-1);
 }
 
@@ -63,7 +66,7 @@ static int get_label_value(prog_list_t *prog_list, prog_list_t *line, int i)
     }
     if (is_label(line->line_array[i]) == 0) {
         curr_index = get_curr_index(prog_list, line);
-        index = find_label_index(prog_list, line, line->line_array[i]);
+        index = find_label_index(prog_list, line->line_array[i]);
         if (index == -1)
             return (-1);
         if (change_int_value(line, i, index - curr_index) == -1)
@@ -81,11 +84,11 @@ int change_label_value(prog_list_t *prog_list)
 
     while (tmp != NULL) {
         while (tmp->line_array != NULL && tmp->line_array[i] != NULL) {
-            error = get_label_value(prog_list, tmp, i);
+            error += get_label_value(prog_list, tmp, i);
             i++;
         }
         if (error != 0) {
-            return (error);
+            return (-1);
         }
         i = 0;
         tmp = tmp->next;

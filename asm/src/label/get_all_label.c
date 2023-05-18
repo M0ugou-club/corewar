@@ -7,9 +7,10 @@
 
 #include <stdlib.h>
 #include "asm.h"
+#include "op.h"
 #include "my.h"
 
-int store_label(char *line)
+static int store_label(char const *line)
 {
     int index = 0;
     int info = 0;
@@ -27,7 +28,7 @@ int store_label(char *line)
     return (index);
 }
 
-int copy_label(prog_list_t *line, int index)
+static int copy_label(prog_list_t *line, int index)
 {
     line->label = malloc(sizeof(char) * (index + 1));
     if (line->label == NULL) {

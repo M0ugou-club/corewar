@@ -6,6 +6,7 @@
 */
 
 #include "asm.h"
+#include "op.h"
 #include "my.h"
 
 int compare_char(char compare)

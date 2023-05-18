@@ -27,7 +27,7 @@ static prog_list_t *fill_list(prog_list_t *prog_list, prog_list_t *new_node)
     return (prog_list);
 }
 
-static prog_list_t *add_node(char *copy, prog_list_t *prog_list,
+static prog_list_t *add_node(char const *copy, prog_list_t *prog_list,
     bool *first_line)
 {
     prog_list_t *new_node = NULL;

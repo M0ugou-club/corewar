@@ -46,7 +46,7 @@ char *fill_char_tab(int num, int size)
     return (num_tab);
 }
 
-int get_nbr_value(char **value , int *value_size, char *arg, int index)
+int get_nbr_value(char **value , int *value_size, char const *arg, int index)
 {
     int error = 0;
     int i = 0;
@@ -59,7 +59,7 @@ int get_nbr_value(char **value , int *value_size, char *arg, int index)
         }
         if (my_strncmp(arg, type[i].c, my_strlen(type[i].c)) == 0) {
             error = get_error_value(arg, index_nb);
-            value_size[index] = type[i].lenght;
+            value_size[index] = type[i].info;
             num = my_atoi(&arg[index_nb]);
             value[index] = fill_char_tab(num, value_size[index]);
             MALLOC_RETURN(value[index], -1);

@@ -6,14 +6,14 @@
 */
 
 #include <stddef.h>
-#include "my.h"
 #include "asm.h"
+#include "my.h"
 
 static const format_t format_value[] = {{"r", 0, 1},
 {"%", 1, 0},
 {NULL, 1, 1}};
 
-int increase_value(int bit_strenght, char *arg)
+static int increase_value(int bit_strenght, char const *arg)
 {
     int value = 0;
     int i = 0;
