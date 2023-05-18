@@ -14,6 +14,9 @@ SRC = ./src/my_memset.c \
 	  ./src/my_power.c \
 	  ./src/str_is_num.c \
 	  ./src/str_to_word_array.c \
+	  ./src/my_strcpy.c \
+	  ./src/my_strcat.c \
+	  ./src/my_putstr.c
 
 OBJ = $(SRC:.c=.o)
 

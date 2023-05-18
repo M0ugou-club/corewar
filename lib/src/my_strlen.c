@@ -19,3 +19,16 @@ int my_strlen(char const *str)
     }
     return (len);
 }
+
+int my_tablen(char **tab)
+{
+    int len = 0;
+    
+    if (tab == NULL) {
+        return (len);
+    }
+    while (tab[len] != NULL) {
+        len++;
+    }
+    return (len);
+}

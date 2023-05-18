@@ -20,5 +20,11 @@
     int my_int_memset(int *tab, int byte, int len);
     char **str_to_array(char const *str, char delim);
     int my_tab_memset(char **data, char *byte, int len);
+    int my_strncat(char *dest, char const *src, int len);
+    int my_strcat(char *dest, char const *src);
+    int my_strncpy(char *dest, char const *src, int len);
+    int my_strcpy(char *dest, char const *src);
+    int my_putstr(char const *str, int output);
+    int my_tablen(char **tab);
 
 #endif /* !MY_H_ */
