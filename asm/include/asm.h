@@ -14,6 +14,7 @@
     #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) \
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
     #define REG_INDEX 0
+    #define SKIP_COMMAND 1
 
     #include <stdio.h>
 
