@@ -9,13 +9,13 @@
     #define PROCESS_H_
     #include "op.h"
 
-    typedef struct process
-    {
+    typedef struct process_s {
         int index;
+        int cooldown;
+        int last_lives;
+        int *registers;
         char *id;
-        int[REG_NUMBER];
         process_t *next;
     } process_t;
-
 
 #endif /* !PROCESS_H_ */
