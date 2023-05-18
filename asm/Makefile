@@ -10,6 +10,7 @@ UTILS =  ./src/utils/get_line_array.c \
 		 ./src/utils/manip_index.c \
 		 ./src/utils/create_new_file.c \
 		 ./src/utils/get_str.c \
+		 ./src/utils/free_prog_list.c \
 		 ./src/compil/utils/load_tab.c \
 		 ./src/compil/utils/change_size_index.c \
 		 ./src/compil/utils/fill_line.c \
@@ -39,7 +40,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = asm
 
-CFLAGS = -W -Wall -Wextra -I./include -g3
+CFLAGS = -W -Wall -Wextra -I./include
 
 LDFLAGS = -L ../lib -lmy -g3
 

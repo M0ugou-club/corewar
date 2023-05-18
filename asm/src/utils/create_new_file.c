@@ -49,7 +49,9 @@ int open_new_file(char const *file_name)
     }
     fd = open(new_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (fd == -1) {
+        free(new_file);
         return (-1);
     }
+    free(new_file);
     return (fd);
 }

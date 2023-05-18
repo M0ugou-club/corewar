@@ -63,6 +63,8 @@
     int get_line_array(prog_list_t *prog_list);
     int compare_char(char compare);
     int increase_index(command_int_t *command_int);
+    void free_prog_list(prog_list_t *prog_list);
+    void free_tab(char **tab);
 
     /* Compil */
     prog_list_t *get_prog_list(FILE *fd);
