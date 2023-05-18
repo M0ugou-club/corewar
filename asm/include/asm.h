@@ -10,9 +10,11 @@
     #define MAX_LENGTH 6
     #define BYTE_VALUE 256
     #define MALLOC_RETURN(ptr, ret) if (ptr == NULL) return (ret);
+    #define RETURN_ERROR(value, error, exit) if (value == error) return(exit);
+    #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000)\
+        | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
 
     #include <stdio.h>
-    #include "op.h"
 
     typedef struct format_s format_t;
 
@@ -29,7 +31,7 @@
 
     typedef struct type_s {
         char* c;
-        int lenght;
+        int info;
     } type_t;
 
     struct prog_list_s {
@@ -45,24 +47,25 @@
         char **value;
     };
 
+    typedef struct header_s header_t;
+
     prog_list_t *get_prog_list(FILE *fd);
     command_int_t *load_int_tab(void);
-    int fill_multiple_args_line(command_int_t *command_int, char **line_array,
-        int fnct_nbr);
-    int get_format_value(char **args);
-    int get_nbr_value(char **value , int *value_size, char *arg, int index);
     int process_asm(char const *file_name);
     FILE *open_file(char const *file_name);
     int compile_line(prog_list_t *line);
     int is_label(char const *arg);
     int change_label_value(prog_list_t *prog_list);
-    int write_file(prog_list_t *prog_list);
+    int write_file(prog_list_t *prog_list, int fd);
     int get_line_array(prog_list_t *prog_list);
     int compare_char(char compare);
     int get_all_label(prog_list_t *list);
-    int change_size_index(command_int_t *command_int);
     char *fill_char_tab(int num, int size);
     int increase_index(command_int_t *command_int);
     int get_line_array(prog_list_t *prog_list);
+    int open_new_file(char const *file_name);
+    int compil_header(prog_list_t *file, header_t *header, int size);
+    int get_curr_index(prog_list_t *prog_list, prog_list_t *line);
+    int error_compil(char **line_array, int fct_nb);
 
 #endif /* !ASM_H_ */
