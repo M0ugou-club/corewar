@@ -49,7 +49,8 @@ static char *create_new_file_name(char const *file_name, int index_last,
         return (NULL);
     }
     my_memset(new_file_name, '\0', len + 1);
-    my_strncpy(new_file_name, &file_name[index_start], (index_last - index_start));
+    my_strncpy(new_file_name, &file_name[index_start],
+        (index_last - index_start));
     my_strcat(new_file_name, suffix);
     return (new_file_name);
 }
