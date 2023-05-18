@@ -31,10 +31,13 @@ process_t *create_process(int index, char *id)
     if (list == NULL) {
         return (NULL);
     }
+    list->registers = malloc(sizeof(int) * REG_NUMBER);
+    if (list->registers == NULL) {
+        return NULL;
+    }
     list->id = id;
     list->index = index;
     list->next = NULL;
-    list->last_live = 0;
+    list->last_lives = 0;
     return (list);
 }
-
