@@ -9,9 +9,9 @@ SRC =
 
 OBJ = $(SRC:.c=.o)
 
-NAME = asm
+NAME = corewar
 
-CFLAGS = 
+CFLAGS = -W -Wall -Wextra -Iincludes -Iinclude
 
 LDFLAGS =
 
