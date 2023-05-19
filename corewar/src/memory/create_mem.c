@@ -23,12 +23,12 @@ int circular_mod(int index)
 
 char get_mem_value(char *mem, int index)
 {
-    return (mem[modulo_circulaire(index)]);
+    return (mem[circular_mod(index)]);
 }
 
 void modif_mem(char *mem, int index, const char value)
 {
-    mem[modulo_circulaire(index)] = value;
+    mem[circular_mod(index)] = value;
 }
 
 char *create_memory(unsigned const int mem_size)
