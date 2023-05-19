@@ -5,12 +5,12 @@
 ## Makefile
 ##
 
-SRC =	src/memory/create_mem.c \
+SRC =   ./champion/put_champion.c\
+		src/memory/create_mem.c \
 		src/memory/list_process.c \
 		src/memory/op.c \
 		src/process_loop.c \
-		src/vm.c \
-		src/main.c
+		src/vm.c 
 
 OBJ = $(SRC:.c=.o)
 
