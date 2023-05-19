@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "fonction.h"
+#include "vm.h"
 
 static const function_t function[] = { {1, NULL},
 {2, NULL},
@@ -26,7 +27,7 @@ static const function_t function[] = { {1, NULL},
 {16, NULL},
 {-1, NULL}};
 
-static int parse_champ(process_t *process, char *memory)
+static int parse_champ(vm_t *vm, process_t *process)
 {
     if (process->index == -1) {
         return 0;
@@ -40,12 +41,12 @@ static int parse_champ(process_t *process, char *memory)
     return 0;
 }
 
-int loop_process(process_t *process, char *memory)
+int loop_process(vm_t *vm, process_t *process)
 {
     process_t *tmp = process;
 
     while (tmp) {
-        parse_champ(tmp, memory);
+        parse_champ(vm, tmp);
         tmp = tmp->next;
     }
     return 0;
