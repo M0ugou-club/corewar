@@ -9,6 +9,18 @@
 #include <stdbool.h>
 #include "op.h"
 
+void get_mem_value(char *mem, int index)
+{
+    char value = '0';
+
+    if (index < 0) {
+        index *= -1;
+    }
+    index = index % MEM_SIZE;
+    value = mem[index];
+    return (value);
+}
+
 void modif_mem(char *mem, int index, const char value)
 {
     bool is_neg = false;
