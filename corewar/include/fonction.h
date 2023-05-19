@@ -21,5 +21,6 @@
     int get_type_error(char const *cb_tab, int fct_nb);
     char *get_coding_byte(char coding_bytes);
     int increase_index(char *cb_tab);
+    int get_reg_error(int reg_nb);
 
 #endif /*FONCTION_H_*/

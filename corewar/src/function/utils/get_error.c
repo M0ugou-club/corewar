@@ -7,6 +7,14 @@
 
 #include "op.h"
 
+int get_reg_error(int reg_nb)
+{
+    if (reg_nb < 0 || reg_nb > REG_NUMBER) {
+        return (-1);
+    }
+    return (0);
+}
+
 int get_type_error(char const *cb_tab, int fct_nb)
 {
     int error = 0;
