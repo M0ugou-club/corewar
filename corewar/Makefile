@@ -7,7 +7,7 @@
 
 SRC =	src/memory/create_mem.c \
 		src/memory/list_process.c \
-		src/memory/list_op.c \
+		src/memory/op.c \
 		src/process_loop.c \
 		src/vm.c \
 		src/main.c
