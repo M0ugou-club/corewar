@@ -5,7 +5,7 @@
 ** fonction.h
 */
 #ifndef FONCTION_H_
-	#define FONCTION_H_
+    #define FONCTION_H_
 
 typedef struct function_s {
     char id;
