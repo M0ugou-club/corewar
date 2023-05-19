@@ -15,7 +15,8 @@
         int last_lives;
         int *registers;
         char *id;
-        process_t *next;
+        char *code;
+        struct process_s *next;
     } process_t;
 
 #endif /* !PROCESS_H_ */
