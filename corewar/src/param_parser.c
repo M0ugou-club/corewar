@@ -18,7 +18,7 @@ int get_dump_value(char **av)
         }
     }
     if (value < 0) {
-        return;
+        return (0);
     }
     return (value);
 }
