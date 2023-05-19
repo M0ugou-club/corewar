@@ -7,8 +7,9 @@
 
 #include <stdlib.h>
 #include "my.h"
+#include "vm.h"
 
-int get_dump_value(char **av)
+void get_dump_value(char **av, vm_t *vm)
 {
     int value = 0;
 
@@ -18,7 +19,8 @@ int get_dump_value(char **av)
         }
     }
     if (value < 0) {
-        return (0);
+        vm->f_dump = 0;
+    } else {
+        vm->f_dump = value;
     }
-    return (value);
 }
