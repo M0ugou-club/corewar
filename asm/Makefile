@@ -42,7 +42,7 @@ NAME = asm
 
 CFLAGS = -W -Wall -Wextra -I./include
 
-LDFLAGS = -L ../lib -lmy -g3
+LDFLAGS = -L ../lib -lmy
 
 $(NAME) : $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
