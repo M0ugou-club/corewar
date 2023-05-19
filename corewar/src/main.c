@@ -24,6 +24,7 @@ int main(int ac, char **argv)
     vm = malloc(sizeof(vm_t));
     if (vm) {
         vm->memory = create_memory();
+        vm->f_dump = get_dump_value(argv);
     }
     return 0;
 }
