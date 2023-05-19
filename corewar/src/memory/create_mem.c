@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "op.h"
 
-int circular_mod(int index)
+static int circular_mod(int index)
 {
     int res = 0;
 
@@ -31,7 +31,7 @@ void modif_mem(char *mem, int index, const char value)
     mem[circular_mod(index)] = value;
 }
 
-char *create_memory(unsigned const int mem_size)
+char *create_memory(void)
 {
     char *mem = NULL;
 

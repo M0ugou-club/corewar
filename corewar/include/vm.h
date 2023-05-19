@@ -16,4 +16,5 @@ typedef struct vm_s {
     int f_dump;
 }vm_t;
 int loop_process(vm_t *vm, process_t *process);
+int get_dump_value(char **av);
 #endif /*VM_H_*/

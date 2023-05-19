@@ -9,7 +9,7 @@
 #include "my.h"
 #include "vm.h"
 
-int get_dump_value(char **av, vm_t *vm)
+int get_dump_value(char **av)
 {
     int value = 0;
 
@@ -19,9 +19,8 @@ int get_dump_value(char **av, vm_t *vm)
         }
     }
     if (value < 0) {
-        vm->f_dump = 0;
+        return 0;
     } else {
-        vm->f_dump = value;
+        return value;
     }
-    return (0);
 }
