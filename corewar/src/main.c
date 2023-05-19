@@ -6,6 +6,8 @@
 */
 
 #include <stdlib.h>
+#include "vm.h"
+#include "memory.h"
 
 static int error_handling(int ac, char **argv)
 {
@@ -14,8 +16,14 @@ static int error_handling(int ac, char **argv)
 
 int main(int ac, char **argv)
 {
+    vm_t *vm = NULL;
+
     if (error_handling(ac, argv) != 0) {
         return 84;
+    }
+    vm = malloc(sizeof(vm_t));
+    if (vm) {
+        vm->memory = create_memory();
     }
     return 0;
 }
