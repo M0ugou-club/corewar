@@ -7,9 +7,11 @@
 #ifndef FONCTION_H_
     #define FONCTION_H_
 
+    #include "vm.h"
+
 typedef struct function_s {
     char id;
-    int (*action) (int index, char *memmory, process_t *process);
+    int (*action) (int index, vm_t *vm, process_t *process);
 } function_t;
 
 #endif /*FONCTION_H_*/
