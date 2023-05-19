@@ -6,12 +6,20 @@
 */
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "op.h"
 
-char modif_mem(char *mem, int index, const char value)
+void modif_mem(char *mem, int index, const char value)
 {
+    bool is_neg = false;
+
     if (index < 0) {
-        index = MEM_SIZE - index;
+        index *= -1;
+        is_neg = true;
+    }
+    index = index % MEM_SIZE;
+    if (is_neg == true) {
+        index *= -1;
     }
     mem[index] = value;
 }
