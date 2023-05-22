@@ -33,7 +33,8 @@ static int parse_champ(vm_t *vm, process_t *process)
         return 0;
     }
     for (int i = 0; function[i].id != -1; i++) {
-        if (function[i].action && vm->memory[process->index] == function[i].id) {
+        if (function[i].action &&
+        vm->memory[process->index] == function[i].id) {
             process->index = function[i].action;
         }
     }
