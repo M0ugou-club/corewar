@@ -18,6 +18,7 @@ int is_opt(char **av, int i, process_t *process)
     if (my_strcmp(av[i], "-a") && av[i + 1] != NULL) {
         if (my_str_is_num(av[1]) == -1) {
             write(2, ERROR, sizeof(ERROR));
+            exit(84);
         }
         process->index = my_atoi(av[i + 1]);
         return (0);
@@ -25,6 +26,7 @@ int is_opt(char **av, int i, process_t *process)
     if (my_strcmp(av[i], "-n") && av[i + 1] != NULL) {
         if (my_str_is_num(av[1]) == -1) {
             write(2, ERROR, sizeof(ERROR));
+            exit(84);
         }
         process->nb_champ = my_atoi(av[i + 1]);
         return (0);
