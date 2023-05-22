@@ -52,7 +52,6 @@ process_t *head)
 process_t *param_parser(char **av)
 {
     int nb_champ = 1;
-    char *name = NULL;
     process_t *process = NULL;
     process_t *head = NULL;
 
