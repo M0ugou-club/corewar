@@ -15,6 +15,18 @@ static const type_value_t type[] = {{1, T_REG},
 {IND_SIZE, T_IND},
 {-1, -1}};
 
+int get_index(char coding_byte)
+{
+    int value_size = 0;
+
+    for (int i = 0; type[i].value != -1; i++) {
+        if (type[i].type == coding_byte) {
+            value_size = type[i].value;
+        }
+    }
+    return (value_size);
+}
+
 int get_value(char *memory, int index, char coding_byte)
 {
     int value_size = 0;

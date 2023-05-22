@@ -29,6 +29,7 @@ int process_addidtion(process_t *process, vm_t *vm, char *cb_tab, int add_type)
     val1 = process->registers[val1 - 1];
     val2 = process->registers[val2 - 1] * add_type;
     process->registers[reg_result - 1] = val1 + val2;
+
     return (0);
 }
 
@@ -43,7 +44,10 @@ int exec_add(process_t *process, vm_t *vm)
         free(cb_tab);
         return (-1);
     }
-    process_addidtion(process, vm, cb_tab, 1);
+    if (process_addidtion(process, vm, cb_tab, 1) == -1) {
+        free(cb_tab);
+        return (-1);
+    }
     index = increase_index(cb_tab) + 2;
     if (index == -1) {
         free(cb_tab);
