@@ -44,6 +44,7 @@ int get_special_value(char *memory, int index, char coding_byte,
     value = get_value(memory, index, coding_byte);
     if (coding_byte == T_REG) {
         if (get_reg_error(value) != 0) {
+            process->index = -1;
             return (0);
         }
         return(process->registers[value - 1]);
