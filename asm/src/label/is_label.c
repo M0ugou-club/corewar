@@ -38,3 +38,14 @@ int is_label(char const *arg)
     }
     return (error);
 }
+
+int is_only_label_line(char const *arg)
+{
+    int len = 0;
+
+    len = my_strlen(arg);
+    if (arg[len - 1] == ':') {
+        return (0);
+    }
+    return (-1);
+}
