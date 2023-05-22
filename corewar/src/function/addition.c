@@ -12,25 +12,23 @@
 
 int process_addidtion(process_t *process, vm_t *vm, char *cb_tab, int add_type)
 {
-    int reg1 = 0;
-    int reg2 = 0;
-    int reg3 = 0;
-    int value1 = 0;
-    int value2 = 0;
+    int val1 = 0;
+    int val2 = 0;
+    int reg_result = 0;
 
-    reg1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
+    val1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
         cb_tab[INDEX_1ST]);
-    reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB + 1,
+    val2 = get_value(vm->memory, process->index + SKIP_COMM_CB + 1,
         cb_tab[INDEX_2ND]);
-    reg3 = get_value(vm->memory, process->index + SKIP_COMM_CB + 2,
+    reg_result = get_value(vm->memory, process->index + SKIP_COMM_CB + 2,
         cb_tab[INDEX_3RD]);
-    if (get_reg_error(reg1) == -1 || get_reg_error(reg2) == -1
-        || get_reg_error(reg3) == -1) {
+    if (get_reg_error(val1) == -1 || get_reg_error(val2) == -1
+        || get_reg_error(reg_result) == -1) {
         return (-1);
     }
-    value1 = process->registers[reg1 - 1];
-    value2 = process->registers[reg2 - 1] * add_type;
-    process->registers[reg3 - 1] = value1 + value2;
+    val1 = process->registers[val1 - 1];
+    val2 = process->registers[val2 - 1] * add_type;
+    process->registers[reg_result - 1] = val1 + val2;
     return (0);
 }
 
