@@ -10,7 +10,10 @@ SRC =   ./champion/put_champion.c\
 		src/memory/list_process.c \
 		src/memory/op.c \
 		src/process_loop.c \
-		src/vm.c 
+		src/vm.c \
+		src/main.c \
+		src/param_parser.c \
+		src/get_nb_champ_alive.c
 
 OBJ = $(SRC:.c=.o)
 
