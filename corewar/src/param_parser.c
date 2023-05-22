@@ -34,6 +34,8 @@ process_t *create_process(char *name, process_t *process)
     }
     header = get_header(fd);
     process->id = header->prog_name;
+    free(header);
+    return (process);
 }
 
 process_t *init_next_champ(char *champ_name, process_t *process,
@@ -44,6 +46,7 @@ process_t *head)
     process = malloc(sizeof(process_t));
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
+    return process;
 }
 
 process_t *param_parser(char **av)
