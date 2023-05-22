@@ -25,8 +25,11 @@ process_t *add_process(process_t *to_add, process_t *list)
 {
     process_t *tmp = NULL;
 
-    if (to_add == NULL || list == NULL) {
+    if (to_add == NULL) {
         return NULL;
+    }
+    if (list == NULL) {
+        return (to_add);
     }
     tmp = list;
     while (tmp->next != NULL) {
