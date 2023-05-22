@@ -10,7 +10,8 @@ SRC =	src/memory/create_mem.c \
 		src/memory/op.c \
 		src/process_loop.c \
 		src/vm.c \
-		src/main.c
+		src/main.c \
+		src/param_parser.c
 
 OBJ = $(SRC:.c=.o)
 
