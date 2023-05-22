@@ -45,7 +45,7 @@ int my_vm(vm_t *vm, process_t *process)
         loop_process(vm, process);
         cycle++;
         if (cycle == cycle_to_die) {
-            cycle_to_die = incrementation_cycle(cycle_to_die, vm)
+            cycle_to_die = incrementation_cycle(cycle_to_die, vm);
             cycle = 0;
         }
         champ_alive = how_many_champ_alive(process);

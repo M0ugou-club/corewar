@@ -5,15 +5,22 @@
 ## Makefile
 ##
 
-SRC = 
+SRC =	src/memory/create_mem.c \
+		src/memory/list_process.c \
+		src/memory/op.c \
+		src/process_loop.c \
+		src/vm.c \
+		src/main.c \
+		src/param_parser.c \
+		src/get_nb_champ_alive.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = corewar
 
-CFLAGS = -W -Wall -Wextra -Iincludes -Iinclude
+CFLAGS = -W -Wall -Wextra -Iinclude
 
-LDFLAGS =
+LDFLAGS = -L../lib/lmy
 
 $(NAME) : $(OBJ)
 	gcc -o $(NAME) $(OBJ)

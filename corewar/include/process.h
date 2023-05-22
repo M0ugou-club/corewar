@@ -14,8 +14,9 @@
         int cooldown;
         int last_lives;
         int *registers;
+        int nb_champ;
         char *id;
-        process_t *next;
+        struct process_s *next;
     } process_t;
 
 #endif /* !PROCESS_H_ */

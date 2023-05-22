@@ -5,15 +5,12 @@
 ** fonction.h
 */
 #ifndef FONCTION_H_
-	#define FONCTION_H_
+    #define FONCTION_H_
 
-    #include "vm.h"
-    #include "process.h"
-
-    typedef struct function_s {
-        char id;
-        int (*action) (process_t *process, vm_t *vm);
-    } function_t;
+typedef struct function_s {
+    char id;
+    int (*action) (int index, char *memmory, process_t *process);
+} function_t;
 
     int exec_sub(process_t *process, vm_t *vm);
     int exec_add(process_t *process, vm_t *vm);
