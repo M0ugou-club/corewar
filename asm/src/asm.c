@@ -26,24 +26,20 @@ static int get_prog_size(prog_list_t *prog_list)
 
 static int make_header(prog_list_t *prog_list, int fd)
 {
-    header_t *header = NULL;
+    header_t header = {0};
     int size = 0;
 
-    header = malloc(sizeof(header_t));
-    MALLOC_RETURN(header, -1);
-    my_memset(header->prog_name, '\0', PROG_NAME_LENGTH + 1);
-    my_memset(header->comment, '\0', COMMENT_LENGTH + 1);
-    header->magic = 0;
-    header->prog_size = 0;
+    my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
+    my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
+    header.magic = 0;
+    header.prog_size = 0;
     size = get_prog_size(prog_list);
-    if (compil_header(prog_list, header, size) == 84) {
-        free(header);
+    if (compil_header(prog_list, &header, size) == 84) {
         return (-1);
     }
-    header->prog_size = SWAP_ENDIAN(header->prog_size);
-    header->magic = SWAP_ENDIAN(header->magic);
-    write(fd, header, sizeof(header_t));
-    free(header);
+    header.prog_size = SWAP_ENDIAN(header.prog_size);
+    header.magic = SWAP_ENDIAN(header.magic);
+    write(fd, &header, sizeof(header_t));
     return (0);
 }
 
