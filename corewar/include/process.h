@@ -19,4 +19,7 @@
         struct process_s *next;
     } process_t;
 
+    process_t *create_basic_process(int index, char *name, int nb_champ,
+                                    process_t *process);
+
 #endif /* !PROCESS_H_ */
