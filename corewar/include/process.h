@@ -17,6 +17,7 @@
         int nb_champ;
         char *id;
         struct process_s *next;
+        int carry;
     } process_t;
 
 #endif /* !PROCESS_H_ */
