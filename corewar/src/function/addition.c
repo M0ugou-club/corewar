@@ -43,7 +43,7 @@ int exec_add(process_t *process, vm_t *vm)
         free(cb_tab);
         return (-1);
     }
-    process_addidtion(process, vm, cb_tab, -1);
+    process_addidtion(process, vm, cb_tab, 1);
     index = increase_index(cb_tab) + 2;
     if (index == -1) {
         free(cb_tab);
