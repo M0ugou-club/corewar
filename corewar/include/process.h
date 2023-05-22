@@ -14,6 +14,7 @@
         int cooldown;
         int last_lives;
         int *registers;
+        int nb_champ;
         char *id;
         struct process_s *next;
     } process_t;
