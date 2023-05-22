@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include "my.h"
 #include "vm.h"
@@ -13,6 +14,7 @@
 int is_opt(char **av, int i, process_t *process)
 {
     if (my_strcmp(av[i], "-a") && av[i + 1] != NULL) {
+        if (my_str_is_num(av[1]))
         process->index = my_atoi(av[i + 1]);
         return (0);
     }
@@ -35,6 +37,7 @@ process_t *create_process(char *name, process_t *process)
     header = get_header(fd);
     process->id = header->prog_name;
     free(header);
+    close(fd);
     return (process);
 }
 
