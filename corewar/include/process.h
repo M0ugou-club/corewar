@@ -15,6 +15,7 @@
         int last_lives;
         int *registers;
         char *id;
+        int nb_champ;
         struct process_s *next;
     } process_t;
 
