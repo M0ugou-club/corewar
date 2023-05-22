@@ -17,10 +17,11 @@ int process_xor(process_t *process, vm_t *vm, char **cb_tab)
     int result = 0;
     int index = 0;
 
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB, cb_tab[INDEX_1ST]);
+    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
+                       cb_tab[INDEX_1ST]);
     index += get_index(cb_tab[INDEX_1ST]);
     param1 = get_value(vm->memory, process->index + SKIP_COMM_CB +
-                                   index, cb_tab[INDEX_2ND]);
+    index, cb_tab[INDEX_2ND]);
     index += get_index(cb_tab[INDEX_2ND]);
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
                        cb_tab[INDEX_3RD]);
