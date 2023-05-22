@@ -57,7 +57,8 @@ int compile_line(prog_list_t *line)
         if ((return_value != 0 || tmp->command_int == NULL)
             && (my_strncmp(tmp->line, ".name", my_strlen(".name") != 0))
             && (my_strncmp(tmp->line, ".comment", my_strlen(".comment") != 0))
-            && (my_tablen(tmp->line_array) != 1)) {
+            && (is_only_label_line(tmp->line) != 0)) {
+            printf("%s\n", tmp->line);
             return (-1);
         }
         i = 0;
