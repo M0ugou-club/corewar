@@ -11,14 +11,21 @@
 #include "my.h"
 #include "vm.h"
 
+static const char ERROR[] = "ERROR: invalid argument\n";
+
 int is_opt(char **av, int i, process_t *process)
 {
     if (my_strcmp(av[i], "-a") && av[i + 1] != NULL) {
-        if (my_str_is_num(av[1]))
+        if (my_str_is_num(av[1]) == -1) {
+            write(2, ERROR, sizeof(ERROR));
+        }
         process->index = my_atoi(av[i + 1]);
         return (0);
     }
     if (my_strcmp(av[i], "-n") && av[i + 1] != NULL) {
+        if (my_str_is_num(av[1]) == -1) {
+            write(2, ERROR, sizeof(ERROR));
+        }
         process->nb_champ = my_atoi(av[i + 1]);
         return (0);
     }
