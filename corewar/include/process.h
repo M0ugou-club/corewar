@@ -21,5 +21,6 @@
 
     process_t *create_basic_process(int index, char *name, int nb_champ,
                                     process_t *process);
+    header_t *get_header(int fd);
 
 #endif /* !PROCESS_H_ */
