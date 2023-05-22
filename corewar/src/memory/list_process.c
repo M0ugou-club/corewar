@@ -52,5 +52,7 @@ process_t *create_process(int index, char *id)
     list->index = index;
     list->next = NULL;
     list->last_lives = 0;
+    list->cooldown = 0;
+    list->nb_champ = 0;
     return (list);
 }
