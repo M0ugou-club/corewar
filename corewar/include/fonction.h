@@ -5,7 +5,7 @@
 ** fonction.h
 */
 #ifndef FONCTION_H_
-	#define FONCTION_H_
+    #define FONCTION_H_
 
     #include "vm.h"
     #include "process.h"
