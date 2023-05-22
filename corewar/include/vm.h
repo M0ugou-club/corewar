@@ -30,6 +30,11 @@
         int f_dump;
     } vm_t;
 
+    typedef struct type_value_s {
+        char value;
+        char type;
+    } type_value_t;
+
     int loop_process(vm_t *vm, process_t *process);
     int get_dump_value(char **av);
 
