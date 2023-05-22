@@ -22,5 +22,7 @@
     char *get_coding_byte(char coding_bytes);
     int increase_index(char *cb_tab);
     int get_reg_error(int reg_nb);
+    int get_special_value(char *memory, int index, char coding_byte,
+        process_t *process);
 
 #endif /*FONCTION_H_*/
