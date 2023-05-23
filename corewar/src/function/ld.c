@@ -15,7 +15,7 @@ int load_value(process_t *process, vm_t *vm, char coding_byte, int val2)
     int val1 = 0;
 
     val1 = get_value(vm->memory, process->index + SKIP_COMM_CB + 1,
-        coding_byte);
+    coding_byte);
     if (coding_byte == T_REG) {
         if (get_reg_error(val1) == -1) {
             return -1;
@@ -23,7 +23,8 @@ int load_value(process_t *process, vm_t *vm, char coding_byte, int val2)
         process->registers[val2 - 1] = process->registers[val1 - 1];
     }
     if (coding_byte == T_IND) {
-        process->registers[val2 - 1] = get_value(vm->memory, process->index + (val1 % IDX_MOD), coding_byte);
+        process->registers[val2 - 1] = get_value(vm->memory,
+        process->index + (val1 % IDX_MOD), coding_byte);
     }
     return 0;
 }

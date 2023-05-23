@@ -23,7 +23,8 @@ int store_value(process_t *process, vm_t *vm, char coding_byte, int val1)
         process->registers[val2 - 1] = process->registers[val1 - 1];
     }
     if (coding_byte == T_IND) {
-        modif_mem(vm->memory, (process->index + (val2 % IDX_MOD)), process->registers[val1 - 1]);
+        modif_mem(vm->memory, (process->index + (val2 % IDX_MOD)),
+        process->registers[val1 - 1]);
     }
     return 0;
 }
