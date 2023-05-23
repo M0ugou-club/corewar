@@ -6,6 +6,7 @@
 */
 #ifndef VM_H_
     #define VM_H_
+    #define MALLOC_RETURN(ptr, ret) if (ptr == NULL) return (ret);
 
     #include "process.h"
 
