@@ -20,7 +20,7 @@ static int is_dump(char **av, int i, process_t *process, vm_t *vm)
             write(2, ERROR, sizeof(ERROR));
             return (-1);
         }
-        vm->f_dump=  my_atoi(av[i + 1]);
+        vm->f_dump = my_atoi(av[i + 1]);
         return (0);
     }
     return (1);
