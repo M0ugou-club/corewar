@@ -62,6 +62,9 @@ static int get_name(prog_list_t *file, header_t *header)
         if (count_text(file, ".name ") != 0) {
             return NAME_REP_ERROR_STATUS;
         }
+        if (file->line[my_strlen(file->line) - 1] != "\"") {
+            return SYNTAX_ERROR_STATUS;
+        }
         get_str(file->line, header->prog_name);
     }
     return 0;
@@ -81,6 +84,9 @@ static int get_comment(prog_list_t *file, header_t *header)
         }
         if (count_text(file, ".comment ") != 0) {
             return COMMENT_REP_ERROR_STATUS;
+        }
+        if (file->line[my_strlen(file->line) - 1] != "\"") {
+            return SYNTAX_ERROR_STATUS;
         }
         get_str(file->line, header->comment);
     }
