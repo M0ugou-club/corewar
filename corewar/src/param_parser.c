@@ -17,19 +17,21 @@ static process_t *create_process(process_t *process, vm_t *vm, int fd)
     header_t header = {0};
     char *prog_champ = NULL;
 
-    if (get_header(fd, &header) == -1) {
+    if (get_header(fd, &header) == -1)
         return (NULL);
-    }
     prog_champ = get_prog(fd, &header);
-    if (prog_champ == NULL) {
+    if (prog_champ == NULL)
         return (NULL);
-    }
     process = create_basic_process(header.prog_name, process);
     if (process == NULL) {
         free(prog_champ);
         return (NULL);
     }
-    put_champ(process, vm, prog_champ);
+    if (put_champ(process, vm, prog_champ) == -1) {
+        free_champ(process);
+        free(prog_champ);
+        return (NULL);
+    }
     free(prog_champ);
     return (process);
 }

@@ -14,7 +14,7 @@
 int put_champ_in_arena(char *arena, int index, char *code)
 {
     for (int i = 0; code[i] != '\0' ;i++) {
-        if (get_mem_value(arena, index + 1) == 0) {
+        if (get_mem_value(arena, index + 1) != 0) {
             write(2, "champion overwrites another in memory\n", 38);
             return -1;
         }
@@ -28,10 +28,14 @@ int put_champ(process_t *champ, vm_t *vm, char *code)
     static int index = 0;
 
     if (champ->index == -1) {
-        put_champ_in_arena(vm->memory, index, code);
+        if (put_champ_in_arena(vm->memory, index, code) == -1) {
+            return -1;
+        }
         champ->index = index;
     } else {
-        put_champ_in_arena(vm->memory, champ->index, code);
+        if (put_champ_in_arena(vm->memory, champ->index, code) == -1) {
+            return -1;
+        }
     }
     index += MEM_SIZE / vm->nb_champ;
     return 0;
