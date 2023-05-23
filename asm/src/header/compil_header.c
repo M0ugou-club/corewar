@@ -53,19 +53,16 @@ static int get_name(prog_list_t *file, header_t *header)
         if (my_strncmp(file->line, ".name ", 6) != 0) {
             return NAME_FIRST_LINE_ERROR_STATUS;
         }
-        if (my_strncmp(file->line, ".name \"", 7) != 0) {
+        if (my_strncmp(file->line, ".name \"", 7) != 0)
             return SYNTAX_ERROR_STATUS;
-        }
-        if (count_quote(file->line) != 0) {
+        if (count_quote(file->line) != 0)
             return SYNTAX_ERROR_STATUS;
-        }
-        if (count_text(file, ".name ") != 0) {
+        if (count_text(file, ".name ") != 0)
             return NAME_REP_ERROR_STATUS;
-        }
-        if (file->line[my_strlen(file->line) - 1] != "\"") {
+        get_str(file->line, header->prog_name);
+        if (file->line[my_strlen(file->line) - 1] != '\"') {
             return SYNTAX_ERROR_STATUS;
         }
-        get_str(file->line, header->prog_name);
     }
     return 0;
 }
@@ -85,10 +82,10 @@ static int get_comment(prog_list_t *file, header_t *header)
         if (count_text(file, ".comment ") != 0) {
             return COMMENT_REP_ERROR_STATUS;
         }
-        if (file->line[my_strlen(file->line) - 1] != "\"") {
+        get_str(file->line, header->comment);
+        if (file->line[my_strlen(file->line) - 1] != '\"') {
             return SYNTAX_ERROR_STATUS;
         }
-        get_str(file->line, header->comment);
     }
     return 0;
 }
