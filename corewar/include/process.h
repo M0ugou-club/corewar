@@ -10,15 +10,14 @@
     #include "op.h"
 
     typedef struct process_s {
+        char *id;
+        int nb_champ;
+        int *registers;
         int index;
         int cooldown;
         int last_lives;
-        int *registers;
-        int nb_champ;
-        char *id;
-        int nb_champ;
-        struct process_s *next;
         int carry;
+        struct process_s *next;
     } process_t;
 
     process_t *create_basic_process(char *name, process_t *process);
