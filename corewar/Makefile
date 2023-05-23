@@ -15,6 +15,8 @@ SRC =   ./champion/put_champion.c\
 		src/param_parser.c \
 		src/get_nb_champ.c \
 		src/champion/handle_champ.c \
+		src/get_champ_info.c \
+		src/check_opt.c \
 
 OBJ = $(SRC:.c=.o)
 
