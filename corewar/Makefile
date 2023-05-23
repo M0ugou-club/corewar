@@ -13,7 +13,8 @@ SRC =   ./champion/put_champion.c\
 		src/vm.c \
 		src/main.c \
 		src/param_parser.c \
-		src/get_nb_champ_alive.c
+		src/get_nb_champ.c \
+		src/champion/handle_champ.c \
 
 OBJ = $(SRC:.c=.o)
 
