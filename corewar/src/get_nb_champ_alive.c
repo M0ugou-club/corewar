@@ -24,7 +24,7 @@ int is_champ_alive(process_t *process, int nb_champ)
 
 int get_nb_champ_alive(process_t *process, vm_t *vm)
 {
-    int nb_loop = vm->nb_alive;
+    int nb_loop = vm->nb_champ;
     process_t *tmp = process;
     int alive = 0;
 
