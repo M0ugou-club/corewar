@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "process.h"
 #include "my.h"
 #include "vm.h"
 
@@ -48,6 +49,7 @@ process_t *create_process(char *name, process_t *process, vm_t *vm, int fd)
     }
     process = create_basic_process(header.prog_name, process);
     if (process == NULL) {
+        free(prog_champ);
         return (NULL);
     }
     put_champ(process, vm, prog_champ);
@@ -108,6 +110,7 @@ process_t *param_parser(char **av, vm_t *vm)
     for (int i = 1; av[i] != NULL; i++) {
         val_ret = test_parser(process, head, av[i], vm);
         if (val_ret == -1) {
+            free_champ(head);
             return (NULL);
         } else {
             i += val_ret;
