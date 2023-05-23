@@ -12,36 +12,6 @@
 #include "my.h"
 #include "vm.h"
 
-static const char ERROR[] = "ERROR: invalid argument\n";
-
-int is_opt(char **av, int i, process_t *process)
-{
-    if (my_strcmp(av[i], "-a") == 0 && av[i + 1] != NULL) {
-        if (my_str_is_num(av[i + 1]) == -1) {
-            write(2, ERROR, sizeof(ERROR));
-            return (-1);
-        }
-        process->index = my_atoi(av[i + 1]);
-        return (0);
-    }
-    if (my_strcmp(av[i], "-n") == 0 && av[i + 1] != NULL) {
-        if (my_str_is_num(av[i + 1]) == -1) {
-            write(2, ERROR, sizeof(ERROR));
-            return (-1);
-        }
-        process->nb_champ = my_atoi(av[i + 1]);
-        return (0);
-    }
-    if (my_strcmp(av[i], "-dump") == 0 && av[i + 1] != NULL) {
-        if (my_str_is_num(av[i + 1]) == -1) {
-            write(2, ERROR, sizeof(ERROR));
-            return (-1);
-        }
-        return (0);
-    }
-    return 1;
-}
-
 process_t *create_process(char *name, process_t *process, vm_t *vm, int fd)
 {
     header_t header = {0};
@@ -83,7 +53,7 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     return process;
 }
 
-int test_parser(process_t *process, process_t *head, char **av, int i, vm_t *vm)
+int test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
 {
     static int nb_champ = 1;
 
@@ -91,7 +61,7 @@ int test_parser(process_t *process, process_t *head, char **av, int i, vm_t *vm)
         process->nb_champ = nb_champ;
         nb_champ += 1;
     }
-    process = init_next_champ(av[i], process, head, nb_champ);
+    process = init_next_champ(arg, process, head, nb_champ);
     MALLOC_RETURN(process, -1);
     return (0);
 }
