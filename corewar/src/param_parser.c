@@ -50,7 +50,7 @@ static process_t *create_process(process_t *process, vm_t *vm, int fd)
 }
 
 process_t *init_next_champ(char *champ_name, process_t *process,
-    process_t *head, vm_t *vm)
+    process_t **head, vm_t *vm)
 {
     int fd = 0;
 
@@ -61,7 +61,7 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     process = create_process(process, vm, fd);
     close(fd);
     MALLOC_RETURN(process, NULL);
-    head = add_process(process, head);
+    *head = add_process(process, *head);
     process = malloc(sizeof(process_t));
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
@@ -69,7 +69,7 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     return process;
 }
 
-static process_t *test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
+static process_t *test_parser(process_t *process, process_t **head, char *arg, vm_t *vm)
 {
     static int nb_champ = 1;
 
@@ -95,7 +95,7 @@ process_t *param_parser(char **av, vm_t *vm)
     for (int i = 1; av[i] != NULL; i++) {
         val_ret = is_opt(av, i, process, vm) == 1;
         if (val_ret == 1) {
-            process = test_parser(process, head, av[i], vm);
+            process = test_parser(process, &head, av[i], vm);
         } else {
             i++;
         }

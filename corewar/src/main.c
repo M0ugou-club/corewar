@@ -49,6 +49,7 @@ int main(int ac, char **argv)
         return 84;
     }
     vm = initialisation_of_vm(argv);
+    return_value = 84;
     if (vm) {
         process = param_parser(argv, vm);
         if (process) {

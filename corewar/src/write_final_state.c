@@ -16,9 +16,9 @@ static int write_hexa_line(int line)
 
     to_print = line % 16;
     if (to_print > 9) {
-        to_print += '0';
+        to_print += 'A' - 10;
     } else {
-        to_print += 'A';
+        to_print += '0';
     }
     if (line > 16) {
         write_hexa_line(line / 16);
@@ -29,18 +29,20 @@ static int write_hexa_line(int line)
 
 static int write_hexa_mem(int nb, int index)
 {
-    char to_print = 0;
+    unsigned char new_nb = 0;
+    unsigned char to_print = 0;
 
-    to_print = nb % 16;
+    new_nb = nb;
+    to_print = new_nb % 16;
     if (to_print > 9) {
-        to_print += '0';
+        to_print += 'A' - 10;
     } else {
-        to_print += 'A';
+        to_print += '0';
     }
     if (index == 0) {
         return (0);
     } else {
-        write_hexa_mem(nb / 16, index - 1);
+        write_hexa_mem(new_nb / 16, index - 1);
     }
     write(1, &to_print, 1);
     return (0);
