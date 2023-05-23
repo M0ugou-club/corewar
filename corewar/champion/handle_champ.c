@@ -24,21 +24,6 @@ int count_champ(process_t *list_champ)
     return nb_champ;
 }
 
-int verify_size_champ(process_t *list_champ, int section_size)
-{
-    process_t *current = list_champ;
-    int size_of_code = 0;
-
-    while (current) {
-        size_of_code = strlen(current->code);
-        if (size_of_code > section_size) {
-            return -1;
-        }
-        current = current->next;
-    }
-    return 0;
-}
-
 void free_champ(process_t *list_champ)
 {
     process_t *current = list_champ;
