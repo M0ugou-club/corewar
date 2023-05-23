@@ -40,20 +40,18 @@ process_t *create_process(char *name, process_t *process, vm_t *vm, int fd)
     char *prog_champ = NULL;
 
     if (get_header(fd, &header) == -1) {
-        close(fd);
         return (NULL);
     }
     prog_champ = get_prog(fd, &header);
     if (prog_champ == NULL) {
-        close(fd);
         return (NULL);
     }
     process = create_basic_process(header.prog_name, process);
     if (process == NULL) {
-        close(fd);
         return (NULL);
     }
-    close(fd);
+    put_champ(process, vm, prog_champ);
+    free(prog_champ);
     return (process);
 }
 
