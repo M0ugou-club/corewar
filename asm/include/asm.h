@@ -78,5 +78,6 @@
     int get_all_label(prog_list_t *list);
     int change_label_value(prog_list_t *prog_list);
     int is_label(char const *arg);
+    int is_only_label_line(char const *arg);
 
 #endif /* !ASM_H_ */

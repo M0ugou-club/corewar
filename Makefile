@@ -5,15 +5,10 @@
 ## Makefile
 ##
 
-asm :
+all :
 	make -C lib/
 	make -C asm/
-
-corewar :
-	make -C lib/
 	make -C corewar/
-
-all : $(asm) $(corewar)
 
 clean :
 	make clean -C asm

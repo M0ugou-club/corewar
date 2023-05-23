@@ -91,30 +91,30 @@ static int how_many_champ_alive(const process_t *process)
 
 static int incrementation_cycle(int cycle_to_die, vm_t *vm)
 {
-    if (vm->nb_alive > NBR_LIVE) {
+    if (vm->nb_alive >= NBR_LIVE) {
         cycle_to_die -= CYCLE_DELTA;
+        vm->nb_alive = 0;
     }
     return cycle_to_die;
 }
 
 int my_vm(vm_t *vm, process_t *process)
 {
-    int champ_alive = 0;
+    int champ_alive = vm->nb_champ;
     int cycle_to_die = CYCLE_TO_DIE;
     int cycle = 0;
 
-    if (!vm || !process) {
+    if (!vm || !process)
         return 84;
-    }
-    champ_alive = how_many_champ_alive(process);
-    while (champ_alive > 1 && cycle_to_die > 0) {
-        loop_process(vm, process);
+    while (champ_alive > 1 && cycle_to_die > 0 && vm->f_dump != 0) {
         cycle++;
+        if (vm->f_dump > 0)
+            vm->f_dump--;
         if (cycle == cycle_to_die) {
             cycle_to_die = incrementation_cycle(cycle_to_die, vm);
             cycle = 0;
         }
-        champ_alive = how_many_champ_alive(process);
+        champ_alive = get_nb_champ_alive(process, vm);
     }
     return 0;
 }

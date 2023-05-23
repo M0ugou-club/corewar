@@ -25,8 +25,11 @@ process_t *add_process(process_t *to_add, process_t *list)
 {
     process_t *tmp = NULL;
 
-    if (to_add == NULL || list == NULL) {
+    if (to_add == NULL) {
         return NULL;
+    }
+    if (list == NULL) {
+        return (to_add);
     }
     tmp = list;
     while (tmp->next != NULL) {
@@ -36,7 +39,7 @@ process_t *add_process(process_t *to_add, process_t *list)
     return list;
 }
 
-process_t *create_process(int index, char *id)
+process_t *create_process(int index, char *id, int nb_champ)
 {
     process_t *list = NULL;
 
@@ -49,8 +52,12 @@ process_t *create_process(int index, char *id)
         return NULL;
     }
     list->id = id;
+    list->nb_champ = nb_champ;
+    list->cooldown = 0;
     list->index = index;
     list->next = NULL;
     list->last_lives = 0;
+    list->cooldown = 0;
+    list->nb_champ = 0;
     return (list);
 }
