@@ -14,9 +14,11 @@
         int cooldown;
         int last_lives;
         int *registers;
+        int nb_champ;
         char *id;
         int nb_champ;
         struct process_s *next;
+        int carry;
     } process_t;
 
     process_t *create_basic_process(int index, char *name, int nb_champ,
