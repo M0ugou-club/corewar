@@ -9,20 +9,6 @@
 #include "op.h"
 #include "vm.h"
 
-static int how_many_champ_alive(const process_t *process)
-{
-    process_t *tmp = process;
-    int champ_alive = 0;
-
-    while (tmp) {
-        if (tmp->index != -1) {
-            champ_alive++;
-        }
-        tmp = tmp->next;
-    }
-    return champ_alive;
-}
-
 static int incrementation_cycle(int cycle_to_die, vm_t *vm)
 {
     if (vm->nb_alive >= NBR_LIVE) {

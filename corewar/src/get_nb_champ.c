@@ -7,15 +7,17 @@
 
 #include <stddef.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "process.h"
 #include "vm.h"
+#include "my.h"
 
 int is_champ_alive(process_t *process, int nb_champ)
 {
     process_t *tmp = process;
 
     while (tmp != NULL) {
-        if (my_strcmp(tmp->id, nb_champ) == 0 && tmp->index != -1) {
+        if (tmp->nb_champ == nb_champ && tmp->index != -1) {
             return (1);
         }
         tmp = tmp->next;

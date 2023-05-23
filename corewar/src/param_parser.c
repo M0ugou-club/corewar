@@ -12,7 +12,7 @@
 #include "my.h"
 #include "vm.h"
 
-process_t *create_process(char *name, process_t *process, vm_t *vm, int fd)
+static process_t *create_process(process_t *process, vm_t *vm, int fd)
 {
     header_t header = {0};
     char *prog_champ = NULL;
@@ -43,7 +43,7 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     if (fd < 0) {
         return NULL;
     }
-    process = create_process(champ_name, process, vm, fd);
+    process = create_process(process, vm, fd);
     close(fd);
     MALLOC_RETURN(process, NULL);
     head = add_process(process, head);
@@ -61,7 +61,7 @@ int test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
         process->nb_champ = nb_champ;
         nb_champ += 1;
     }
-    process = init_next_champ(arg, process, head, nb_champ);
+    process = init_next_champ(arg, process, head, vm);
     MALLOC_RETURN(process, -1);
     return (0);
 }

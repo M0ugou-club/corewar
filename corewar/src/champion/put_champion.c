@@ -5,12 +5,11 @@
 ** place champion in the memory
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <unistd.h>
 #include "op.h"
 #include "process.h"
 #include "vm.h"
+#include "memory.h"
 
 int put_champ_in_arena(char *arena, int index, char *code)
 {

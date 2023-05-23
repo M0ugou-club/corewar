@@ -17,7 +17,7 @@ static void free_vm(vm_t *vm)
     free(vm);
 }
 
-static int error_handling(int ac, char **argv)
+static int error_handling(int ac)
 {
     if (ac < 3) {
         return 84;
@@ -45,7 +45,7 @@ int main(int ac, char **argv)
     vm_t *vm = NULL;
     int return_value = 0;
 
-    if (error_handling(ac, argv) != 0) {
+    if (error_handling(ac) != 0) {
         return 84;
     }
     vm = initialisation_of_vm(argv);

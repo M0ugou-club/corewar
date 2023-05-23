@@ -5,8 +5,10 @@
 ** write_final_state
 */
 
+#include <unistd.h>
 #include "vm.h"
 #include "op.h"
+#include "my.h"
 
 static int write_hexa_line(int line)
 {
