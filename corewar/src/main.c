@@ -9,6 +9,14 @@
 #include "vm.h"
 #include "memory.h"
 
+static void free_vm(vm_t *vm)
+{
+    if (vm->memory != NULL) {
+        free(vm->memory);
+    }
+    free(vm);
+}
+
 static int error_handling(int ac, char **argv)
 {
     if (ac < 3) {
@@ -26,7 +34,7 @@ vm_t *initialisation_of_vm(char **argv)
         vm->memory = create_memory();
         vm->nb_champ = get_nb_champ(argv);
         vm->nb_alive = 0;
-        vm->f_dump = get_dump_value(argv);
+        vm->f_dump = -1;
     }
     return vm;
 }
@@ -48,5 +56,6 @@ int main(int ac, char **argv)
         }
     }
     free_champ(process);
+    free_vm(vm);
     return return_value;
 }
