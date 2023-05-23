@@ -58,7 +58,6 @@ int compile_line(prog_list_t *line)
             && (my_strncmp(tmp->line, ".name", my_strlen(".name") != 0))
             && (my_strncmp(tmp->line, ".comment", my_strlen(".comment") != 0))
             && (is_only_label_line(tmp->line) != 0)) {
-            printf("%s\n", tmp->line);
             return (-1);
         }
         i = 0;
