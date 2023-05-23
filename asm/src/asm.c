@@ -24,37 +24,41 @@ static int get_prog_size(prog_list_t *prog_list)
     return (size);
 }
 
-static int make_header(prog_list_t *prog_list, int fd)
+static int make_header(prog_list_t *prog_list, int fd, header_t *header)
 {
-    header_t header = {0};
     int size = 0;
 
-    my_memset(header.prog_name, '\0', PROG_NAME_LENGTH + 1);
-    my_memset(header.comment, '\0', COMMENT_LENGTH + 1);
-    header.magic = 0;
-    header.prog_size = 0;
+    my_memset(header->prog_name, '\0', PROG_NAME_LENGTH + 1);
+    my_memset(header->comment, '\0', COMMENT_LENGTH + 1);
+    header->magic = 0;
+    header->prog_size = 0;
     size = get_prog_size(prog_list);
-    if (compil_header(prog_list, &header, size) == 84) {
+    if (compil_header(prog_list, header, size) == 84) {
         return (-1);
     }
-    header.prog_size = SWAP_ENDIAN(header.prog_size);
-    header.magic = SWAP_ENDIAN(header.magic);
-    write(fd, &header, sizeof(header_t));
+    if ((my_strlen(header->prog_name) > PROG_NAME_LENGTH
+        || my_strlen(header->comment) > COMMENT_LENGTH)) {
+        write(2, "Command or name too long\n", 25);
+        return (-1);
+    }
+    header->prog_size = SWAP_ENDIAN(header->prog_size);
+    header->magic = SWAP_ENDIAN(header->magic);
     return (0);
 }
 
 static int write_cor_file(prog_list_t *prog_list, char const *file_name)
 {
     int fd = 0;
+    header_t header = {0};
 
+    if (make_header(prog_list, fd, &header) != 0) {
+        return (-1);
+    }
     fd = open_new_file(file_name);
     if (fd == -1) {
         return (-1);
     }
-    if (make_header(prog_list, fd) != 0) {
-        close(fd);
-        return (-1);
-    }
+    write(fd, &header, sizeof(header));
     if (write_file(prog_list, fd) != 0) {
         close(fd);
         return (-1);
