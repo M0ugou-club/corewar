@@ -8,15 +8,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "op.h"
 #include "process.h"
 #include "vm.h"
+
+static const char ERROR[38] = "champion overwrites another in memory\n";
 
 int put_champ_in_arena(char *arena, int index, char *code)
 {
     for (int i = 0; code[i] != '\0' ;i++) {
         if (get_mem_value(arena, index + 1) != 0) {
-            printf("ca ecrase \n");
+            write(2, ERROR, sizeof(ERROR));
             return -1;
         }
         modif_mem(arena, index + i, code[i]);
