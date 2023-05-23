@@ -31,6 +31,12 @@ void free_champ(process_t *list_champ)
 
     while (current) {
         next = current->next;
+        if (current->id != NULL) {
+            free(current->id);
+        }
+        if (current->registers != NULL) {
+            free(current->registers);
+        }
         free(current);
         current = next;
     }
