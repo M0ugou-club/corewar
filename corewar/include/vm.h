@@ -24,5 +24,6 @@
     int get_dump_value(char **av);
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
+    int put_champ(process_t *champ, vm_t *vm, char *code);
 
 #endif /*VM_H_*/
