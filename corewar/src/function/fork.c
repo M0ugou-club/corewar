@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "fonction.h"
 #include "process.h"
+#include "memory.h"
 #include "vm.h"
 #include "op.h"
 #include "my.h"
@@ -22,7 +23,11 @@ int process_fork(process_t *process, vm_t *vm)
     if (param == -1) {
         return (-1);
     }
-    new_index = process->index + param % IDX_MOD;
+    if (get_mem_value(vm->memory, process->index) == 12) {
+        new_index = process->index + param % IDX_MOD;
+    } else {
+        new_index = process->index + param;
+    }
     new_process = create_process(new_index, my_strdup(process->id),
     process->nb_champ);
     process = add_process(new_process, process);
