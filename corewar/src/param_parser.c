@@ -69,7 +69,8 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     return process;
 }
 
-static process_t *test_parser(process_t *process, process_t **head, char *arg, vm_t *vm)
+static process_t *test_parser(process_t *process, process_t **head, char *arg,
+    vm_t *vm)
 {
     static int nb_champ = 1;
 
