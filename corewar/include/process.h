@@ -16,6 +16,7 @@
         int *registers;
         int nb_champ;
         char *id;
+        char *code;
         struct process_s *next;
         int carry;
     } process_t;
