@@ -5,12 +5,18 @@
 ## Makefile
 ##
 
-SRC =	src/memory/create_mem.c \
+SRC =   src/champion/put_champion.c\
+		src/memory/create_mem.c \
 		src/memory/list_process.c \
 		src/memory/op.c \
-		src/process_loop.c \
 		src/vm.c \
-		src/main.c
+		src/main.c \
+		src/param_parser.c \
+		src/get_nb_champ.c \
+		src/champion/handle_champ.c \
+		src/get_champ_info.c \
+		src/check_opt.c \
+		src/write_final_state.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -18,10 +24,10 @@ NAME = corewar
 
 CFLAGS = -W -Wall -Wextra -Iinclude
 
-LDFLAGS = -L../lib/lmy
+LDFLAGS = -L ../lib -lmy
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
 
 all : $(NAME)
 
