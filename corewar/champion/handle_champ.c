@@ -15,6 +15,7 @@
 int count_champ(process_t *list_champ)
 {
     int nb_champ = 0;
+
     process_t *current = list_champ;
 
     while (current) {
