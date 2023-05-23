@@ -21,8 +21,9 @@
         int carry;
     } process_t;
 
-    process_t *create_basic_process(int index, char *name, int nb_champ,
-                                    process_t *process);
-    header_t *get_header(int fd);
+    process_t *create_basic_process(char *name, process_t *process);
+    int get_header(int fd, header_t *champ_header);
+    char *get_prog(int fd, header_t *champ_header);
+    void free_champ(process_t *list_champ);
 
 #endif /* !PROCESS_H_ */
