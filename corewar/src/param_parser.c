@@ -14,22 +14,29 @@
 
 static const char ERROR[] = "ERROR: invalid argument\n";
 
-int is_opt(char *arg, process_t *process)
+int is_opt(char **av, int i, process_t *process)
 {
-    if (my_strcmp(arg, "-a") && arg != NULL) {
-        if (my_str_is_num(arg) == -1) {
+    if (my_strcmp(av[i], "-a") == 0 && av[i + 1] != NULL) {
+        if (my_str_is_num(av[i + 1]) == -1) {
             write(2, ERROR, sizeof(ERROR));
             return (-1);
         }
-        process->index = my_atoi(arg);
+        process->index = my_atoi(av[i + 1]);
         return (0);
     }
-    if (my_strcmp(arg, "-n") && arg != NULL) {
-        if (my_str_is_num(arg) == -1) {
+    if (my_strcmp(av[i], "-n") == 0 && av[i + 1] != NULL) {
+        if (my_str_is_num(av[i + 1]) == -1) {
             write(2, ERROR, sizeof(ERROR));
             return (-1);
         }
-        process->nb_champ = my_atoi(arg);
+        process->nb_champ = my_atoi(av[i + 1]);
+        return (0);
+    }
+    if (my_strcmp(av[i], "-dump") == 0 && av[i + 1] != NULL) {
+        if (my_str_is_num(av[i + 1]) == -1) {
+            write(2, ERROR, sizeof(ERROR));
+            return (-1);
+        }
         return (0);
     }
     return 1;
@@ -76,25 +83,16 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     return process;
 }
 
-int test_parser(process_t *process, process_t *head, char arg, vm_t *vm)
+int test_parser(process_t *process, process_t *head, char **av, int i, vm_t *vm)
 {
     static int nb_champ = 1;
-    int val_ret = 0;
 
     if (process->nb_champ == 0) {
         process->nb_champ = nb_champ;
-    }
-    val_ret = is_opt(arg, process);
-    if (val_ret == -1) {
-        return (-1);
-    }
-    if (val_ret == 1) {
         nb_champ += 1;
-        process = init_next_champ(arg, process, head, nb_champ);
-        MALLOC_RETURN(process, -1);
-    } else {
-        return (1);
     }
+    process = init_next_champ(av[i], process, head, nb_champ);
+    MALLOC_RETURN(process, -1);
     return (0);
 }
 
@@ -108,12 +106,15 @@ process_t *param_parser(char **av, vm_t *vm)
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
     for (int i = 1; av[i] != NULL; i++) {
-        val_ret = test_parser(process, head, av[i], vm);
+        val_ret = is_opt(av, i, process) == 1;
+        if (val_ret == 1) {
+            val_ret = test_parser(process, head, av[i], vm);
+        } else {
+            i++;
+        }
         if (val_ret == -1) {
             free_champ(head);
             return (NULL);
-        } else {
-            i += val_ret;
         }
     }
     return (head);
