@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** corewar
 ** File description:
-** load
+** load long
 */
 
 #include <stdlib.h>
@@ -10,20 +10,20 @@
 #include "process.h"
 #include "vm.h"
 
-int load_value(process_t *process, vm_t *vm, char coding_byte, int val2)
+int load_value_long(process_t *process, vm_t *vm, char coding_byte, int val1)
 {
-    int val1 = 0;
+    int val2 = 0;
 
-    val1 = get_value(vm->memory, process->index + SKIP_COMM_CB + 1,
+    val2 = get_value(vm->memory, process->index + SKIP_COMM_CB + 1,
         coding_byte);
     if (coding_byte == T_REG) {
-        if (get_reg_error(val1) == -1) {
+        if (get_reg_error(val2) == -1) {
             return -1;
         }
         process->registers[val2 - 1] = process->registers[val1 - 1];
     }
     if (coding_byte == T_IND) {
-        process->registers[val2 - 1] = get_value(vm->memory, process->index + (val1 % IDX_MOD), coding_byte);
+        process->registers[val2 - 1] = get_value(vm->memory, process->index + val1, coding_byte);
     }
     return 0;
 }
@@ -43,7 +43,7 @@ int process_load_value(process_t *process, vm_t *vm, char *cb_tab)
     return (0);
 }
 
-int exec_ld(process_t *process, vm_t *vm)
+int exec_st(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
     int index = 0;
@@ -54,7 +54,7 @@ int exec_ld(process_t *process, vm_t *vm)
         free(cb_tab);
         return (-1);
     }
-    if (process_load_value(process, vm, cb_tab) == -1) {
+    if (process_store_value(process, vm, cb_tab) == -1) {
         free(cb_tab);
         return -1;
     }
