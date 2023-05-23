@@ -76,7 +76,7 @@ process_t *param_parser(char **av, vm_t *vm)
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
     for (int i = 1; av[i] != NULL; i++) {
-        val_ret = is_opt(av, i, process) == 1;
+        val_ret = is_opt(av, i, process, vm) == 1;
         if (val_ret == 1) {
             val_ret = test_parser(process, head, av[i], vm);
         } else {
