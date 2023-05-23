@@ -12,6 +12,7 @@
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
 
     #include "process.h"
+    #include "op.h"
 
     typedef struct vm_s {
         char *memory;
@@ -20,11 +21,11 @@
         int f_dump;
     } vm_t;
 
-    int get_dump_value(char **av);
     int print_final_state(vm_t *vm);
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
-    int put_champ(process_t *champ, vm_t *vm, char *code);
+    int put_champ(process_t *champ, vm_t *vm, char *code,
+        header_t *champ_info);
     int get_nb_champ(char **argv);
     process_t *param_parser(char **av, vm_t *vm);
     int is_opt(char **av, int i, process_t *process, vm_t *vm);

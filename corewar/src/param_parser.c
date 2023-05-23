@@ -12,6 +12,19 @@
 #include "my.h"
 #include "vm.h"
 
+static int initialisation_process(process_t *process)
+{
+    process->carry = 0;
+    process->cooldown = 0;
+    process->last_lives = 0;
+    process->nb_champ = 0;
+    process->index = -1;
+    process->id = NULL;
+    process->next = NULL;
+    process->registers = NULL;
+    return (0);
+}
+
 static process_t *create_process(process_t *process, vm_t *vm, int fd)
 {
     header_t header = {0};
@@ -27,7 +40,7 @@ static process_t *create_process(process_t *process, vm_t *vm, int fd)
         free(prog_champ);
         return (NULL);
     }
-    if (put_champ(process, vm, prog_champ) == -1) {
+    if (put_champ(process, vm, prog_champ, &header) == -1) {
         free_champ(process);
         free(prog_champ);
         return (NULL);
@@ -52,10 +65,11 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     process = malloc(sizeof(process_t));
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
+    process->index = -1;
     return process;
 }
 
-int test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
+static process_t *test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
 {
     static int nb_champ = 1;
 
@@ -64,8 +78,9 @@ int test_parser(process_t *process, process_t *head, char *arg, vm_t *vm)
         nb_champ += 1;
     }
     process = init_next_champ(arg, process, head, vm);
-    MALLOC_RETURN(process, -1);
-    return (0);
+    MALLOC_RETURN(process, NULL);
+    initialisation_process(process);
+    return (process);
 }
 
 process_t *param_parser(char **av, vm_t *vm)
@@ -76,18 +91,18 @@ process_t *param_parser(char **av, vm_t *vm)
 
     process = malloc(sizeof(process_t));
     MALLOC_RETURN(process, NULL);
-    process->nb_champ = 0;
+    initialisation_process(process);
     for (int i = 1; av[i] != NULL; i++) {
         val_ret = is_opt(av, i, process, vm) == 1;
         if (val_ret == 1) {
-            val_ret = test_parser(process, head, av[i], vm);
+            process = test_parser(process, head, av[i], vm);
         } else {
             i++;
         }
-        if (val_ret == -1) {
-            free_champ(head);
+        if (val_ret == -1 || process == NULL) {
             return (NULL);
         }
     }
+    free_champ(process);
     return (head);
 }
