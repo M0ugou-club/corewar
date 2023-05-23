@@ -24,17 +24,14 @@ int my_vm(vm_t *vm, process_t *process)
     int cycle_to_die = CYCLE_TO_DIE;
     int cycle = 0;
 
-    if (!vm || !process) {
+    if (!vm || !process)
         return 84;
-    }
     while (champ_alive > 1 && cycle_to_die > 0 && vm->f_dump != 0) {
-        if (loop_process(vm, process) == -1) {
+        if (loop_process(vm, process) == -1)
             return 84;
-        }
         cycle++;
-        if (vm->f_dump > 0) {
+        if (vm->f_dump > 0)
             vm->f_dump--;
-        }
         if (cycle == cycle_to_die) {
             cycle_to_die = incrementation_cycle(cycle_to_die, vm);
             cycle = 0;
