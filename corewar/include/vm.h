@@ -24,5 +24,6 @@
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
     int put_champ(process_t *champ, vm_t *vm, char *code);
+    int is_opt(char **av, int i, process_t *process);
 
 #endif /*VM_H_*/

@@ -13,7 +13,7 @@
 
 static const char ERROR[] = "ERROR: invalid argument\n";
 
-int is_dump(char **av, int i, process_t *process)
+static int is_dump(char **av, int i, process_t *process)
 {
     if (my_strcmp(av[i], "-dump") == 0 && av[i + 1] != NULL) {
         if (my_str_is_num(av[i + 1]) == -1) {
