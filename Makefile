@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-all : 
+all :
 	make -C lib/
 	make -C asm/
 	make -C corewar/
