@@ -6,17 +6,41 @@
 */
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "op.h"
 
-char modif_mem(char *mem, int index, const char value)
+static int circular_mod(int index)
 {
-    if (index < 0) {
-        index = MEM_SIZE - index;
+    int res = 0;
+
+    if (index >= 0) {
+        return index % MEM_SIZE;
+    } else {
+        res = index % MEM_SIZE;
+        return (res != 0) ? MEM_SIZE + res : 0;
     }
-    mem[index] = value;
 }
 
-char *create_memory(unsigned const int mem_size)
+char get_mem_value(char *mem, int index)
+{
+    int new_index = 0;
+    char get = 0;
+
+    new_index = circular_mod(index);
+    get = mem[new_index];
+    return (get);
+}
+
+void modif_mem(char *mem, int index, const char value)
+{
+    int new_index = 0;
+
+    new_index = circular_mod(index);
+    mem[new_index] = value;
+    return;
+}
+
+char *create_memory(void)
 {
     char *mem = NULL;
 
