@@ -9,22 +9,22 @@
 #include "fonction.h"
 #include "vm.h"
 
-static const function_t function[] = { {1, NULL},
-{2, NULL},
-{3, NULL},
-{4, NULL},
-{5, NULL},
-{6, NULL},
-{7, NULL},
-{8, NULL},
-{9, NULL},
-{10, NULL},
-{11, NULL},
-{12, NULL},
-{13, NULL},
-{14, NULL},
-{15, NULL},
-{16, NULL},
+static const function_t function[] = { {1, &exec_live},
+{2, &exec_ld},
+{3, &exec_st},
+{4, &exec_add},
+{5, &exec_sub},
+{6, &exec_and},
+{7, &exec_or},
+{8, &exec_xor},
+{9, &exec_zjmp},
+{10, &exec_ldi},
+{11, &exec_sti},
+{12, &exec_fork},
+{13, &exec_lld},
+{14, &exec_lldi},
+{15, &exec_fork},
+{16, &exec_aff},
 {-1, NULL}};
 
 static int parse_champ(vm_t *vm, process_t *process)

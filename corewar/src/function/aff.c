@@ -24,7 +24,7 @@ int process_aff(process_t *process, vm_t *vm, char **cb_tab)
 int exec_aff(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -33,11 +33,7 @@ int exec_aff(process_t *process, vm_t *vm)
         return (-1);
     }
     process_aff(process, vm, cb_tab);
-    index = increase_index(cb_tab);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
+    ret_val = get_new_process_index(cb_tab, true, process);
     free(cb_tab);
-    return (process->index + index + SKIP_COMM_CB);
+    return (0);
 }
