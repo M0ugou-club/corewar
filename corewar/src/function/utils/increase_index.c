@@ -29,7 +29,7 @@ int get_index_arg(char coding_byte, bool index_function)
     return (index);
 }
 
-int increase_basic_function_index(char *cb_tab, bool index_function)
+int increase_index(char *cb_tab, bool index_function)
 {
     int index = 0;
     int tmp = 0;
