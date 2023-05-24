@@ -36,9 +36,8 @@ int process_addidtion(process_t *process, vm_t *vm, char *cb_tab, int add_type)
 
 int exec_add(process_t *process, vm_t *vm)
 {
-    int ret_val = 0;
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -48,19 +47,15 @@ int exec_add(process_t *process, vm_t *vm)
     }
     ret_val = process_addidtion(process, vm, cb_tab, 1);
     process->carry = (ret_val == 0) ? 1 : 0;
-    index = increase_index(cb_tab, false) + 2;
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
-    return (process->index + index + SKIP_COMM_CB);
+    return (ret_val);
 }
 
 int exec_sub(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -68,15 +63,9 @@ int exec_sub(process_t *process, vm_t *vm)
         free(cb_tab);
         return (-1);
     }
-    if (process_addidtion(process, vm, cb_tab, -1) == -1) {
-        free(cb_tab);
-        return (-1);
-    }
-    index = increase_index(cb_tab);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
+    ret_val = process_addidtion(process, vm, cb_tab, -1);
+    process->carry = (ret_val == 0) ? 1 : 0;
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
-    return (process->index + index + SKIP_COMM_CB);
+    return (ret_val);
 }

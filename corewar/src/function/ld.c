@@ -35,11 +35,11 @@ int process_load_value(process_t *process, vm_t *vm, char *cb_tab)
 
     index = get_index_arg(cb_tab[INDEX_2ND], false);
     reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
-    cb_tab[INDEX_2ST]);
+    cb_tab[INDEX_2ND]);
     if (get_reg_error(reg2) == -1) {
         return (-1);
     }
-    if (load_value(process, vm, cb_tab[INDEX_1ND], reg2) == -1)
+    if (load_value(process, vm, cb_tab[INDEX_1ST], reg2) == -1)
         return -1;
     return (0);
 }

@@ -53,7 +53,7 @@ int exec_lldi(process_t *process, vm_t *vm)
 {
     int ret_val = 0;
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -63,12 +63,7 @@ int exec_lldi(process_t *process, vm_t *vm)
     }
     ret_val = process_lldi(process, vm, cb_tab, process->index + SKIP_COMM_CB);
     process->carry = (ret_val == 0) ? 1 : 0;
-    index = increase_index(cb_tab, false);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
+    ret_val = get_new_process_index(cb_tab, true, process);
     free(cb_tab);
-    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
-    return (0);
+    return (ret_val);
 }

@@ -34,11 +34,11 @@ int process_lld(process_t *process, vm_t *vm, char *cb_tab)
     int reg2 = 0;
 
     reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_2ST]);
+    cb_tab[INDEX_2ND]);
     if (get_reg_error(reg2) == -1) {
         return (-1);
     }
-    if (lld_value(process, vm, cb_tab[INDEX_1ND], reg2) == -1)
+    if (lld_value(process, vm, cb_tab[INDEX_1ST], reg2) == -1)
         return -1;
     return (0);
 }
@@ -46,7 +46,7 @@ int process_lld(process_t *process, vm_t *vm, char *cb_tab)
 int exec_st(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -58,12 +58,7 @@ int exec_st(process_t *process, vm_t *vm)
         free(cb_tab);
         return -1;
     }
-    index = increase_index(cb_tab, false);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
-    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
-    return (0);
+    return (ret_val);
 }
