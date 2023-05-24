@@ -17,6 +17,8 @@ int exec_zjmp(process_t *process, vm_t *vm)
     index = get_value(vm->memory, process->index + 1, T_IND);
     if (process->carry == 1) {
         process->index = circular_mod(process->index + (index % IDX_MOD));
+    } else {
+        process->index = circular_mod(process->index + 3);
     }
     return (0);
 }
