@@ -39,8 +39,7 @@ int process_load_value(process_t *process, vm_t *vm, char *cb_tab)
     if (get_reg_error(reg2) == -1) {
         return (-1);
     }
-    if (load_value(process, vm, cb_tab[INDEX_1ST], reg2) == -1)
-        return -1;
+    load_value(process, vm, cb_tab[INDEX_1ST], reg2);
     return (0);
 }
 
