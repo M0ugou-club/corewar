@@ -5,6 +5,7 @@
 ** write memomry
 */
 
+#include "mem.h"
 #include "op.h"
 #include "vm.h"
 

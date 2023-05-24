@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "op.h"
 
-static int circular_mod(int index)
+int circular_mod(int index)
 {
     int res = 0;
 

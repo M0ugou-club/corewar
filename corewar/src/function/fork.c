@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "fonction.h"
 #include "process.h"
-#include "memory.h"
+#include "mem.h"
 #include "vm.h"
 #include "op.h"
 #include "my.h"

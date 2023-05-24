@@ -30,7 +30,6 @@ int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
 
 int process_lld(process_t *process, vm_t *vm, char *cb_tab)
 {
-    int val1 = 0;
     int reg2 = 0;
 
     reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB,

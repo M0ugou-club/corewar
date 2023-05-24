@@ -5,6 +5,7 @@
 ** get_value
 */
 
+#include "mem.h"
 #include "fonction.h"
 #include "vm.h"
 #include "op.h"
@@ -50,13 +51,12 @@ int get_indexes_value(char *memory, int index, char coding_byte,
         return (process->registers[value - 1]);
     }
     if (coding_byte == T_IND) {
-        value = get_mem_value(index + value);
-        return (value);
+        value = get_mem_value(memory, index + value);
     }
     if (coding_byte == T_DIR) {
         value = get_value(memory, index, T_IND);
-        return (value);
     }
+    return (value);
 }
 
 int get_special_value(char *memory, int index, char coding_byte,
@@ -74,10 +74,7 @@ int get_special_value(char *memory, int index, char coding_byte,
 
     }
     if (coding_byte == T_IND) {
-        value = get_mem_value(process->index + value);
-        return (value);
+        value = get_mem_value(memory, process->index + value);
     }
-    if (coding_byte == T_DIR) {
-        return (value);
-    }
+    return (value);
 }

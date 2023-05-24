@@ -10,7 +10,7 @@
 #include "fonction.h"
 #include "vm.h"
 
-int process_xor(process_t *process, vm_t *vm, char **cb_tab)
+int process_xor(process_t *process, vm_t *vm, char *cb_tab)
 {
     int param1 = 0;
     int param2 = 0;
@@ -20,10 +20,10 @@ int process_xor(process_t *process, vm_t *vm, char **cb_tab)
 
     param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
         cb_tab[INDEX_1ST]);
-    index += get_index(cb_tab[INDEX_1ST]);
+    index += get_index_arg(cb_tab[INDEX_1ST], false);
     param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
         index, cb_tab[INDEX_2ND]);
-    index += get_index(cb_tab[INDEX_2ND]);
+    index += get_index_arg(cb_tab[INDEX_2ND], false);
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 ^ param2;

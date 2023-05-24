@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "fonction.h"
+#include "mem.h"
 #include "process.h"
 #include "vm.h"
 

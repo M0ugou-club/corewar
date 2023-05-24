@@ -32,7 +32,6 @@ int store_value(process_t *process, vm_t *vm, char coding_byte, int val1)
 int process_store_value(process_t *process, vm_t *vm, char *cb_tab)
 {
     int reg1 = 0;
-    int val2 = 0;
 
     reg1 = get_special_value(vm->memory, process->index + SKIP_COMM_CB,
     cb_tab[INDEX_1ST], process);

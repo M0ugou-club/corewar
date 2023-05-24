@@ -5,6 +5,7 @@
 ** addition
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "fonction.h"
 #include "process.h"

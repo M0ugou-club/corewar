@@ -22,23 +22,23 @@ int get_value_lldi(vm_t *vm, process_t *process, char coding_byte, int value)
         new_value = process->registers[value - 1];
     }
     if (coding_byte == T_IND) {
-        new_value = get_value(process->index, process->index + value,
+        new_value = get_value(vm->memory, process->index + value,
             coding_byte);
     }
     return (new_value);
 }
 
-int process_lldi(process_t *process, vm_t *vm, char **cb_tab, int index)
+int process_lldi(process_t *process, vm_t *vm, char *cb_tab, int index)
 {
     int param = 0;
     int result = 0;
 
     param = get_value(vm->memory, index, cb_tab[INDEX_1ST]);
     result += get_value_lldi(vm, process, cb_tab[INDEX_1ST], param);
-    index += get_index(cb_tab[INDEX_1ST]);
+    index += get_index_arg(cb_tab[INDEX_1ST], true);
     param = get_value(vm->memory, index, cb_tab[INDEX_2ND]);
     result += get_value_lldi(vm, process, cb_tab[INDEX_2ND], param);
-    index += get_index(cb_tab[INDEX_2ND]);
+    index += get_index_arg(cb_tab[INDEX_2ND], true);
     param = get_value(vm->memory, index, cb_tab[INDEX_3RD]);
     if (get_reg_error(param) == -1) {
         process->index = -1;

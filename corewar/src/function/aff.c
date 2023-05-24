@@ -5,20 +5,21 @@
 ** xor.c
 */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "fonction.h"
 #include "vm.h"
 
 static const int ASCII_SIZE = 256;
 
-int process_aff(process_t *process, vm_t *vm, char **cb_tab)
+int process_aff(process_t *process, vm_t *vm, char *cb_tab)
 {
     int param1 = 0;
 
     param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_1ST]);
+        cb_tab[INDEX_1ST]);
     param1 = param1 % ASCII_SIZE;
-    write(1, param1, 1);
+    write(1, &param1, 1);
     return (0);
 }
 
@@ -37,5 +38,5 @@ int exec_aff(process_t *process, vm_t *vm)
     process_aff(process, vm, cb_tab);
     ret_val = get_new_process_index(cb_tab, true, process);
     free(cb_tab);
-    return (0);
+    return (ret_val);
 }

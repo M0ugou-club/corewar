@@ -9,7 +9,7 @@
 #include "op.h"
 #include "process.h"
 #include "vm.h"
-#include "memory.h"
+#include "mem.h"
 
 int put_champ_in_arena(char *arena, int index, char *code,
     header_t *champ_info)
