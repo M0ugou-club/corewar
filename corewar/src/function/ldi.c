@@ -10,31 +10,66 @@
 #include "fonction.h"
 #include "vm.h"
 
-int process_ldi(process_t *process, vm_t *vm, char **cb_tab)
+int get_value_ldi(vm_t *vm, process_t *process, char coding_byte, int value)
 {
-    int param1 = 0;
-    int param2 = 0;
-    int param3 = 0;
-    int result = 0;
-    int index = 0;
+    int new_value = value;
 
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-                       cb_tab[INDEX_1ST]);
-    index += get_index(cb_tab[INDEX_1ST]);
-    param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
-                                   index, cb_tab[INDEX_2ND]);
-    index += get_index(cb_tab[INDEX_2ND]);
-    param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
-                       cb_tab[INDEX_3RD]);
-    result = process->index + param1 % IDX_MOD;
-    result = get_value(vm->memory, result, T_IND);
-    result += param2;
-    result = process->index + result % IDX_MOD;
-    process->register[param3 - 1] = result;
-    return 0;
+    if (coding_byte == T_REG) {
+        if (get_reg_error(value) == -1) {
+            process->index = -1;
+            return (0);
+        }
+        new_value = process->registers[value - 1];
+    }
+    if (coding_byte == T_IND) {
+        new_value = get_value(process->index, process->index + value, coding_byte);
+        new_value = new_value % IDX_MOD;
+    }
+    return (new_value);
 }
 
-int exec_ldi(process_t *process, vm_t *vm) {
+int get_value_lldi(vm_t *vm, process_t *process, char coding_byte, int value)
+{
+    int new_value = value;
+
+    if (coding_byte == T_REG) {
+        if (get_reg_error(value) == -1) {
+            process->index = -1;
+            return (0);
+        }
+        new_value = process->registers[value - 1];
+    }
+    if (coding_byte == T_IND) {
+        new_value = get_value(process->index, process->index + value, coding_byte);
+    }
+    return (new_value);
+}
+
+int process_ldi(process_t *process, vm_t *vm, char *cb_tab, int index)
+{
+    int param = 0;
+    int result = 0;
+
+    param = get_value(vm->memory, index, cb_tab[INDEX_1ST]);
+    result += get_value_ldi(vm, process, cb_tab[INDEX_1ST], param);
+    index += get_index(cb_tab[INDEX_1ST]);
+    param = get_value(vm->memory, index, cb_tab[INDEX_2ND]);
+    result += get_value_ldi(vm, process, cb_tab[INDEX_2ND], param);
+    index += get_index(cb_tab[INDEX_2ND]);
+    param = get_value(vm->memory, index, cb_tab[INDEX_3RD]);
+    if (get_reg_error(param) == -1) {
+        process->index = -1;
+        return (-1);
+    }
+    result = process->index + result % IDX_MOD;
+    result = get_value(vm->memory, result, T_DIR);
+    process->registers[param - 1] = result;
+    return result;
+}
+
+int exec_ldi(process_t *process, vm_t *vm)
+{
+    int ret_val = 0;
     char *cb_tab = NULL;
     int index = 0;
 
@@ -44,7 +79,8 @@ int exec_ldi(process_t *process, vm_t *vm) {
         free(cb_tab);
         return (-1);
     }
-    process_ldi(process, vm, cb_tab);
+    ret_val = process_ldi(process, vm, cb_tab, process->index + SKIP_COMM_CB);
+    process->carry = (ret_val == 0) ? 1 : 0;
     index = increase_index(cb_tab, false);
     if (index == -1) {
         free(cb_tab);
@@ -55,31 +91,31 @@ int exec_ldi(process_t *process, vm_t *vm) {
     return (0);
 }
 
-int process_lldi(process_t *process, vm_t *vm, char **cb_tab)
+int process_lldi(process_t *process, vm_t *vm, char **cb_tab, int index)
 {
-    int param1 = 0;
-    int param2 = 0;
-    int param3 = 0;
+    int param = 0;
     int result = 0;
-    int index = 0;
 
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-                       cb_tab[INDEX_1ST]);
+    param = get_value(vm->memory, index, cb_tab[INDEX_1ST]);
+    result += get_value_lldi(vm, process, cb_tab[INDEX_1ST], param);
     index += get_index(cb_tab[INDEX_1ST]);
-    param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
-                                   index, cb_tab[INDEX_2ND]);
+    param = get_value(vm->memory, index, cb_tab[INDEX_2ND]);
+    result += get_value_lldi(vm, process, cb_tab[INDEX_2ND], param);
     index += get_index(cb_tab[INDEX_2ND]);
-    param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
-                       cb_tab[INDEX_3RD]);
-    result = process->index + param1;
-    result = get_value(vm->memory, result, T_IND);
-    result += param2;
+    param = get_value(vm->memory, index, cb_tab[INDEX_3RD]);
+    if (get_reg_error(param) == -1) {
+        process->index = -1;
+        return (-1);
+    }
     result = process->index + result;
-    process->register[param3 - 1] = result;
-    return 0;
+    result = get_value(vm->memory, result, T_DIR);
+    process->registers[param - 1] = result;
+    return result;
 }
 
-int exec_lldi(process_t *process, vm_t *vm) {
+int exec_lldi(process_t *process, vm_t *vm)
+{
+    int ret_val = 0;
     char *cb_tab = NULL;
     int index = 0;
 
@@ -89,7 +125,8 @@ int exec_lldi(process_t *process, vm_t *vm) {
         free(cb_tab);
         return (-1);
     }
-    process_lldi(process, vm, cb_tab);
+    ret_val = process_lldi(process, vm, cb_tab, process->index + SKIP_COMM_CB);
+    process->carry = (ret_val == 0) ? 1 : 0;
     index = increase_index(cb_tab, false);
     if (index == -1) {
         free(cb_tab);
