@@ -17,6 +17,9 @@ int exec_live(process_t *process, vm_t *vm)
     nb_champ = get_value(vm->memory, process->index + 1, T_IND);
     if (nb_champ == process->nb_champ) {
         process->last_lives = 0;
+        process->index = process->index + 5;
+    } else {
+        process->index = -1;
     }
     return (0);
 }
