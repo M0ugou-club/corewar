@@ -12,17 +12,11 @@
 
 int exec_zjmp(process_t *process, vm_t *vm)
 {
-    char *cb_tab = NULL;
     int index = 0;
 
-    cb_tab = get_coding_byte(vm->memory[process->index + 1]);
-    MALLOC_RETURN(cb_tab, -1);
-    index = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_1ST]);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
+    index = get_value(vm->memory, process->index + 1, T_IND);
+    if (process->carry == 1) {
+        process->index = circular_mod(process->index + (index % IDX_MOD));
     }
-    free(cb_tab);
-    return (process->index + (index % IDX_MOD));
+    return (0);
 }
