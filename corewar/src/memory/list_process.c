@@ -39,7 +39,7 @@ process_t *add_process(process_t *to_add, process_t *list)
     return list;
 }
 
-process_t *create_process(int index, char *id, int nb_champ)
+process_t *copy_process(int index, char *id, int nb_champ)
 {
     process_t *list = NULL;
 
