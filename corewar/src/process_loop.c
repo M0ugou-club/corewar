@@ -29,17 +29,18 @@ static const function_t function[] = { {1, NULL},
 
 static int parse_champ(vm_t *vm, process_t *process)
 {
+    int return_value = 0;
+
     if (process->index == -1) {
-        return 0;
+        return return_value;
     }
     for (int i = 0; function[i].id != -1; i++) {
         if (function[i].action &&
         vm->memory[process->index] == function[i].id) {
-            process->index = function[i].action;
+            return_value = function[i].action(process, vm);
         }
     }
-    process->index = -1;
-    return 0;
+    return return_value;
 }
 
 int loop_process(vm_t *vm, process_t *process)
@@ -47,7 +48,9 @@ int loop_process(vm_t *vm, process_t *process)
     process_t *tmp = process;
 
     while (tmp) {
-        parse_champ(vm, tmp);
+        if (parse_champ(vm, tmp) == -1) {
+            return -1;
+        }
         tmp = tmp->next;
     }
     return 0;
