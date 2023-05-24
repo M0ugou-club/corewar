@@ -71,6 +71,7 @@ int get_special_value(char *memory, int index, char coding_byte,
             return (0);
         }
         return (process->registers[value - 1]);
+
     }
     if (coding_byte == T_IND) {
         value = get_mem_value(process->index + value);
