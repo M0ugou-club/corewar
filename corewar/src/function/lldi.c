@@ -22,7 +22,8 @@ int get_value_lldi(vm_t *vm, process_t *process, char coding_byte, int value)
         new_value = process->registers[value - 1];
     }
     if (coding_byte == T_IND) {
-        new_value = get_value(process->index, process->index + value, coding_byte);
+        new_value = get_value(process->index, process->index + value,
+            coding_byte);
     }
     return (new_value);
 }

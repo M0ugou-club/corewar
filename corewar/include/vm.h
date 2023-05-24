@@ -14,7 +14,7 @@
     #define RETURN_ERROR(value, error, exit) if (value == error) return (exit);
     #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) \
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
-  
+
     /* Arg indexex*/
     #define SKIP_COMM_CB 2
     #define INDEX_1ST 0
