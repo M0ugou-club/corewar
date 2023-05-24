@@ -20,7 +20,7 @@ static int write_hexa_line(int line)
     } else {
         to_print += '0';
     }
-    if (line > 16) {
+    if (line >= 16) {
         write_hexa_line(line / 16);
     }
     write(1, &to_print, 1);
