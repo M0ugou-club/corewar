@@ -14,7 +14,7 @@
     #define RETURN_ERROR(value, error, exit) if (value == error) return (exit);
     #define SWAP_ENDIAN(x) ((x >> 24) & 0xff) | ((x << 8) & 0xff0000) \
 | ((x >> 8) & 0xff00) | ((x << 24) & 0xff000000)
-  
+
     /* Arg indexex*/
     #define SKIP_COMM_CB 2
     #define INDEX_1ST 0
@@ -52,5 +52,6 @@
     int get_nb_champ(char **argv);
     process_t *param_parser(char **av, vm_t *vm);
     int is_opt(char **av, int i, process_t *process, vm_t *vm);
+    int loop_process(vm_t *vm, process_t *process, int cycle_to_die);
 
 #endif /*VM_H_*/
