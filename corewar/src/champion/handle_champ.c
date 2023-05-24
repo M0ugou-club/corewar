@@ -15,6 +15,7 @@
 int count_champ(process_t *list_champ)
 {
     int nb_champ = 0;
+
     process_t *current = list_champ;
 
     while (current) {
@@ -24,37 +25,19 @@ int count_champ(process_t *list_champ)
     return nb_champ;
 }
 
-int verify_size_champ(process_t *list_champ, int section_size)
-{
-    process_t *current = list_champ;
-    int size_of_code = 0;
-    while (current) {
-        size_of_code = strlen(current->code);
-        if (size_of_code > section_size) {
-            return -1;
-        }
-        current = current->next;
-    }
-    return 0;
-}
-
-void print_champ(process_t *liste)
-{
-    process_t *current = liste;
-    while (current != NULL) {
-        printf("ID: %s\n", current->id);
-        printf("Code: %s\n", current->code);
-        printf("\n");
-        current = current->next;
-    }
-}
-
 void free_champ(process_t *list_champ)
 {
     process_t *current = list_champ;
-    process_t *next;
+    process_t *next = NULL;
+
     while (current) {
         next = current->next;
+        if (current->id != NULL) {
+            free(current->id);
+        }
+        if (current->registers != NULL) {
+            free(current->registers);
+        }
         free(current);
         current = next;
     }

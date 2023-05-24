@@ -7,6 +7,7 @@
 #ifndef FONCTION_H_
     #define FONCTION_H_
 
+    #include <stdbool.h>
     #include "vm.h"
     #include "process.h"
 
@@ -20,7 +21,12 @@
     int get_value(char *memory, int index, char coding_byte);
     int get_type_error(char const *cb_tab, int fct_nb);
     char *get_coding_byte(char coding_bytes);
-    int increase_index(char *cb_tab);
+    int get_index_arg(char coding_byte, bool index_function);
     int get_reg_error(int reg_nb);
+    int get_special_value(char *memory, int index, char coding_byte,
+        process_t *process);
+    int get_indexes_value(char *memory, int index, char coding_byte,
+        process_t *process);
+    int increase_index(char *cb_tab, bool index_function);
 
 #endif /*FONCTION_H_*/

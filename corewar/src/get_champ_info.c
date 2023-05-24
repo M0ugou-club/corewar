@@ -13,22 +13,19 @@
 #include "op.h"
 #include "my.h"
 
-header_t *get_header(int fd)
+int get_header(int fd, header_t *champ_header)
 {
-    header_t *champ_header = NULL;
-
-    champ_header = malloc(sizeof(header_t));
-    MALLOC_RETURN(champ_header, NULL);
     if (read(fd, champ_header, sizeof(header_t)) != sizeof(header_t)) {
-        return (NULL);
+        return (-1);
     }
     champ_header->magic = champ_header->magic;
     champ_header->prog_size = champ_header->prog_size;
+    champ_header->magic = SWAP_ENDIAN(champ_header->magic);
+    champ_header->prog_size = SWAP_ENDIAN(champ_header->prog_size);
     if (champ_header->magic != COREWAR_EXEC_MAGIC) {
-        free(champ_header);
-        return (NULL);
+        return (-1);
     }
-    return (champ_header);
+    return (0);
 }
 
 char *get_prog(int fd, header_t *champ_header)
@@ -51,14 +48,11 @@ char *get_prog(int fd, header_t *champ_header)
     return (NULL);
 }
 
-process_t *create_basic_process(int index, char *name, int nb_champ,
-    process_t *process)
+process_t *create_basic_process(char *name, process_t *process)
 {
     process->cooldown = 0;
-    process->index = index;
     process->last_lives = 0;
     process->next = NULL;
-    process->nb_champ = nb_champ;
     process->registers = malloc(sizeof(int) * (REG_NUMBER + 1));
     MALLOC_RETURN(process->registers, NULL);
     my_int_memset(process->registers, -1, REG_NUMBER + 1);
