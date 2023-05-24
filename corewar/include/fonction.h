@@ -7,6 +7,7 @@
 #ifndef FONCTION_H_
     #define FONCTION_H_
 
+    #include <stdbool.h>
     #include "vm.h"
     #include "process.h"
 
@@ -26,5 +27,6 @@
         process_t *process);
     int get_indexes_value(char *memory, int index, char coding_byte,
         process_t *process);
+    int increase_index(char *cb_tab, bool index_function);
 
 #endif /*FONCTION_H_*/
