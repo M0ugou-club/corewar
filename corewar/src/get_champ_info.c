@@ -63,6 +63,6 @@ process_t *create_basic_process(char *name, process_t *process)
         return (NULL);
     }
     my_memset(process->id, '\0', (my_strlen(name) + 1));
-    process->id = my_strcpy(process->id, name);
+    my_strcpy(process->id, name);
     return (process);
 }

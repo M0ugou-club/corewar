@@ -74,11 +74,11 @@ prog_list_t *get_prog_list(FILE *fd)
     int len = 0;
 
     while ((len = getline(&line, &size, fd)) != EOF) {
-        line[len - 1] = '\0';
+        if (line[len - 1] == '\n')
+            line[len - 1] = '\0';
         remove_comment(line);
         copy = my_strclear(line);
-        if (copy == NULL)
-            return (NULL);
+        MALLOC_RETURN(copy, NULL);
         prog_list = add_node(copy, prog_list, &first_line);
         if (first_line == true && prog_list == NULL)
             return (NULL);
