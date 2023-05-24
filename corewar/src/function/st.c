@@ -34,9 +34,9 @@ int process_store_value(process_t *process, vm_t *vm, char *cb_tab)
     int reg1 = 0;
     int val2 = 0;
 
-    reg1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_1ST]);
-    if (get_reg_error(reg1) == -1) {
+    reg1 = get_special_value(vm->memory, process->index + SKIP_COMM_CB,
+    cb_tab[INDEX_1ST], process);
+    if (process->index == -1) {
         return (-1);
     }
     if (store_value(process, vm, cb_tab[INDEX_2ND], reg1) == -1)
@@ -59,11 +59,12 @@ int exec_st(process_t *process, vm_t *vm)
         free(cb_tab);
         return -1;
     }
-    index = increase_index(cb_tab) + 2;
+    index = increase_index(cb_tab, false);
     if (index == -1) {
         free(cb_tab);
         return (-1);
     }
+    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
     free(cb_tab);
-    return (process->index + index + SKIP_COMM_CB);
+    return (0);
 }
