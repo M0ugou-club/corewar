@@ -22,6 +22,13 @@
     #define INDEX_3RD 2
     #define INDEX_4TH 3
 
+    /* Arg indexex*/
+    #define SKIP_COMM_CB 2
+    #define INDEX_1ST 0
+    #define INDEX_2ND 1
+    #define INDEX_3RD 2
+    #define INDEX_4TH 3
+
     #include "process.h"
     #include "op.h"
 
