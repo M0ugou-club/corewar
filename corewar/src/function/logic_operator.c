@@ -20,13 +20,14 @@ int process_and(process_t *process, vm_t *vm, char **cb_tab)
     param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
         cb_tab[INDEX_1ST]);
     index += get_index(cb_tab[INDEX_1ST]);
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB +
+    param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
     index, cb_tab[INDEX_2ND]);
     index += get_index(cb_tab[INDEX_2ND]);
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 & param2;
     process->register[param3] = result;
+    return 0;
 }
 
 int exec_and(process_t *process, vm_t *vm)
@@ -61,13 +62,14 @@ int process_or(process_t *process, vm_t *vm, char **cb_tab)
     param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
         cb_tab[INDEX_1ST]);
     index += get_index(cb_tab[INDEX_1ST]);
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB +
+    param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
     index, cb_tab[INDEX_2ND]);
     index += get_index(cb_tab[INDEX_2ND]);
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 | param2;
     process->register[param3] = result;
+    return 0;
 }
 
 int exec_or(process_t *process, vm_t *vm)
@@ -81,7 +83,7 @@ int exec_or(process_t *process, vm_t *vm)
         free(cb_tab);
         return (-1);
     }
-    process_and(process, vm, cb_tab);
+    process_or(process, vm, cb_tab);
     index = increase_index(cb_tab);
     if (index == -1) {
         free(cb_tab);

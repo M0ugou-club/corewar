@@ -32,6 +32,11 @@
         int f_dump;
     } vm_t;
 
+    typedef struct type_value_s {
+        char value;
+        char type;
+    } type_value_t;
+
     int print_final_state(vm_t *vm);
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
