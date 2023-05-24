@@ -47,7 +47,7 @@ int process_load_value(process_t *process, vm_t *vm, char *cb_tab)
 int exec_ld(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -59,12 +59,7 @@ int exec_ld(process_t *process, vm_t *vm)
         free(cb_tab);
         return -1;
     }
-    index = increase_index(cb_tab, false);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
-    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
-    return (0);
+    return (ret_val);
 }
