@@ -27,12 +27,20 @@ static const function_t function[] = { {1, &exec_live},
 {16, &exec_aff},
 {-1, NULL}};
 
-static int parse_champ(vm_t *vm, process_t *process)
+static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
 {
     int return_value = 0;
 
     if (process->index == -1) {
         return return_value;
+    }
+    if (process->last_lives < cycle_to_die) {
+        process->index = -1;
+    }
+    process->last_lives++;
+    if (process->cooldown != 0) {
+        process->cooldown--;
+        return 0;
     }
     for (int i = 0; function[i].id != -1; i++) {
         if (function[i].action &&
@@ -43,12 +51,12 @@ static int parse_champ(vm_t *vm, process_t *process)
     return return_value;
 }
 
-int loop_process(vm_t *vm, process_t *process)
+int loop_process(vm_t *vm, process_t *process, int cycle_to_die)
 {
     process_t *tmp = process;
 
     while (tmp) {
-        if (parse_champ(vm, tmp) == -1) {
+        if (parse_champ(vm, tmp, cycle_to_die) == -1) {
             return -1;
         }
         tmp = tmp->next;

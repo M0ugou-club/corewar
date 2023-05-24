@@ -52,5 +52,6 @@
     int get_nb_champ(char **argv);
     process_t *param_parser(char **av, vm_t *vm);
     int is_opt(char **av, int i, process_t *process, vm_t *vm);
+    int loop_process(vm_t *vm, process_t *process, int cycle_to_die);
 
 #endif /*VM_H_*/
