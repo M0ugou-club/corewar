@@ -28,7 +28,9 @@ int process_and(process_t *process, vm_t *vm, char **cb_tab)
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 & param2;
-    process->register[param3] = result;
+    process->register[param3 - 1] = result;
+    process->carry = (result == 0) ? 1 : 0;
+    return 0;
 }
 
 int exec_and(process_t *process, vm_t *vm)
@@ -70,7 +72,9 @@ int process_or(process_t *process, vm_t *vm, char **cb_tab)
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 | param2;
-    process->register[param3] = result;
+    process->register[param3 - 1] = result;
+    process->carry = (result == 0) ? 1 : 0;
+    return 0;
 }
 
 int exec_or(process_t *process, vm_t *vm)
