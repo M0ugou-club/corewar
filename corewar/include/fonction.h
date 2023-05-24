@@ -7,7 +7,6 @@
 #ifndef FONCTION_H_
     #define FONCTION_H_
 
-    #include <stdbool.h>
     #include "vm.h"
     #include "process.h"
 
