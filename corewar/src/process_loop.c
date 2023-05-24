@@ -34,7 +34,7 @@ static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
     if (process->index == -1) {
         return return_value;
     }
-    if (process->last_lives < cycle_to_die) {
+    if (process->last_lives > cycle_to_die) {
         process->index = -1;
     }
     process->last_lives++;
