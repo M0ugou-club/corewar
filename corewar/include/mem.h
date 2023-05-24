@@ -10,5 +10,6 @@
     char *create_memory(void);
     void modif_mem(char *mem, int index, const char value);
     char get_mem_value(char *mem, int index);
+    int circular_mod(int index);
 
 #endif /*MEMORY_H_*/
