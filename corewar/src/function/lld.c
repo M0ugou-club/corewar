@@ -17,9 +17,14 @@ int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
     val1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
     coding_byte);
     if (coding_byte == T_IND) {
-        val1 = get_mem_value(process->index + val1);
+        val1 = get_value(vm->memory, process->index, T_DIR);
     }
     process->registers[val2 - 1] = val1;
+    if (val1 == 0) {
+        process->carry = 1;
+    } else {
+        process->carry = 0;
+    }
     return 0;
 }
 
