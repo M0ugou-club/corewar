@@ -27,7 +27,7 @@ int process_xor(process_t *process, vm_t *vm, char **cb_tab)
     param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
         cb_tab[INDEX_3RD]);
     result = param1 ^ param2;
-    process->register[param3 - 1] = result;
+    process->registers[param3 - 1] = result;
     process->carry = (result == 0) ? 1 : 0;
     return 0;
 }
@@ -35,7 +35,7 @@ int process_xor(process_t *process, vm_t *vm, char **cb_tab)
 int exec_xor(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
-    int index = 0;
+    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
@@ -44,12 +44,7 @@ int exec_xor(process_t *process, vm_t *vm)
         return (-1);
     }
     process_xor(process, vm, cb_tab);
-    index = increase_index(cb_tab, false);
-    if (index == -1) {
-        free(cb_tab);
-        return (-1);
-    }
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
-    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
-    return (0);
+    return (ret_val);
 }
