@@ -16,7 +16,16 @@
         int *registers;
         int nb_champ;
         char *id;
+        int nb_champ;
         struct process_s *next;
+        int carry;
     } process_t;
+
+    process_t *create_basic_process(char *name, process_t *process);
+    int get_header(int fd, header_t *champ_header);
+    char *get_prog(int fd, header_t *champ_header);
+    void free_champ(process_t *list_champ);
+    process_t *create_process(int index, char *id, int nb_champ);
+    process_t *add_process(process_t *to_add, process_t *list);
 
 #endif /* !PROCESS_H_ */

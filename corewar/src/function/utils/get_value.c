@@ -5,6 +5,7 @@
 ** get_value
 */
 
+#include "fonction.h"
 #include "vm.h"
 #include "op.h"
 #include "my.h"
@@ -33,4 +34,49 @@ int get_value(char *memory, int index, char coding_byte)
     }
     nb = SWAP_ENDIAN(nb);
     return (nb);
+}
+
+int get_indexes_value(char *memory, int index, char coding_byte,
+    process_t *process)
+{
+    int value = 0;
+
+    value = get_value(memory, index, coding_byte);
+    if (coding_byte == T_REG) {
+        if (get_reg_error(value) != 0) {
+            process->index = -1;
+            return (0);
+        }
+        return(process->registers[value - 1]);
+    }
+    if (coding_byte == T_IND) {
+        value = get_mem_value(index + value);
+        return (value);
+    }
+    if (coding_byte == T_DIR) {
+        value = get_value(memory, index, T_IND);
+        return (value);
+    }
+}
+
+int get_special_value(char *memory, int index, char coding_byte,
+    process_t *process)
+{
+    int value = 0;
+
+    value = get_value(memory, index, coding_byte);
+    if (coding_byte == T_REG) {
+        if (get_reg_error(value) != 0) {
+            process->index = -1;
+            return (0);
+        }
+        return(process->registers[value - 1]);
+    }
+    if (coding_byte == T_IND) {
+        value = get_mem_value(process->index + value);
+        return (value);
+    }
+    if (coding_byte == T_DIR) {
+        return (value);
+    }
 }
