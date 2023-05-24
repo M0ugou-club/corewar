@@ -18,11 +18,11 @@ SRC =   src/champion/put_champion.c\
 		src/check_opt.c \
 		src/write_final_state.c \
 		src/process_loop.c \
-		src/function/utils/utils/get_coding_byte.c \
-		src/function/utils/utils/get_error.c \
-		src/function/utils/utils/get_value.c \
-		src/function/utils/utils/increase_index.c \
-		src/function/utils/utils/write_memory.c \
+		src/function/utils/get_coding_byte.c \
+		src/function/utils/get_error.c \
+		src/function/utils/get_value.c \
+		src/function/utils/increase_index.c \
+		src/function/utils/write_memory.c \
 		src/function/addition.c \
 		src/function/aff.c \
 		src/function/fork.c \

@@ -55,7 +55,6 @@ int exec_ldi(process_t *process, vm_t *vm)
 {
     int ret_val = 0;
     char *cb_tab = NULL;
-    int ret_val = 0;
 
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
