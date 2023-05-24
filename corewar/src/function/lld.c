@@ -43,7 +43,7 @@ int process_lld(process_t *process, vm_t *vm, char *cb_tab)
     return (0);
 }
 
-int exec_st(process_t *process, vm_t *vm)
+int exec_lld(process_t *process, vm_t *vm)
 {
     char *cb_tab = NULL;
     int index = 0;
