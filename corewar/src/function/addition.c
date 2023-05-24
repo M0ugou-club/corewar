@@ -25,11 +25,11 @@ int process_addidtion(process_t *process, vm_t *vm, char *cb_tab, int add_type)
         cb_tab[INDEX_3RD]);
     if (get_reg_error(val1) == -1 || get_reg_error(val2) == -1
         || get_reg_error(reg_result) == -1) {
+        process->index = -1;
         return (-1);
     }
-    val1 = process->registers[val1 - 1];
-    val2 = process->registers[val2 - 1] * add_type;
-    result = val1 + val2;
+    result = process->registers[val1 - 1] +
+        (process->registers[val2 - 1] * add_type);
     process->registers[reg_result - 1] = result;
     return (result);
 }
