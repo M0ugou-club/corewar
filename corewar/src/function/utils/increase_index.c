@@ -52,6 +52,9 @@ int get_new_process_index(char cb_tab, bool index_function, process_t *process)
 {
     int index = 0;
 
+    if (process->index == -1) {
+        return (0);
+    }
     index = increase_index(cb_tab, false);
     if (index == -1) {
         return (-1);

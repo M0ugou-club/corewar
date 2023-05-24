@@ -51,12 +51,14 @@ int exec_ld(process_t *process, vm_t *vm)
     cb_tab = get_coding_byte(vm->memory[process->index + 1]);
     MALLOC_RETURN(cb_tab, -1);
     if (get_type_error(cb_tab, vm->memory[process->index]) == -1) {
+        process->index = -1;
         free(cb_tab);
-        return (-1);
+        return (0);
     }
     if (process_load_value(process, vm, cb_tab) == -1) {
+        process->index = -1;
         free(cb_tab);
-        return -1;
+        return 0;
     }
     ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
