@@ -47,3 +47,15 @@ int increase_index(char *cb_tab, bool index_function)
     }
     return (index);
 }
+
+int get_new_process_index(char cb_tab, bool index_function, process_t *process)
+{
+    int index = 0;
+
+    index = increase_index(cb_tab, false);
+    if (index == -1) {
+        return (-1);
+    }
+    process->index = circular_mod(process->index + index + SKIP_COMM_CB);
+    return (0);
+}
