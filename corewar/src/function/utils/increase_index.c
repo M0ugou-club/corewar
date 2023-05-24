@@ -18,7 +18,6 @@ int get_index_arg(char coding_byte, bool index_function)
 {
     int index = -1;
 
-
     if (index_function == true && coding_byte == T_DIR) {
         return (IND_SIZE);
     }
