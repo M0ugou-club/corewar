@@ -28,7 +28,7 @@ int process_fork(process_t *process, vm_t *vm)
     }
     copy_name = my_strdup(process->id);
     MALLOC_RETURN(copy_name, -1);
-    new_process = copy_process(new_index, copy_name, process->nb_champ);
+    new_process = copy_process(new_index, copy_name, process);
     if (new_process == NULL) {
         free(copy_name);
         return (-1);
