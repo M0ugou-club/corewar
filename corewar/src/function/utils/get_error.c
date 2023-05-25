@@ -9,7 +9,7 @@
 
 int get_reg_error(int reg_nb)
 {
-    if (reg_nb < 0 || reg_nb > REG_NUMBER) {
+    if (reg_nb < 1 || reg_nb > REG_NUMBER) {
         return (-1);
     }
     return (0);

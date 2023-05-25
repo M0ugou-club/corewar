@@ -11,9 +11,9 @@
 #include "my.h"
 
 static const type_value_t type[] = {{0, 0},
-{1, T_REG},
-{2, T_DIR},
-{3, T_IND},
+{0b1, T_REG},
+{0b10, T_DIR},
+{0b11, T_IND},
 {-1, -1}};
 
 static int fill_cb_type(char *cb_tab, int i, int value)
@@ -26,7 +26,7 @@ static int fill_cb_type(char *cb_tab, int i, int value)
     return (0);
 }
 
-char *get_coding_byte(char coding_bytes)
+char *get_coding_byte(unsigned char coding_bytes)
 {
     char *cb_tab = NULL;
     int tmp = 0;
@@ -35,8 +35,8 @@ char *get_coding_byte(char coding_bytes)
     MALLOC_RETURN(cb_tab, NULL);
     my_memset(cb_tab, '\0', CODYNG_BYTE_LEN + 1);
     for (int i = CODYNG_BYTE_LEN - 1; i >= 0; i--) {
-        tmp = coding_bytes % (BIT_VALUE * 2);
-        coding_bytes = coding_bytes / (BIT_VALUE * 2);
+        tmp = coding_bytes % (BIT_VALUE * BIT_VALUE);
+        coding_bytes = coding_bytes >> 2;
         fill_cb_type(cb_tab, i, tmp);
     }
     return (cb_tab);

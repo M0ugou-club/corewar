@@ -21,19 +21,18 @@ int get_value(char *memory, int index, char coding_byte)
     int value_size = 0;
     int nb = 0;
     int index_value = 0;
-    char mem_value = 0;
+    unsigned char mem_value = 0;
 
     for (int i = 0; type[i].value != -1; i++) {
         if (type[i].type == coding_byte) {
             value_size = type[i].value;
         }
     }
-    for (int i = 0; i < value_size; i++) {
-        mem_value = get_mem_value(memory, index + 1);
+    for (int i = value_size - 1; i >= 0; i--) {
+        mem_value = get_mem_value(memory, index + i);
         nb += mem_value * (my_power(BYTE_VALUE, index_value));
-        index++;
+        index_value++;
     }
-    nb = SWAP_ENDIAN(nb);
     return (nb);
 }
 
@@ -70,8 +69,7 @@ int get_special_value(char *memory, int index, char coding_byte,
             process->index = -1;
             return (0);
         }
-        return (process->registers[value - 1]);
-
+        value = process->registers[value - 1];
     }
     if (coding_byte == T_IND) {
         value = get_mem_value(memory, process->index + value);

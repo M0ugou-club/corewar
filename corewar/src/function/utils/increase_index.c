@@ -36,11 +36,7 @@ int increase_index(char *cb_tab, bool index_function)
     int tmp = 0;
 
     for (int i = 0; cb_tab[i] != '\0'; i++) {
-        if (cb_tab[i] == T_DIR && index_function == true) {
-            tmp += get_index_arg(cb_tab[i], index_function);
-        } else {
-            tmp = get_index_arg(cb_tab[i], index_function);
-        }
+        tmp = get_index_arg(cb_tab[i], index_function);
         if (tmp == -1) {
             return (-1);
         }
