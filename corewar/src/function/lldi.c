@@ -10,7 +10,8 @@
 #include "fonction.h"
 #include "vm.h"
 
-int get_value_lldi(vm_t *vm, process_t *process, char coding_byte, int value)
+static int get_value_lldi(vm_t *vm, process_t *process, char coding_byte,
+    int value)
 {
     int new_value = value;
 
@@ -29,7 +30,8 @@ int get_value_lldi(vm_t *vm, process_t *process, char coding_byte, int value)
     return (new_value);
 }
 
-int process_lldi(process_t *process, vm_t *vm, char *cb_tab, int index)
+static int process_lldi(process_t *process, vm_t *vm, const char *cb_tab,
+    int index)
 {
     int param = 0;
     int result = 0;

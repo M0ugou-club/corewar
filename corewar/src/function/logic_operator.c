@@ -11,7 +11,7 @@
 #include "vm.h"
 #include "mem.h"
 
-int process_and(process_t *process, vm_t *vm, char *cb_tab)
+static int process_and(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int param1 = 0;
     int param2 = 0;
@@ -53,7 +53,7 @@ int exec_and(process_t *process, vm_t *vm)
     return (ret_val);
 }
 
-int process_or(process_t *process, vm_t *vm, char *cb_tab)
+static int process_or(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int param1 = 0;
     int param2 = 0;

@@ -10,7 +10,7 @@
 #include "process.h"
 #include "vm.h"
 
-int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
+static int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
 {
     int val1 = 0;
 
@@ -28,7 +28,7 @@ int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
     return 0;
 }
 
-int process_lld(process_t *process, vm_t *vm, char *cb_tab)
+static int process_lld(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int reg2 = 0;
     int index = 0;

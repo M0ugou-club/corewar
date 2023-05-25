@@ -10,7 +10,7 @@
 #include "fonction.h"
 #include "vm.h"
 
-int process_xor(process_t *process, vm_t *vm, char *cb_tab)
+static int process_xor(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int param1 = 0;
     int param2 = 0;

@@ -12,7 +12,7 @@
 
 static const int ASCII_SIZE = 256;
 
-int process_aff(process_t *process, vm_t *vm, char *cb_tab)
+static int process_aff(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int param1 = 0;
 

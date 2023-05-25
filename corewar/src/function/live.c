@@ -24,7 +24,7 @@ int write_nb(int nb)
     return 0;
 }
 
-int print_live(process_t *process)
+static int print_live(process_t *process)
 {
     write(1, "The player ", 11);
     write_nb(process->nb_champ);

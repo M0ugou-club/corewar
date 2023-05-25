@@ -10,7 +10,8 @@
 #include "process.h"
 #include "vm.h"
 
-int process_addidtion(process_t *process, vm_t *vm, char *cb_tab, int add_type)
+static int process_addidtion(process_t *process, vm_t *vm, const char *cb_tab,
+    int add_type)
 {
     int val1 = 0;
     int val2 = 0;

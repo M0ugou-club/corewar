@@ -10,7 +10,7 @@
 #include "process.h"
 #include "vm.h"
 
-int sti_values(process_t *process, vm_t *vm, char *cb_tab)
+static int sti_values(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int reg = 0;
     int val1 = 0;

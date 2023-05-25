@@ -13,7 +13,7 @@
 #include "op.h"
 #include "my.h"
 
-int process_fork(process_t *process, vm_t *vm)
+static int process_fork(process_t *process, vm_t *vm)
 {
     int param = 0;
     int new_index = 0;

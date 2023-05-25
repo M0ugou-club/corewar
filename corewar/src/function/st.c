@@ -10,7 +10,8 @@
 #include "process.h"
 #include "vm.h"
 
-int store_value(process_t *process, vm_t *vm, char coding_byte, int val1)
+static int store_value(process_t *process, vm_t *vm, char coding_byte,
+    int val1)
 {
     int val2 = 0;
 
@@ -30,7 +31,7 @@ int store_value(process_t *process, vm_t *vm, char coding_byte, int val1)
     return 0;
 }
 
-int process_store_value(process_t *process, vm_t *vm, char *cb_tab)
+static int process_store_value(process_t *process, vm_t *vm, const char *cb_tab)
 {
     int reg1 = 0;
 
