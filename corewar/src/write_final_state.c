@@ -63,7 +63,7 @@ static int write_mem(char *memory, int line)
     return (0);
 }
 
-int print_final_state(vm_t *vm)
+int print_final_state(vm_t *vm, process_t *process_list)
 {
     int line = 0;
 
@@ -75,5 +75,6 @@ int print_final_state(vm_t *vm)
             line += 32;
         }
     }
+    get_winner(process_list);
     return (0);
 }

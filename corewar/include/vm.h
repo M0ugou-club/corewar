@@ -44,7 +44,7 @@
         char type;
     } type_value_t;
 
-    int print_final_state(vm_t *vm);
+    int print_final_state(vm_t *vm, process_t *process_list);
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
     int put_champ(process_t *champ, vm_t *vm, char *code,
@@ -53,5 +53,6 @@
     process_t *param_parser(char **av, vm_t *vm);
     int is_opt(char **av, int i, process_t *process, vm_t *vm);
     int loop_process(vm_t *vm, process_t *process, int cycle_to_die);
+    int get_winner(process_t *list_champ);
 
 #endif /*VM_H_*/

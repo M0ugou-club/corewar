@@ -37,6 +37,6 @@ int my_vm(vm_t *vm, process_t *process)
         }
         champ_alive = get_nb_champ_alive(process, vm);
     }
-    print_final_state(vm);
+    print_final_state(vm, process);
     return 0;
 }
