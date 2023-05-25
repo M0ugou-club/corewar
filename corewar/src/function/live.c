@@ -40,7 +40,7 @@ int exec_live(process_t *process, vm_t *vm)
 
     nb_champ = get_value(vm->memory, process->index + 1, T_DIR);
     if (process->registers != NULL) {
-        if (nb_champ == process->registers[0]) {
+        if (nb_champ == process->nb_champ) {
             process->last_lives = 0;
             print_live(process);
             vm->nb_alive += 1;
