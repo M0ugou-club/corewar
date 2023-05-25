@@ -39,25 +39,33 @@ process_t *add_process(process_t *to_add, process_t *list)
     return list;
 }
 
-process_t *copy_process(int index, char *id, int nb_champ)
+int copy_registers(int *new_reg, int *to_copy)
 {
-    process_t *list = NULL;
+    for (int i = 0; i != REG_NUMBER; i++) {
+        new_reg[i] = to_copy[i];
+    }
+    return (new_reg);
+}
 
-    list = malloc(sizeof(process_t));
-    if (list == NULL) {
+process_t *copy_process(int index, char *id, process_t *to_copy)
+{
+    process_t *new = NULL;
+
+    new = malloc(sizeof(process_t));
+    if (new == NULL) {
         return (NULL);
     }
-    list->registers = malloc(sizeof(int) * REG_NUMBER);
-    if (list->registers == NULL) {
+    new->registers = malloc(sizeof(int) * REG_NUMBER);
+    if (new->registers == NULL) {
         return NULL;
     }
-    list->id = id;
-    list->nb_champ = nb_champ;
-    list->cooldown = 0;
-    list->index = index;
-    list->next = NULL;
-    list->last_lives = 0;
-    list->cooldown = 0;
-    list->nb_champ = 0;
-    return (list);
+    new->registers = copy_registers(new->registers, to_copy->registers);
+    new->id = id;
+    new->nb_champ = to_copy->nb_champ;
+    new->cooldown = 0;
+    new->index = index;
+    new->next = NULL;
+    new->last_lives = 0;
+    new->cooldown = 0;
+    return (new);
 }
