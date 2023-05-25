@@ -32,7 +32,7 @@ int is_label(char const *arg)
         && my_strncmp(arg, ":", my_strlen(":")) != 0) {
         return (-1);
     }
-    while (arg[len] != LABEL_CHAR) {
+    while (arg[len] != '\0' && arg[len] != LABEL_CHAR) {
         len++;
     }
     len++;

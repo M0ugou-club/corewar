@@ -18,7 +18,7 @@ static int find_label_index(prog_list_t *prog_list, char const *arg)
     int index = 0;
     const char error_str[18] = "Wrong label name\n";
 
-    while (arg[len] != LABEL_CHAR) {
+    while (arg[len] != '\0' && arg[len] != LABEL_CHAR) {
         len++;
     }
     len++;
