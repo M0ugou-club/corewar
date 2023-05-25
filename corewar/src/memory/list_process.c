@@ -67,5 +67,5 @@ process_t *copy_process(int index, char *id, process_t *to_copy)
     new->next = NULL;
     new->last_lives = 0;
     new->cooldown = 0;
-    return ();
+    return (new);
 }
