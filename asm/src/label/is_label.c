@@ -28,10 +28,14 @@ int is_label(char const *arg)
     int len = 0;
     int error = 0;
 
-    if (my_strncmp(arg, "%:", my_strlen("%:")) != 0) {
+    if (my_strncmp(arg, "%:", my_strlen("%:")) != 0
+        && my_strncmp(arg, ":", my_strlen(":")) != 0) {
         return (-1);
     }
-    len = my_strlen("%:");
+    while (arg[len] != LABEL_CHAR) {
+        len++;
+    }
+    len++;
     while (arg[len] != '\0') {
         error += compare_char(arg[len]);
         len++;
