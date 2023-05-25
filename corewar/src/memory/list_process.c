@@ -44,7 +44,7 @@ int copy_registers(int *new_reg, int *to_copy)
     for (int i = 0; i != REG_NUMBER; i++) {
         new_reg[i] = to_copy[i];
     }
-    return (new_reg);
+    return (0);
 }
 
 process_t *copy_process(int index, char *id, process_t *to_copy)
@@ -67,5 +67,5 @@ process_t *copy_process(int index, char *id, process_t *to_copy)
     new->next = NULL;
     new->last_lives = 0;
     new->cooldown = 0;
-    return (new);
+    return ();
 }
