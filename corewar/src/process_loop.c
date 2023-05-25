@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "fonction.h"
+#include "mem.h"
 #include "vm.h"
 
 static const function_t function[] = { {1, &exec_live},
@@ -44,7 +45,7 @@ static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
     }
     for (int i = 0; function[i].id != -1; i++) {
         if (function[i].action &&
-        vm->memory[process->index] == function[i].id) {
+        vm->memory[circular_mod(process->index)] == function[i].id) {
             return_value = function[i].action(process, vm);
         }
     }

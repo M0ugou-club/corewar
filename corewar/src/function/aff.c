@@ -36,7 +36,7 @@ int exec_aff(process_t *process, vm_t *vm)
         return (0);
     }
     process_aff(process, vm, cb_tab);
-    ret_val = get_new_process_index(cb_tab, true, process);
+    ret_val = get_new_process_index(cb_tab, false, process);
     free(cb_tab);
     return (ret_val);
 }
