@@ -31,8 +31,7 @@ int get_winner(process_t *list_champ)
         last_live = current->last_lives;
     }
     while (current) {
-        if (current->last_lives <= last_live)
-        {
+        if (current->last_lives <= last_live) {
             winner = current;
             last_live = current->last_lives;
         }
