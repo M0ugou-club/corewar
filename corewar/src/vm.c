@@ -5,7 +5,6 @@
 ** vm.c
 */
 
-#include <stdlib.h>
 #include "op.h"
 #include "vm.h"
 
@@ -27,6 +26,7 @@ int my_vm(vm_t *vm, process_t *process)
     if (!vm || !process)
         return 84;
     while (champ_alive > 1 && cycle_to_die > 0 && vm->f_dump != 0) {
+        loop_process(vm, process, cycle_to_die);
         cycle++;
         if (vm->f_dump > 0)
             vm->f_dump--;
@@ -36,6 +36,6 @@ int my_vm(vm_t *vm, process_t *process)
         }
         champ_alive = get_nb_champ_alive(process, vm);
     }
-    print_final_state(vm);
+    print_final_state(vm, process);
     return 0;
 }

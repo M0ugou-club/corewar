@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "vm.h"
-#include "memory.h"
+#include "mem.h"
 
 static void free_vm(vm_t *vm)
 {
@@ -32,6 +32,10 @@ vm_t *initialisation_of_vm(char **argv)
     vm = malloc(sizeof(vm_t));
     if (vm) {
         vm->memory = create_memory();
+        if (vm->memory == NULL) {
+            free(vm);
+            return (NULL);
+        }
         vm->nb_champ = get_nb_champ(argv);
         vm->nb_alive = 0;
         vm->f_dump = -1;
