@@ -48,7 +48,7 @@ static int write_hexa_mem(int nb, int index)
     return (0);
 }
 
-static int write_mem(char *memory, int line)
+static int write_mem(const char *memory, int line)
 {
     int index_line = 32;
     int i = line;

@@ -5,7 +5,6 @@
 ** vm.c
 */
 
-#include <stdlib.h>
 #include "op.h"
 #include "vm.h"
 

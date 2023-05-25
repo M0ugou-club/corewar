@@ -47,7 +47,7 @@
     int print_final_state(vm_t *vm, process_t *process_list);
     int get_nb_champ_alive(process_t *process, vm_t *vm);
     int my_vm(vm_t *vm, process_t *process);
-    int put_champ(process_t *champ, vm_t *vm, char *code,
+    int put_champ(process_t *champ, vm_t *vm, const char *code,
         header_t *champ_info);
     int get_nb_champ(char **argv);
     process_t *param_parser(char **av, vm_t *vm);

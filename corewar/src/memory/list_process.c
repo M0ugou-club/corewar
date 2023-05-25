@@ -8,19 +8,6 @@
 #include <stdlib.h>
 #include "process.h"
 
-void destroy_process_list(process_t *list)
-{
-    process_t *tmp = NULL;
-
-    while (list != NULL) {
-        tmp = list;
-        list = list->next;
-        free(tmp->id);
-        free(tmp->registers);
-        free(tmp);
-    }
-}
-
 process_t *add_process(process_t *to_add, process_t *list)
 {
     process_t *tmp = NULL;
@@ -39,7 +26,7 @@ process_t *add_process(process_t *to_add, process_t *list)
     return list;
 }
 
-int copy_registers(int *new_reg, int *to_copy)
+static int copy_registers(int *new_reg, const int *to_copy)
 {
     for (int i = 0; i != REG_NUMBER; i++) {
         new_reg[i] = to_copy[i];

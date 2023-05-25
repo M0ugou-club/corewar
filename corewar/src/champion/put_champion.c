@@ -11,7 +11,7 @@
 #include "vm.h"
 #include "mem.h"
 
-int put_champ_in_arena(char *arena, int index, char *code,
+static int put_champ_in_arena(char *arena, int index, const char *code,
     header_t *champ_info)
 {
     for (int i = 0; i < champ_info->prog_size; i++) {
@@ -24,7 +24,8 @@ int put_champ_in_arena(char *arena, int index, char *code,
     return (0);
 }
 
-int put_champ(process_t *champ, vm_t *vm, char *code, header_t *champ_info)
+int put_champ(process_t *champ, vm_t *vm, const char *code,
+    header_t *champ_info)
 {
     static int index = 0;
 

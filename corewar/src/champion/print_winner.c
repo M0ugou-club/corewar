@@ -11,7 +11,7 @@
 #include "vm.h"
 #include "my.h"
 
-int print_winner(process_t *winner)
+static int print_winner(process_t *winner)
 {
     write(1, "The player ", 11);
     write_nb(winner->nb_champ);
