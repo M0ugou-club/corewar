@@ -13,7 +13,7 @@
 
 int exec_zjmp(process_t *process, vm_t *vm)
 {
-    int index = 0;
+    short int index = 0;
 
     index = get_value(vm->memory, process->index + 1, T_IND);
     if (process->carry == 1) {

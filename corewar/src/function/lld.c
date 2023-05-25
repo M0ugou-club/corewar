@@ -15,9 +15,9 @@ int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
     int val1 = 0;
 
     val1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    coding_byte);
+        coding_byte);
     if (coding_byte == T_IND) {
-        val1 = get_value(vm->memory, process->index, T_DIR);
+        val1 = get_value(vm->memory, process->index + val1, T_DIR);
     }
     process->registers[val2 - 1] = val1;
     if (val1 == 0) {
@@ -31,9 +31,11 @@ int lld_value(process_t *process, vm_t *vm, char coding_byte, int val2)
 int process_lld(process_t *process, vm_t *vm, char *cb_tab)
 {
     int reg2 = 0;
+    int index = 0;
 
-    reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_2ND]);
+    index = get_index_arg(cb_tab[INDEX_1ST], false);
+    reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
+        cb_tab[INDEX_2ND]);
     if (get_reg_error(reg2) == -1) {
         return (-1);
     }

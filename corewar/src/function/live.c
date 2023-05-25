@@ -43,7 +43,9 @@ int exec_live(process_t *process, vm_t *vm)
         if (nb_champ == process->registers[0]) {
             process->last_lives = 0;
             print_live(process);
+            vm->nb_alive += 1;
         }
     }
+    process->index += 5;
     return (0);
 }

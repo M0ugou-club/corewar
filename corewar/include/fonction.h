@@ -23,8 +23,9 @@
     int get_reg_error(int reg_nb);
     int get_special_value(char *memory, int index, char coding_byte,
         process_t *process);
-    int get_indexes_value(char *memory, int index, char coding_byte,
+    int get_special_indexes_value(char *memory, int index, char coding_byte,
         process_t *process);
+    int get_indexes_value(char *memory, int index, char coding_byte);
     int increase_index(char *cb_tab, bool index_function);
     int get_new_process_index(char *cb_tab, bool index_function,
         process_t *process);

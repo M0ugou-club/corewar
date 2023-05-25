@@ -43,6 +43,7 @@ int exec_fork(process_t *process, vm_t *vm)
 
     ret_val = process_fork(process, vm);
     if (ret_val == -1) {
+        process->index = -1;
         return (-1);
     }
     if (ret_val != 0) {

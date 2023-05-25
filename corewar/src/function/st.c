@@ -18,6 +18,7 @@ int store_value(process_t *process, vm_t *vm, char coding_byte, int val1)
         coding_byte);
     if (coding_byte == T_REG) {
         if (get_reg_error(val2) == -1) {
+            process->index = -1;
             return -1;
         }
         process->registers[val2 - 1] = process->registers[val1 - 1];
@@ -34,7 +35,7 @@ int process_store_value(process_t *process, vm_t *vm, char *cb_tab)
     int reg1 = 0;
 
     reg1 = get_special_value(vm->memory, process->index + SKIP_COMM_CB,
-    cb_tab[INDEX_1ST], process);
+        cb_tab[INDEX_1ST], process);
     if (process->index == -1) {
         return (-1);
     }

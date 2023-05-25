@@ -24,6 +24,7 @@ int get_value_ldi(vm_t *vm, process_t *process, char coding_byte, int value)
     if (coding_byte == T_IND) {
         new_value = get_value(vm->memory, process->index + value,
             coding_byte);
+        new_value = (short int) (new_value);
         new_value = new_value % IDX_MOD;
     }
     return (new_value);
@@ -34,13 +35,13 @@ int process_ldi(process_t *process, vm_t *vm, char *cb_tab, int index)
     int param = 0;
     int result = 0;
 
-    param = get_value(vm->memory, index, cb_tab[INDEX_1ST]);
+    param = get_indexes_value(vm->memory, index, cb_tab[INDEX_1ST]);
     result += get_value_ldi(vm, process, cb_tab[INDEX_1ST], param);
     index += get_index_arg(cb_tab[INDEX_1ST], true);
-    param = get_value(vm->memory, index, cb_tab[INDEX_2ND]);
+    param = get_indexes_value(vm->memory, index, cb_tab[INDEX_2ND]);
     result += get_value_ldi(vm, process, cb_tab[INDEX_2ND], param);
     index += get_index_arg(cb_tab[INDEX_2ND], true);
-    param = get_value(vm->memory, index, cb_tab[INDEX_3RD]);
+    param = get_indexes_value(vm->memory, index, cb_tab[INDEX_3RD]);
     if (get_reg_error(param) == -1) {
         process->index = -1;
         return (-1);

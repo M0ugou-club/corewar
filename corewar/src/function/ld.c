@@ -15,7 +15,7 @@ int load_value(process_t *process, vm_t *vm, char coding_byte, int val2)
     int val1 = 0;
 
     val1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-    coding_byte);
+        coding_byte);
     if (coding_byte == T_IND) {
         val1 = get_value(vm->memory, process->index + (val1 % IDX_MOD), T_DIR);
     }
@@ -33,9 +33,9 @@ int process_load_value(process_t *process, vm_t *vm, char *cb_tab)
     int reg2 = 0;
     int index = 0;
 
-    index = get_index_arg(cb_tab[INDEX_2ND], false);
+    index = get_index_arg(cb_tab[INDEX_1ST], false);
     reg2 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
-    cb_tab[INDEX_2ND]);
+        cb_tab[INDEX_2ND]);
     if (get_reg_error(reg2) == -1) {
         return (-1);
     }

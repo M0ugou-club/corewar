@@ -33,12 +33,39 @@ int get_value(char *memory, int index, char coding_byte)
         nb += mem_value * (my_power(BYTE_VALUE, index_value));
         index_value++;
     }
+    if (coding_byte == T_IND) {
+        nb = (short int) (nb);
+    }
     return (nb);
 }
 
-int get_indexes_value(char *memory, int index, char coding_byte,
+int get_indexes_value(char *memory, int index, char coding_byte)
+{
+    int value_size = 0;
+    short int nb = 0;
+    int index_value = 0;
+    unsigned char mem_value = 0;
+
+    for (int i = 0; type[i].value != -1; i++) {
+        if (type[i].type == coding_byte) {
+            value_size = type[i].value;
+        }
+    }
+    if (coding_byte == T_DIR) {
+        value_size = IND_SIZE;
+    }
+    for (int i = value_size - 1; i >= 0; i--) {
+        mem_value = get_mem_value(memory, index + i);
+        nb += mem_value * (my_power(BYTE_VALUE, index_value));
+        index_value++;
+    }
+    return (nb);
+}
+
+int get_special_indexes_value(char *memory, int index, char coding_byte,
     process_t *process)
 {
+    short int new_val = 0;
     int value = 0;
 
     value = get_value(memory, index, coding_byte);
@@ -50,18 +77,19 @@ int get_indexes_value(char *memory, int index, char coding_byte,
         return (process->registers[value - 1]);
     }
     if (coding_byte == T_IND) {
-        value = get_mem_value(memory, index + value);
+        new_val = value;
     }
     if (coding_byte == T_DIR) {
-        value = get_value(memory, index, T_IND);
+        new_val = get_value(memory, index, T_IND);
     }
-    return (value);
+    return (new_val);
 }
 
 int get_special_value(char *memory, int index, char coding_byte,
     process_t *process)
 {
     int value = 0;
+    int new_val = 0;
 
     value = get_value(memory, index, coding_byte);
     if (coding_byte == T_REG) {
@@ -69,10 +97,13 @@ int get_special_value(char *memory, int index, char coding_byte,
             process->index = -1;
             return (0);
         }
-        value = process->registers[value - 1];
+        new_val = process->registers[value - 1];
     }
     if (coding_byte == T_IND) {
-        value = get_mem_value(memory, process->index + value);
+        new_val = (short int) (value);
     }
-    return (value);
+    if (coding_byte == T_DIR) {
+        new_val = value;
+    }
+    return (new_val);
 }

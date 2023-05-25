@@ -18,14 +18,16 @@ int process_xor(process_t *process, vm_t *vm, char *cb_tab)
     int result = 0;
     int index = 0;
 
-    param1 = get_value(vm->memory, process->index + SKIP_COMM_CB,
-        cb_tab[INDEX_1ST]);
+    param1 = get_special_value(vm->memory, process->index + SKIP_COMM_CB,
+        cb_tab[INDEX_1ST], process);
     index += get_index_arg(cb_tab[INDEX_1ST], false);
-    param2 = get_value(vm->memory, process->index + SKIP_COMM_CB +
-        index, cb_tab[INDEX_2ND]);
+    param2 = get_special_value(vm->memory, process->index + SKIP_COMM_CB +
+        index, cb_tab[INDEX_2ND], process);
     index += get_index_arg(cb_tab[INDEX_2ND], false);
-    param3 = get_value(vm->memory, process->index + SKIP_COMM_CB + index,
-        cb_tab[INDEX_3RD]);
+    param3 = get_special_value(vm->memory, process->index + SKIP_COMM_CB + index,
+        cb_tab[INDEX_3RD], process);
+    if (process->index == -1)
+        return (-1);
     result = param1 ^ param2;
     process->registers[param3 - 1] = result;
     process->carry = (result == 0) ? 1 : 0;
