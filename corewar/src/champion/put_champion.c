@@ -28,6 +28,9 @@ int put_champ(process_t *champ, vm_t *vm, char *code, header_t *champ_info)
 {
     static int index = 0;
 
+    if (champ->registers != NULL) {
+        champ->registers[0] = champ->nb_champ;
+    }
     if (champ->index == -1) {
         if (put_champ_in_arena(vm->memory, index, code, champ_info) == -1) {
             return (-1);

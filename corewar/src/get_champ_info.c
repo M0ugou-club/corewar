@@ -55,7 +55,7 @@ process_t *create_basic_process(char *name, process_t *process)
     process->next = NULL;
     process->registers = malloc(sizeof(int) * (REG_NUMBER + 1));
     MALLOC_RETURN(process->registers, NULL);
-    my_int_memset(process->registers, -1, REG_NUMBER + 1);
+    my_int_memset(process->registers, 0, REG_NUMBER + 1);
     process->id = malloc(sizeof(char) * (my_strlen(name) + 1));
     if (process->id == NULL) {
         free(process->registers);
