@@ -9,6 +9,7 @@
 #include "fonction.h"
 #include "mem.h"
 #include "vm.h"
+#include "op.h"
 
 static const function_t function[] = { {1, &exec_live},
 {2, &exec_ld},
@@ -32,9 +33,8 @@ static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
 {
     int return_value = 0;
 
-    if (process->index == -1) {
+    if (process->index == -1)
         return return_value;
-    }
     if (process->last_lives > cycle_to_die) {
         process->index = -1;
     }
@@ -47,8 +47,11 @@ static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
         if (function[i].action &&
         vm->memory[circular_mod(process->index)] == function[i].id) {
             return_value = function[i].action(process, vm);
+            process->cooldown = op_tab[i].nbr_cycles;
+            return (return_value);
         }
     }
+    process->index = -1;
     return return_value;
 }
 
