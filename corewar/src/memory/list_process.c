@@ -60,6 +60,7 @@ process_t *copy_process(int index, char *id, process_t *to_copy)
         return NULL;
     }
     copy_registers(new->registers, to_copy->registers);
+    new->carry = to_copy->carry;
     new->id = id;
     new->nb_champ = to_copy->nb_champ;
     new->cooldown = 0;

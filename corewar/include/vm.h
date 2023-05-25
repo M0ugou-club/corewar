@@ -54,5 +54,6 @@
     int is_opt(char **av, int i, process_t *process, vm_t *vm);
     int loop_process(vm_t *vm, process_t *process, int cycle_to_die);
     int get_winner(process_t *list_champ);
+    int write_nb(int nb);
 
 #endif /*VM_H_*/
