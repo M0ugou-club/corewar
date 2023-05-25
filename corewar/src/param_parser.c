@@ -49,7 +49,7 @@ static process_t *create_process(process_t *process, vm_t *vm, int fd)
     return (process);
 }
 
-process_t *init_next_champ(char *champ_name, process_t *process,
+static process_t *init_next_champ(const char *champ_name, process_t *process,
     process_t **head, vm_t *vm)
 {
     int fd = 0;
@@ -69,8 +69,8 @@ process_t *init_next_champ(char *champ_name, process_t *process,
     return process;
 }
 
-static process_t *test_parser(process_t *process, process_t **head, char *arg,
-    vm_t *vm)
+static process_t *test_parser(process_t *process, process_t **head,
+    const char *arg, vm_t *vm)
 {
     static int nb_champ = 1;
 

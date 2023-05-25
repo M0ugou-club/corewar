@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "op.h"
 
-static int circular_mod(int index)
+int circular_mod(int index)
 {
     int res = 0;
 
@@ -21,7 +21,7 @@ static int circular_mod(int index)
     }
 }
 
-char get_mem_value(char *mem, int index)
+char get_mem_value(const char *mem, int index)
 {
     int new_index = 0;
     char get = 0;

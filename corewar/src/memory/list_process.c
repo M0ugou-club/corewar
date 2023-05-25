@@ -8,19 +8,6 @@
 #include <stdlib.h>
 #include "process.h"
 
-void destroy_process_list(process_t *list)
-{
-    process_t *tmp = NULL;
-
-    while (list != NULL) {
-        tmp = list;
-        list = list->next;
-        free(tmp->id);
-        free(tmp->registers);
-        free(tmp);
-    }
-}
-
 process_t *add_process(process_t *to_add, process_t *list)
 {
     process_t *tmp = NULL;
@@ -39,25 +26,34 @@ process_t *add_process(process_t *to_add, process_t *list)
     return list;
 }
 
-process_t *copy_process(int index, char *id, int nb_champ)
+static int copy_registers(int *new_reg, const int *to_copy)
 {
-    process_t *list = NULL;
+    for (int i = 0; i != REG_NUMBER; i++) {
+        new_reg[i] = to_copy[i];
+    }
+    return (0);
+}
 
-    list = malloc(sizeof(process_t));
-    if (list == NULL) {
+process_t *copy_process(int index, char *id, process_t *to_copy)
+{
+    process_t *new = NULL;
+
+    new = malloc(sizeof(process_t));
+    if (new == NULL) {
         return (NULL);
     }
-    list->registers = malloc(sizeof(int) * REG_NUMBER);
-    if (list->registers == NULL) {
+    new->registers = malloc(sizeof(int) * REG_NUMBER);
+    if (new->registers == NULL) {
         return NULL;
     }
-    list->id = id;
-    list->nb_champ = nb_champ;
-    list->cooldown = 0;
-    list->index = index;
-    list->next = NULL;
-    list->last_lives = 0;
-    list->cooldown = 0;
-    list->nb_champ = 0;
-    return (list);
+    copy_registers(new->registers, to_copy->registers);
+    new->carry = to_copy->carry;
+    new->id = id;
+    new->nb_champ = to_copy->nb_champ;
+    new->cooldown = 0;
+    new->index = index;
+    new->next = NULL;
+    new->last_lives = 0;
+    new->cooldown = 0;
+    return (new);
 }

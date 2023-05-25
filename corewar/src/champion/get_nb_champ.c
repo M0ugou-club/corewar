@@ -10,9 +10,8 @@
 #include <unistd.h>
 #include "process.h"
 #include "vm.h"
-#include "my.h"
 
-int is_champ_alive(process_t *process, int nb_champ)
+static int is_champ_alive(process_t *process, int nb_champ)
 {
     process_t *tmp = process;
 

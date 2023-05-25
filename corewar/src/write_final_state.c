@@ -20,7 +20,7 @@ static int write_hexa_line(int line)
     } else {
         to_print += '0';
     }
-    if (line > 16) {
+    if (line >= 16) {
         write_hexa_line(line / 16);
     }
     write(1, &to_print, 1);
@@ -48,7 +48,7 @@ static int write_hexa_mem(int nb, int index)
     return (0);
 }
 
-static int write_mem(char *memory, int line)
+static int write_mem(const char *memory, int line)
 {
     int index_line = 32;
     int i = line;
@@ -63,7 +63,7 @@ static int write_mem(char *memory, int line)
     return (0);
 }
 
-int print_final_state(vm_t *vm)
+int print_final_state(vm_t *vm, process_t *process_list)
 {
     int line = 0;
 
@@ -75,5 +75,6 @@ int print_final_state(vm_t *vm)
             line += 32;
         }
     }
+    get_winner(process_list);
     return (0);
 }

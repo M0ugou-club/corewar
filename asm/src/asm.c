@@ -24,7 +24,7 @@ static int get_prog_size(prog_list_t *prog_list)
     return (size);
 }
 
-static int make_header(prog_list_t *prog_list, int fd, header_t *header)
+static int make_header(prog_list_t *prog_list, header_t *header)
 {
     int size = 0;
 
@@ -51,7 +51,7 @@ static int write_cor_file(prog_list_t *prog_list, char const *file_name)
     int fd = 0;
     header_t header = {0};
 
-    if (make_header(prog_list, fd, &header) != 0) {
+    if (make_header(prog_list, &header) != 0) {
         return (-1);
     }
     fd = open_new_file(file_name);
