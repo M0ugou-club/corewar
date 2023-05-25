@@ -21,11 +21,11 @@ int sti_values(process_t *process, vm_t *vm, char *cb_tab)
     reg = get_special_value(vm->memory, process->index + SKIP_COMM_CB,
         cb_tab[INDEX_1ST], process);
     index += 1;
-    val1 = get_special_indexes_value(vm->memory, process->index + SKIP_COMM_CB + index,
-        cb_tab[INDEX_2ND], process);
+    val1 = get_special_indexes_value(vm->memory,
+        process->index + SKIP_COMM_CB + index, cb_tab[INDEX_2ND], process);
     index += get_index_arg(cb_tab[INDEX_2ND], true);
-    val2 = get_special_indexes_value(vm->memory, process->index + SKIP_COMM_CB + index,
-        cb_tab[INDEX_3RD], process);
+    val2 = get_special_indexes_value(vm->memory,
+        process->index + SKIP_COMM_CB + index, cb_tab[INDEX_3RD], process);
     addr = process->index + ((val1 + val2) % IDX_MOD);
     if (process->index == -1) {
         return (-1);

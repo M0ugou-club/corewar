@@ -29,20 +29,27 @@ static const function_t function[] = { {1, &exec_live},
 {16, &exec_aff},
 {-1, NULL}};
 
+static int process_cooldown(process_t *process)
+{
+    if (process->cooldown == 0) {
+        return (0);
+    } else {
+        process->cooldown--;
+        return (1);
+    }
+}
+
 static int parse_champ(vm_t *vm, process_t *process, int cycle_to_die)
 {
     int return_value = 0;
 
+    if (process->last_lives > cycle_to_die)
+        process->index = -1;
     if (process->index == -1)
         return return_value;
-    if (process->last_lives > cycle_to_die) {
-        process->index = -1;
-    }
+    if (process_cooldown(process) != 0)
+        return (return_value);
     process->last_lives++;
-    if (process->cooldown != 0) {
-        process->cooldown--;
-        return 0;
-    }
     for (int i = 0; function[i].id != -1; i++) {
         if (function[i].action &&
         vm->memory[circular_mod(process->index)] == function[i].id) {

@@ -24,8 +24,8 @@ int process_xor(process_t *process, vm_t *vm, char *cb_tab)
     param2 = get_special_value(vm->memory, process->index + SKIP_COMM_CB +
         index, cb_tab[INDEX_2ND], process);
     index += get_index_arg(cb_tab[INDEX_2ND], false);
-    param3 = get_special_value(vm->memory, process->index + SKIP_COMM_CB + index,
-        cb_tab[INDEX_3RD], process);
+    param3 = get_special_value(vm->memory,
+        process->index + SKIP_COMM_CB + index, cb_tab[INDEX_3RD], process);
     if (process->index == -1)
         return (-1);
     result = param1 ^ param2;
