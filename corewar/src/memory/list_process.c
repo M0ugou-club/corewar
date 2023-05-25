@@ -59,7 +59,7 @@ process_t *copy_process(int index, char *id, process_t *to_copy)
     if (new->registers == NULL) {
         return NULL;
     }
-    new->registers = copy_registers(new->registers, to_copy->registers);
+    copy_registers(new->registers, to_copy->registers);
     new->id = id;
     new->nb_champ = to_copy->nb_champ;
     new->cooldown = 0;
