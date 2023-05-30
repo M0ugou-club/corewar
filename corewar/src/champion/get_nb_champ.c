@@ -36,7 +36,7 @@ int get_nb_champ_alive(process_t *process, vm_t *vm)
     return (alive);
 }
 
-int get_nb_champ(char **argv)
+int get_nb_champ(const char **argv)
 {
     int nb_champ = 0;
     int fd = 0;

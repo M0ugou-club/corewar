@@ -11,6 +11,15 @@
 #include "vm.h"
 #include "mem.h"
 
+static int put_champ_in_ownership(char *arena, int index, const char champid,
+    header_t *champ_info)
+{
+    for (int i = 0; i < champ_info->prog_size; i++) {
+        modif_mem(arena, index + i, champid);
+    }
+    return (0);
+}
+
 static int put_champ_in_arena(char *arena, int index, const char *code,
     header_t *champ_info)
 {
@@ -33,11 +42,13 @@ int put_champ(process_t *champ, vm_t *vm, const char *code,
         champ->registers[0] = champ->nb_champ;
     }
     if (champ->index == -1) {
+        put_champ_in_ownership(vm->ownership, index, champ->nb_champ, champ_info);
         if (put_champ_in_arena(vm->memory, index, code, champ_info) == -1) {
             return (-1);
         }
         champ->index = index;
     } else {
+        put_champ_in_ownership(vm->ownership, champ->index, champ->nb_champ, champ_info);
         if (put_champ_in_arena(vm->memory, champ->index, code, champ_info)
             == -1) {
             return (-1);

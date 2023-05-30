@@ -25,8 +25,8 @@ static int store_value(process_t *process, vm_t *vm, char coding_byte,
         process->registers[val2 - 1] = process->registers[val1 - 1];
     }
     if (coding_byte == T_IND) {
-        write_memory(vm->memory, (process->index + (val2 % IDX_MOD)),
-            process->registers[val1 - 1]);
+        write_memory(vm, (process->index + (val2 % IDX_MOD)),
+            process->registers[val1 - 1], process->nb_champ);
     }
     return 0;
 }

@@ -25,14 +25,15 @@ static int error_handling(int ac)
     return 0;
 }
 
-vm_t *initialisation_of_vm(char **argv)
+vm_t *initialisation_of_vm(const char **argv)
 {
     vm_t *vm = NULL;
 
     vm = malloc(sizeof(vm_t));
     if (vm) {
         vm->memory = create_memory();
-        if (vm->memory == NULL) {
+        vm->ownership = create_memory();
+        if (vm->memory == NULL || vm->ownership == NULL) {
             free(vm);
             return (NULL);
         }
@@ -43,7 +44,7 @@ vm_t *initialisation_of_vm(char **argv)
     return vm;
 }
 
-int main(int ac, char **argv)
+int main(int ac, const char **argv)
 {
     process_t *process = NULL;
     vm_t *vm = NULL;

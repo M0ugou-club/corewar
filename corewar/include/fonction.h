@@ -30,7 +30,7 @@
     int get_new_process_index(char *cb_tab, bool index_function,
         process_t *process);
     int get_value(char *memory, int index, char coding_byte);
-    int write_memory(char *memory, int index, int val);
+    int write_memory(vm_t *vm, int index, int val, int champid);
 
     /* Function Pointer */
 

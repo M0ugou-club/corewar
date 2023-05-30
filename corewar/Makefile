@@ -35,10 +35,9 @@ SRC =   src/champion/put_champion.c \
 		src/write_final_state.c \
 		src/process_loop.c \
 		src/vm.c \
-		src/op.c \
-		src/main.c
+		src/op.c
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o) src/main.o
 
 NAME = corewar
 
@@ -60,5 +59,8 @@ fclean : clean
 	rm -f #*#
 
 re : fclean all
+
+bonus: $(OBJ)
+	ar rc libmycorewar.a $(OBJ)
 
 .PHONY: all clean fclean re

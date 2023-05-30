@@ -23,6 +23,7 @@ process_t *add_process(process_t *to_add, process_t *list)
         tmp = tmp->next;
     }
     tmp->next = to_add;
+    to_add->next = NULL;
     return list;
 }
 
@@ -54,6 +55,6 @@ process_t *copy_process(int index, char *id, process_t *to_copy)
     new->index = index;
     new->next = NULL;
     new->last_lives = 0;
-    new->cooldown = 0;
+    new->cooldown = 800;
     return (new);
 }

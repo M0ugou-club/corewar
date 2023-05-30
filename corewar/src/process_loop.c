@@ -66,6 +66,8 @@ int loop_process(vm_t *vm, process_t *process, int cycle_to_die)
 {
     process_t *tmp = process;
 
+    if (!vm || !process)
+        return -1;
     while (tmp) {
         if (parse_champ(vm, tmp, cycle_to_die) == -1) {
             return -1;

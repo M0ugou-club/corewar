@@ -30,7 +30,7 @@ static int sti_values(process_t *process, vm_t *vm, const char *cb_tab)
     if (process->index == -1) {
         return (-1);
     }
-    write_memory(vm->memory, addr, reg);
+    write_memory(vm, addr, reg, process->nb_champ);
     return 0;
 }
 

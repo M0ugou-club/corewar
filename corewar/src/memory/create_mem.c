@@ -44,11 +44,11 @@ char *create_memory(void)
 {
     char *mem = NULL;
 
-    mem = malloc(sizeof(char) * MEM_SIZE);
+    mem = malloc(sizeof(char) * MEM_SIZE + 1);
     if (mem == NULL) {
         return NULL;
     }
-    for (int i = 0; i != MEM_SIZE; i++) {
+    for (int i = 0; i != MEM_SIZE + 1; i++) {
         mem[i] = 0;
     }
     return mem;

@@ -34,9 +34,14 @@
 
     typedef struct vm_s {
         char *memory;
+        char *ownership;
         int nb_alive;
         int nb_champ;
         int f_dump;
+        process_t *process;
+        int champ_alive;
+        int cycle_to_die;
+        int cycle;
     } vm_t;
 
     typedef struct type_value_s {
@@ -49,9 +54,9 @@
     int my_vm(vm_t *vm, process_t *process);
     int put_champ(process_t *champ, vm_t *vm, const char *code,
         header_t *champ_info);
-    int get_nb_champ(char **argv);
-    process_t *param_parser(char **av, vm_t *vm);
-    int is_opt(char **av, int i, process_t *process, vm_t *vm);
+    int get_nb_champ(const char **argv);
+    process_t *param_parser(const char **av, vm_t *vm);
+    int is_opt(const char **av, int i, process_t *process, vm_t *vm);
     int loop_process(vm_t *vm, process_t *process, int cycle_to_die);
     int get_winner(process_t *list_champ);
     int write_nb(int nb);

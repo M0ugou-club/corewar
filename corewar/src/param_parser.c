@@ -66,6 +66,7 @@ static process_t *init_next_champ(const char *champ_name, process_t *process,
     MALLOC_RETURN(process, NULL);
     process->nb_champ = 0;
     process->index = -1;
+    process->next = NULL;
     return process;
 }
 
@@ -84,7 +85,7 @@ static process_t *test_parser(process_t *process, process_t **head,
     return (process);
 }
 
-process_t *param_parser(char **av, vm_t *vm)
+process_t *param_parser(const char **av, vm_t *vm)
 {
     process_t *process = NULL;
     process_t *head = NULL;
